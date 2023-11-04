@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8929c13b-38b4-40dc-a6e1-cce39789a9bc" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Back-end/Users/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/Users/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/Users/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/Users/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/Users/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/Users/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/Users/src/main/java/com/school/universitymanagementapp/Controller/NiveauController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/Users/src/main/java/com/school/universitymanagementapp/Controller/StudentController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/Users/src/main/java/com/school/universitymanagementapp/Model/Admin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/Users/src/main/java/com/school/universitymanagementapp/Model/Annonces.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/Users/src/main/java/com/school/universitymanagementapp/Model/Chefdep.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/Users/src/main/java/com/school/universitymanagementapp/Model/Dean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/Users/src/main/java/com/school/universitymanagementapp/Model/Niveau.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/Users/src/main/java/com/school/universitymanagementapp/Model/PV.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/Users/src/main/java/com/school/universitymanagementapp/Model/Requete.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/Users/src/main/java/com/school/universitymanagementapp/Model/Specialite.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/Users/src/main/java/com/school/universitymanagementapp/Model/Student.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/Users/src/main/java/com/school/universitymanagementapp/Model/Teacher.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/Users/src/main/java/com/school/universitymanagementapp/Model/UE.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/Users/src/main/java/com/school/universitymanagementapp/Model/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/Users/src/main/java/com/school/universitymanagementapp/Repository/NiveauRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/Users/src/main/java/com/school/universitymanagementapp/Repository/SpecialiteRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/Users/src/main/java/com/school/universitymanagementapp/Repository/StudentRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/Users/src/main/java/com/school/universitymanagementapp/Repository/UERepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/Users/src/main/java/com/school/universitymanagementapp/Services/NiveauService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/Users/src/main/java/com/school/universitymanagementapp/Services/StudentService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/Users/src/main/java/com/school/universitymanagementapp/UniversityManagementAppApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/Users/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/Users/src/main/resources/static/actenaiss/Capture d’écran du 2023-10-30 11-26-09.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/Users/src/main/resources/static/dernierdiplom/Capture d’écran du 2023-10-30 11-26-09.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/Users/src/main/resources/static/photocni/Capture d’écran du 2023-10-30 11-26-09.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/Users/src/main/resources/static/recu/Capture d’écran du 2023-10-30 11-26-09.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/Users/src/main/resources/static/relevebac/TD1_INF4067_23-24.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/Users/src/main/resources/static/releveproba/Capture d’écran du 2023-10-30 11-26-09.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Back-end/Users/src/test/java/com/school/universitymanagementapp/UniversityManagementAppApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Back-end/Admission/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Back-end/Admission/pom.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/Back-end/Users" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2XbCL2fFbAa8VnLffMOGSjtIwOZ" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="AdmissionApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="Admission" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.demo.AdmissionApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8929c13b-38b4-40dc-a6e1-cce39789a9bc" name="Changes" comment="" />
+      <created>1698888338387</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1698888338387</updated>
+      <workItem from="1698888379146" duration="805000" />
+      <workItem from="1699120555448" duration="2040000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
