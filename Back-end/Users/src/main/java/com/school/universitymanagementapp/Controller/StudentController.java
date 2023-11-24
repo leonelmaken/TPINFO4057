@@ -56,9 +56,11 @@ public class StudentController {
                                              @RequestParam MultipartFile actenaiss,
                                              @RequestParam MultipartFile recu,
                                              // >>
-                                             @RequestParam String faculte,
-                                             @RequestParam String filiere,
-                                             @RequestParam int specialite,
+                                  
+                                             @RequestParam String premierchoix,
+                                             @RequestParam String deuxiemechoix,
+                                             @RequestParam String troisiemechoix,
+                                             @RequestParam String specialite,
                                              @RequestParam int niveau,
                                              //photo scannee à uploader
                                              @RequestParam MultipartFile dernierdiplom,
@@ -75,17 +77,30 @@ public class StudentController {
                                              @RequestParam String professmere,
                                              @RequestParam String nomurgent,
                                              @RequestParam Double numerourgent,
-                                             @RequestParam String villeurgent) throws IOException {
+                                             @RequestParam String villeurgent,
+                                             @RequestParam String nomtuteur,
+                                             @RequestParam String emailtuteur,
+                                             @RequestParam String professtuteur,
+                                             @RequestParam Double numerotransaction,
+                                             @RequestParam Double codepreins,
+                                             @RequestParam boolean sport,
+                                             @RequestParam  boolean art
+    		) throws IOException {
 
         if((!photouser.getContentType().equals("image/jpeg") && !photouser.getContentType().equals("image/png") && !photouser.getContentType().equals("image/jpg")) && !photouser.getContentType().equals("application/pdf") && (!photocni.getContentType().equals("image/jpeg") && !photocni.getContentType().equals("image/png") && !photocni.getContentType().equals("image/jpg")) && !photocni.getContentType().equals("application/pdf") && (!actenaiss.getContentType().equals("image/jpeg") && !actenaiss.getContentType().equals("image/png") && !actenaiss.getContentType().equals("image/jpg")) && !actenaiss.getContentType().equals("application/pdf") && (!relevebac.getContentType().equals("image/jpeg") && !relevebac.getContentType().equals("image/png") && !relevebac.getContentType().equals("image/jpg")) && !relevebac.getContentType().equals("application/pdf") && (!releveproba.getContentType().equals("image/jpeg") && !releveproba.getContentType().equals("image/png") && !releveproba.getContentType().equals("image/jpg")) && !releveproba.getContentType().equals("application/pdf") && (!recu.getContentType().equals("image/jpeg") && !recu.getContentType().equals("image/png") && !recu.getContentType().equals("image/jpg")) && !recu.getContentType().equals("application/pdf") && (!dernierdiplom.getContentType().equals("image/jpeg") && !dernierdiplom.getContentType().equals("image/png") && !dernierdiplom.getContentType().equals("image/jpg")) && !dernierdiplom.getContentType().equals("application/pdf")) {
             return ResponseEntity.status(HttpStatus.UNSUPPORTED_MEDIA_TYPE).body("Seulement les images jpeg,png,jpg, ou les fichiers pdf sont acceptees");
 
         }
-         Specialite specialite1= spacialrepo.findById(specialite).orElseThrow(() -> new RuntimeException("speciality is not found"));
+        if(studentService.findByEmail(email).isPresent()){
+            return ResponseEntity.status(HttpStatus.UNSUPPORTED_MEDIA_TYPE).body("l'utilisateur existe dejà");
 
+            // verifie la présence de l'email ou du télephone pour empêcher les doublons
+        }
+         
         Niveau niveau1 = niveaurepo.findById(niveau).orElseThrow(() -> new RuntimeException("type of this annonce is not found"));
 
-        Student etudiant= studentService.preinscription(name,surname,dateNaiss,lieuNaiss,numerocni,photouser,adresse,sexe,email,statusMarital,langue,statusprofess,numerotel,nationalite,region,departmt,photocni,relevebac,releveproba,actenaiss,recu,faculte,filiere,specialite1,niveau1,dernierdiplom,anneeObtent,moyenne,infojury,matriculediplo,delivrepar,Datedeliv,nompere,professpere,nommere,professmere,nomurgent,numerourgent,villeurgent);
+        Student etudiant = studentService.preinscription(name, surname, dateNaiss, lieuNaiss, numerocni, photouser, adresse, sexe, email, statusMarital, langue, statusprofess, numerotel, nationalite, region, departmt, photocni, relevebac, releveproba, actenaiss, recu, premierchoix, deuxiemechoix, troisiemechoix, specialite, niveau1, dernierdiplom, anneeObtent, moyenne, infojury, matriculediplo, delivrepar, Datedeliv, nompere, professpere, nommere, professmere, nomurgent, numerourgent, villeurgent, nomtuteur, emailtuteur, professtuteur, numerotransaction, codepreins, sport, art);
+        
         return ResponseEntity.ok(etudiant);
     }
 
