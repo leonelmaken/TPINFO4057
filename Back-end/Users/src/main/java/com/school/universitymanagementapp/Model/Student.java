@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Data
+
 @Entity
 public class Student extends User{
     // << photos scannees à uploader
@@ -19,10 +19,12 @@ public class Student extends User{
     private String actenaiss;
     private String recu;
     // >>
-    private String faculte;
-    private String filiere;
-    @ManyToOne
-    private Specialite specialite;
+    
+    private String premierchoix;
+    private String deuxiemechoix;
+    private String troisiemechoix;
+    
+    private String specialite;
     @ManyToOne
     private Niveau niveau;
     //photo scannee à uploader
@@ -39,9 +41,17 @@ public class Student extends User{
     private String professpere;
     private String nommere;
     private String professmere;
+    private String nomtuteur;
+    private String emailtuteur;
+    private String professtuteur;
     private String nomurgent;
     private Double numerourgent;
     private String villeurgent;
+	private int etat;
+    private Double numerotransaction;
+    private Double codepreins;
+    private boolean sport;
+    private boolean art;
 	public Student() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -67,7 +77,7 @@ public class Student extends User{
 		this.infojury = infojury;
 		this.matriculediplo = matriculediplo;
 		this.delivrepar = delivrepar;
-		Datedeliv = datedeliv;
+		this.Datedeliv = datedeliv;
 		this.nompere = nompere;
 		this.professpere = professpere;
 		this.nommere = nommere;
@@ -75,6 +85,56 @@ public class Student extends User{
 		this.nomurgent = nomurgent;
 		this.numerourgent = numerourgent;
 		this.villeurgent = villeurgent;
+			}
+    
+	public String getNomtuteur() {
+		return nomtuteur;
+	}
+	public void setNomtuteur(String nomtuteur) {
+		this.nomtuteur = nomtuteur;
+	}
+	public String getEmailtuteur() {
+		return emailtuteur;
+	}
+	public void setEmailtuteur(String emailtuteur) {
+		this.emailtuteur = emailtuteur;
+	}
+	public String getProfesstuteur() {
+		return professtuteur;
+	}
+	public void setProfesstuteur(String professtuteur) {
+		this.professtuteur = professtuteur;
+	}
+	public Double getNumerotransaction() {
+		return numerotransaction;
+	}
+	public void setNumerotransaction(Double numerotransaction) {
+		this.numerotransaction = numerotransaction;
+	}
+	public Double getCodepreins() {
+		return codepreins;
+	}
+	public void setCodepreins(Double codepreins) {
+		this.codepreins = codepreins;
+	}
+	public boolean isSport() {
+		return sport;
+	}
+	public void setSport(boolean sport) {
+		this.sport = sport;
+	}
+	public boolean isArt() {
+		return art;
+	}
+	public void setArt(boolean art) {
+		this.art = art;
+	}
+	public int getEtat() {
+		return etat;
+	}
+	public void setEtat(int etat) {
+		this.etat = etat;
+
 	}
 	public String getPhotocni() {
 		return photocni;
@@ -106,6 +166,7 @@ public class Student extends User{
 	public void setRecu(String recu) {
 		this.recu = recu;
 	}
+
 	public String getFaculte() {
 		return faculte;
 	}
@@ -118,10 +179,11 @@ public class Student extends User{
 	public void setFiliere(String filiere) {
 		this.filiere = filiere;
 	}
-	public Specialite getSpecialite() {
+	public String getSpecialite() {
 		return specialite;
 	}
-	public void setSpecialite(Specialite specialite) {
+	public void setSpecialite(String specialite) {
+
 		this.specialite = specialite;
 	}
 	public Niveau getNiveau() {
@@ -214,6 +276,7 @@ public class Student extends User{
 	public void setVilleurgent(String villeurgent) {
 		this.villeurgent = villeurgent;
 	}
+
 	@Override
 	public String toString() {
 		return "Student [photocni=" + photocni + ", relevebac=" + relevebac + ", releveproba=" + releveproba
@@ -226,4 +289,26 @@ public class Student extends User{
 				+ villeurgent + "]";
 	}
     
+
+	public String getPremierchoix() {
+		return premierchoix;
+	}
+	public void setPremierchoix(String premierchoix) {
+		this.premierchoix = premierchoix;
+	}
+	public String getDeuxiemechoix() {
+		return deuxiemechoix;
+	}
+	public void setDeuxiemechoix(String deuxiemechoix) {
+		this.deuxiemechoix = deuxiemechoix;
+	}
+	public String getTroisiemechoix() {
+		return troisiemechoix;
+	}
+	public void setTroisiemechoix(String troisiemechoix) {
+		this.troisiemechoix = troisiemechoix;
+	}
+
+
+
 }

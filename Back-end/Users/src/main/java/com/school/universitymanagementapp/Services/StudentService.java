@@ -18,6 +18,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Date;
+import java.util.Optional;
 
 @Service
 public class StudentService {
@@ -49,9 +50,11 @@ public class StudentService {
             MultipartFile actenaiss,
             MultipartFile recu,
             // >>
-            String faculte,
-            String filiere,
-            Specialite specialite,
+            
+            String premierchoix,
+            String deuxiemechoix,
+            String troisiemechoix,
+            String specialite,
             Niveau niveau,
             //photo scannee à uploader
             MultipartFile dernierdiplom,
@@ -67,7 +70,15 @@ public class StudentService {
             String professmere,
             String nomurgent,
             Double numerourgent,
-            String villeurgent
+            String villeurgent,
+            String nomtuteur,
+            String emailtuteur,
+            String professtuteur,
+            Double numerotransaction,
+            Double codepreins,
+            boolean sport,
+            boolean art
+            
 
     ) throws IOException {
         Student etudiant = new Student();
@@ -136,12 +147,12 @@ public class StudentService {
         etudiant.setRegion(region);
         etudiant.setNationalite(nationalite);
         etudiant.setDepartmt(departmt);
-
+        etudiant.setPremierchoix(premierchoix);
+        etudiant.setDeuxiemechoix(deuxiemechoix);
+        etudiant.setTroisiemechoix(troisiemechoix);
         etudiant.setAnneeObtent(anneeObtent);
-        etudiant.setFaculte(faculte);
         etudiant.setDelivrepar(delivrepar);
         etudiant.setDatedeliv(Datedeliv);
-        etudiant.setFiliere(filiere);
 
         etudiant.setInfojury(infojury);
         etudiant.setMatriculediplo(matriculediplo);
@@ -162,7 +173,21 @@ public class StudentService {
         etudiant.setNomurgent(nomurgent);
         etudiant.setNumerourgent(numerourgent);
         etudiant.setVilleurgent(villeurgent);
+        etudiant.setEtat(1);
+        etudiant.setNomtuteur(nomtuteur);
+        etudiant.setEmailtuteur(emailtuteur);
+        etudiant.setProfesstuteur(professtuteur);
+        etudiant.setNumerotransaction(numerotransaction);
+        etudiant.setCodepreins(codepreins);
+        etudiant.setSport(sport);
+        etudiant.setArt(art);
         studentrepo.save(etudiant);
         return etudiant;
     }
+    
+    //rechercher les utilisateur en fonction de leur email
+    public Optional<Student> findByEmail(String email){
+        return Optional.ofNullable(studentrepo.findByEmail(email));
+    }
+
 }

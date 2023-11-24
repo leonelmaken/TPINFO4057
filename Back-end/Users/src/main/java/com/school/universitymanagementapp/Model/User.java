@@ -5,7 +5,7 @@ import lombok.Data;
 
 import java.util.Date;
 
-@Data
+//@Data
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class User {
@@ -34,6 +34,7 @@ public class User {
     private String nationalite;
     private String region;
     private String departmt;
+
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -184,5 +185,4 @@ public class User {
 				+ statusprofess + ", numerotel=" + numerotel + ", nationalite=" + nationalite + ", region=" + region
 				+ ", departmt=" + departmt + "]";
 	}
-    
 }

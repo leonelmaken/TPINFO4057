@@ -3,7 +3,7 @@ package com.school.universitymanagementapp.Model;
 import jakarta.persistence.*;
 import lombok.Data;
 
-@Data
+
 @Entity
 public class UE {
     @Id
