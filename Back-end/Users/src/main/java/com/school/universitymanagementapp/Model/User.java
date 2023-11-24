@@ -34,13 +34,4 @@ public class User {
     private String nationalite;
     private String region;
     private String departmt;
-
-
-
-
-
-
-
-
-
 }

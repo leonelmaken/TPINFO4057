@@ -42,6 +42,4 @@ public class Student extends User{
     private String nomurgent;
     private Double numerourgent;
     private String villeurgent;
-
-
 }
