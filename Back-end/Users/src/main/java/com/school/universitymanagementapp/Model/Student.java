@@ -47,6 +47,7 @@ public class Student extends User{
     private String nomurgent;
     private Double numerourgent;
     private String villeurgent;
+<<<<<<< HEAD
     private int etat;
     private Double numerotransaction;
     private Double codepreins;
@@ -248,4 +249,6 @@ public class Student extends User{
 	}
 
 
+=======
+>>>>>>> branch 'main' of https://github.com/leonelmaken/TPINFO4057.git
 }

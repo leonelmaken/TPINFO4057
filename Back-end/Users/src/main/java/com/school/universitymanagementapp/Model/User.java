@@ -34,6 +34,7 @@ public class User {
     private String nationalite;
     private String region;
     private String departmt;
+<<<<<<< HEAD
     
     
     
@@ -197,4 +198,6 @@ public class User {
 
 
 
+=======
+>>>>>>> branch 'main' of https://github.com/leonelmaken/TPINFO4057.git
 }
