@@ -34,7 +34,21 @@ public class User {
     private String nationalite;
     private String region;
     private String departmt;
+<<<<<<< HEAD
+    private String type;
 
+    
+    
+    
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+=======
+
+>>>>>>> branch 'main' of https://github.com/leonelmaken/TPINFO4057.git
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -176,6 +190,18 @@ public class User {
 	public void setDepartmt(String departmt) {
 		this.departmt = departmt;
 	}
+<<<<<<< HEAD
+
+
+
+
+
+
+
+
+
+
+=======
 	@Override
 	public String toString() {
 		return "User [idUser=" + idUser + ", name=" + name + ", surname=" + surname + ", dateNaiss=" + dateNaiss
@@ -185,4 +211,5 @@ public class User {
 				+ statusprofess + ", numerotel=" + numerotel + ", nationalite=" + nationalite + ", region=" + region
 				+ ", departmt=" + departmt + "]";
 	}
+>>>>>>> branch 'main' of https://github.com/leonelmaken/TPINFO4057.git
 }

@@ -42,12 +42,16 @@ public class Student extends User{
     private String nommere;
     private String professmere;
     private String nomtuteur;
-    private String emailtuteur;
     private String professtuteur;
     private String nomurgent;
     private Double numerourgent;
     private String villeurgent;
+<<<<<<< HEAD
+
+    private int etat;
+=======
 	private int etat;
+>>>>>>> branch 'main' of https://github.com/leonelmaken/TPINFO4057.git
     private Double numerotransaction;
     private Double codepreins;
     private boolean sport;
@@ -87,7 +91,16 @@ public class Student extends User{
 		this.nommere = nommere;
 		this.professmere = professmere;
 		this.nomtuteur = nomtuteur;
+<<<<<<< HEAD
+	}
+	
+	public String getProfesstuteur() {
+		return professtuteur;
+	}
+	public void setProfesstuteur(String professtuteur) {
+=======
 		this.emailtuteur = emailtuteur;
+>>>>>>> branch 'main' of https://github.com/leonelmaken/TPINFO4057.git
 		this.professtuteur = professtuteur;
 		this.nomurgent = nomurgent;
 		this.numerourgent = numerourgent;
@@ -180,6 +193,8 @@ public class Student extends User{
 	}
 
 
+<<<<<<< HEAD
+=======
 	public String getSpecialite() {
 		return specialite;
 	}
@@ -433,5 +448,6 @@ public class Student extends User{
 				+ ", villeurgent=" + villeurgent + ", etat=" + etat + ", numerotransaction=" + numerotransaction
 				+ ", codepreins=" + codepreins + ", sport=" + sport + ", art=" + art + "]";
 	}
+>>>>>>> branch 'main' of https://github.com/leonelmaken/TPINFO4057.git
 
 }
