@@ -8,6 +8,7 @@ import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.ManyToOne;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -23,8 +24,16 @@ import java.util.Optional;
 @Service
 public class StudentService {
 
+
     @Autowired
     private StudentRepository studentrepo;
+
+    @Autowired
+    private KafkaTemplate<String, Object> kafkaTemplate;  // Ajoutez cette ligne
+
+    /*@Autowired
+    private NiveauRepository niveaurepo;*/
+
 
     public Student preinscription(
             String name,

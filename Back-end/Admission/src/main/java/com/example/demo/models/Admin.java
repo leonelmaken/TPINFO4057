@@ -55,8 +55,6 @@ public class Admin {
     
     @Column(name = "role")
     private Role role;
-
-    
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "admin")
     private List<Selectionne> selectionnes;
 

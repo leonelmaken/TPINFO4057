@@ -12,8 +12,8 @@ public class NiveauController {
     @Autowired
     private NiveauService niveauService;
 
-    @PostMapping("/niveau")
+   /* @PostMapping("/niveau")
     public Niveau addNiveau(@RequestParam String name, @RequestParam String ue) {
         return niveauService.addNiveau(name, ue);
-    }
+    }*/
 }
