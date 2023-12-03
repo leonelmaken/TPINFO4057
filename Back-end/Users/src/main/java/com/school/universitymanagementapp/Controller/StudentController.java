@@ -79,7 +79,6 @@ public class StudentController {
                                              @RequestParam Double numerourgent,
                                              @RequestParam String villeurgent,
                                              @RequestParam String nomtuteur,
-                                             @RequestParam String emailtuteur,
                                              @RequestParam String professtuteur,
                                              @RequestParam Double numerotransaction,
                                              @RequestParam Double codepreins,
@@ -99,7 +98,7 @@ public class StudentController {
          
         Niveau niveau1 = niveaurepo.findById(niveau).orElseThrow(() -> new RuntimeException("type of this annonce is not found"));
 
-        Student etudiant = studentService.preinscription(name, surname, dateNaiss, lieuNaiss, numerocni, photouser, adresse, sexe, email, statusMarital, langue, statusprofess, numerotel, nationalite, region, departmt, photocni, relevebac, releveproba, actenaiss, recu, premierchoix, deuxiemechoix, troisiemechoix, specialite, niveau1, dernierdiplom, anneeObtent, moyenne, infojury, matriculediplo, delivrepar, Datedeliv, nompere, professpere, nommere, professmere, nomurgent, numerourgent, villeurgent, nomtuteur, emailtuteur, professtuteur, numerotransaction, codepreins, sport, art);
+        Student etudiant = studentService.preinscription(name, surname, dateNaiss, lieuNaiss, numerocni, photouser, adresse, sexe, email, statusMarital, langue, statusprofess, numerotel, nationalite, region, departmt, photocni, relevebac, releveproba, actenaiss, recu, premierchoix, deuxiemechoix, troisiemechoix, specialite, niveau1, dernierdiplom, anneeObtent, moyenne, infojury, matriculediplo, delivrepar, Datedeliv, nompere, professpere, nommere, professmere, nomurgent, numerourgent, villeurgent, nomtuteur,professtuteur, numerotransaction, codepreins, sport, art);
         
         return ResponseEntity.ok(etudiant);
     }

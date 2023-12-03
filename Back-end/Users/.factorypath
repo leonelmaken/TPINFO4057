@@ -95,4 +95,5 @@
     <factorypathentry kind="VARJAR" id="M2_REPO/org/springframework/spring-core/6.0.13/spring-core-6.0.13.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/springframework/spring-jcl/6.0.13/spring-jcl-6.0.13.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/com/mysql/mysql-connector-j/8.0.33/mysql-connector-j-8.0.33.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/springframework/security/spring-security-crypto/6.1.5/spring-security-crypto-6.1.5.jar" enabled="true" runInBatchMode="false"/>
 </factorypath>

@@ -81,7 +81,6 @@ public class StudentService {
             Double numerourgent,
             String villeurgent,
             String nomtuteur,
-            String emailtuteur,
             String professtuteur,
             Double numerotransaction,
             Double codepreins,
@@ -184,12 +183,12 @@ public class StudentService {
         etudiant.setVilleurgent(villeurgent);
         etudiant.setEtat(1);
         etudiant.setNomtuteur(nomtuteur);
-        etudiant.setEmailtuteur(emailtuteur);
         etudiant.setProfesstuteur(professtuteur);
         etudiant.setNumerotransaction(numerotransaction);
         etudiant.setCodepreins(codepreins);
         etudiant.setSport(sport);
         etudiant.setArt(art);
+        etudiant.setType("student");
         studentrepo.save(etudiant);
         return etudiant;
     }
