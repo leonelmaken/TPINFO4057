@@ -2,39 +2,93 @@ package com.example.demo.models;
 
 import java.util.Date;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "teachers")
 public class Teacher {
 
-	private int idTeacher;
-	private String name;
-    private String surname;
-    private Date dateNaiss;
-    private String lieuNaiss;
+	   @Id
+	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	    @Column(name = "id_teacher")
+	    private int idTeacher;
 
-    private String numerocni;
-    private String photouser;
+	   @ManyToOne(cascade = CascadeType.PERSIST)
+	   @JoinColumn(name = "admin_id")
+	   private Admin createdByAdmin;
 
-    private String adresse;
-    private String sexe;
-    private String matricule;
-    private String email;
-    private String password;
-    private String statusMarital;
-    private String langue;
-    private String statusprofess;
-    private Double numerotel;
-    private String nationalite;
-    private String region;
-    private String departmt;
-    private Statut statut;
+	    @Column(name = "name", nullable = false)
+	    private String name;
+
+	    @Column(name = "surname", nullable = false)
+	    private String surname;
+
+	    @Column(name = "date_naiss")
+	    private Date dateNaiss;
+
+	    @Column(name = "lieu_naiss")
+	    private String lieuNaiss;
+
+	    @Column(name = "numerocni")
+	    private String numerocni;
+
+	    @Column(name = "photouser")
+	    private String photouser;
+
+	    @Column(name = "adresse")
+	    private String adresse;
+
+	    @Column(name = "sexe")
+	    private String sexe;
+
+	    @Column(name = "matricule")
+	    private String matricule;
+
+	    @Column(name = "email", nullable = false, unique = true)
+	    private String email;
+
+	    @Column(name = "password", nullable = false)
+	    private String password;
+
+	    @Column(name = "status_marital")
+	    private String statusMarital;
+
+	    @Column(name = "langue")
+	    private String langue;
+	    @Column(name = "numerotel")
+	    private Double numerotel;
+
+	    @Column(name = "nationalite")
+	    private String nationalite;
+
+	    @Column(name = "region")
+	    private String region;
+
+	    @Column(name = "departmt")
+	    private String departmt;
+
+	    @Column(name = "statut")
+	    private Statut statut;
 	public Teacher() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Teacher(String name, String surname, Date dateNaiss, String lieuNaiss, String numerocni, String photouser,
-			String adresse, String sexe, String matricule, String email, String password, String statusMarital,
-			String langue, String statusprofess, Double numerotel, String nationalite, String region, String departmt,
-			Statut statut) {
+	
+	
+	public Teacher(Admin createdByAdmin, String name, String surname, Date dateNaiss, String lieuNaiss,
+			String numerocni, String photouser, String adresse, String sexe, String matricule, String email,
+			String password, String statusMarital, String langue, String statusprofess, Double numerotel,
+			String nationalite, String region, String departmt, Statut statut) {
 		super();
+		this.createdByAdmin = createdByAdmin;
 		this.name = name;
 		this.surname = surname;
 		this.dateNaiss = dateNaiss;
@@ -48,12 +102,19 @@ public class Teacher {
 		this.password = password;
 		this.statusMarital = statusMarital;
 		this.langue = langue;
-		this.statusprofess = statusprofess;
 		this.numerotel = numerotel;
 		this.nationalite = nationalite;
 		this.region = region;
 		this.departmt = departmt;
 		this.statut = statut;
+	}
+
+
+	public Admin getCreatedByAdmin() {
+		return createdByAdmin;
+	}
+	public void setCreatedByAdmin(Admin createdByAdmin) {
+		this.createdByAdmin = createdByAdmin;
 	}
 	public int getIdTeacher() {
 		return idTeacher;
@@ -139,12 +200,6 @@ public class Teacher {
 	public void setLangue(String langue) {
 		this.langue = langue;
 	}
-	public String getStatusprofess() {
-		return statusprofess;
-	}
-	public void setStatusprofess(String statusprofess) {
-		this.statusprofess = statusprofess;
-	}
 	public Double getNumerotel() {
 		return numerotel;
 	}
@@ -181,7 +236,7 @@ public class Teacher {
 				+ dateNaiss + ", lieuNaiss=" + lieuNaiss + ", numerocni=" + numerocni + ", photouser=" + photouser
 				+ ", adresse=" + adresse + ", sexe=" + sexe + ", matricule=" + matricule + ", email=" + email
 				+ ", password=" + password + ", statusMarital=" + statusMarital + ", langue=" + langue
-				+ ", statusprofess=" + statusprofess + ", numerotel=" + numerotel + ", nationalite=" + nationalite
+				+ ", numerotel=" + numerotel + ", nationalite=" + nationalite
 				+ ", region=" + region + ", departmt=" + departmt + ", statut=" + statut + "]";
 	}
 }

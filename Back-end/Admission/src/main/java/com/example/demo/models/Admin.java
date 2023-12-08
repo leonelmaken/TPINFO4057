@@ -55,6 +55,8 @@ public class Admin {
     
     @Column(name = "role")
     private Role role;
+    @OneToMany(mappedBy = "createdByAdmin")
+    private List<Teacher> createdTeachers;
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "admin")
     private List<Selectionne> selectionnes;
 
@@ -99,6 +101,18 @@ public class Admin {
 	public void setAdminId(Long adminId) {
 		this.adminId = adminId;
 	}
+
+	public List<Teacher> getCreatedTeachers() {
+		return createdTeachers;
+	}
+
+
+
+	public void setCreatedTeachers(List<Teacher> createdTeachers) {
+		this.createdTeachers = createdTeachers;
+	}
+
+
 
 	public String getNom() {
 		return nom;

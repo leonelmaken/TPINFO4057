@@ -123,7 +123,6 @@
 						<configuration>
 							<backend>html</backend>
 							<doctype>book</doctype>
-							 <encoding>UTF-8</encoding>
 						</configuration>
 					</execution>
 				</executions>
