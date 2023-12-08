@@ -24,14 +24,16 @@ public class TeacherServiceImpl implements TeacherService {
     private final TeacherRepository teacherRepository;
     private final ApplicationEventPublisher eventPublisher;
     private final AdminRepository adminRepository;
+ // Injectez la classe ici
 
     @Autowired
     public TeacherServiceImpl(TeacherRepository teacherRepository, ApplicationEventPublisher eventPublisher,
-            AdminRepository adminRepository) {
+                              AdminRepository adminRepository) {
         this.teacherRepository = teacherRepository;
         this.eventPublisher = eventPublisher;
         this.adminRepository = adminRepository;
     }
+
 
     @Transactional
     @Override
