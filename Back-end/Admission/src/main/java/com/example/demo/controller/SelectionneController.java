@@ -24,7 +24,7 @@ public class SelectionneController {
 
     @PostMapping("/select/{etudiantId}")
     public ResponseEntity<String> selectStudent(@PathVariable Long etudiantId) {
-        return selecionneService.selectStudent(etudiantId, kafkaTemplate);
+        return selecionneService.selectStudent(etudiantId, kafkaTemplate, null);
     }
 
     @GetMapping("/list")
