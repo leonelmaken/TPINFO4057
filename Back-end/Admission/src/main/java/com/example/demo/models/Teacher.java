@@ -19,7 +19,7 @@ public class Teacher {
 	   @Id
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    @Column(name = "id_teacher")
-	    private int idTeacher;
+	    private Long idTeacher; 
 
 	   @ManyToOne(cascade = CascadeType.PERSIST)
 	   @JoinColumn(name = "admin_id")
@@ -116,10 +116,10 @@ public class Teacher {
 	public void setCreatedByAdmin(Admin createdByAdmin) {
 		this.createdByAdmin = createdByAdmin;
 	}
-	public int getIdTeacher() {
+	public Long getIdTeacher() {
 		return idTeacher;
 	}
-	public void setIdTeacher(int idTeacher) {
+	public void setIdTeacher(Long idTeacher) {
 		this.idTeacher = idTeacher;
 	}
 	public String getName() {

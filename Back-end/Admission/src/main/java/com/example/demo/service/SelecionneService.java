@@ -10,8 +10,11 @@ import com.example.demo.models.Selectionne;
 
 public interface SelecionneService {
 
-	public void addSelectionne(Selectionne selectionne);
-	public ResponseEntity<String> selectStudent(Long etudiantId, KafkaTemplate<String, Object> kafkaTemplate,Admin admin);
-	public List<Selectionne> getSelectionnes();
-	public ResponseEntity<String> deleteSelectionne(Long id);
+    void addSelectionne(Selectionne selectionne);
+
+    ResponseEntity<String> selectStudent(Long etudiantId, KafkaTemplate<String, Object> kafkaTemplate, Admin admin);
+
+    List<Selectionne> getSelectionnes();
+
+    ResponseEntity<String> deleteSelectionne(Long id);
 }
