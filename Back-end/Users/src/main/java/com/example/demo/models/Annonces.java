@@ -15,7 +15,5 @@ public class Annonces {
     private String imageannonce;
 
     @ManyToOne
-    private Chefdep chefdep;
-    @ManyToOne
     private Dean doyen;
 }

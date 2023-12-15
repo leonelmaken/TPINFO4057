@@ -18,7 +18,7 @@ import com.example.demo.service.SelecionneService;
 import com.example.demo.service.UserFeignClient;
 
 @Service
-public class SelectionneServiceImpl implements SelecionneService {
+public class SelectionneServiceImpl<UserFeignClient> implements SelecionneService {
 
     private final SelectionneRepository selectionneRepository;
     private final KafkaTemplate<String, Object> kafkaTemplate;

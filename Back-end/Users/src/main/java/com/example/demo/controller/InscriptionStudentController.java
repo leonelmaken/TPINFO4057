@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.demo.models.InscriptionStudent;
 import com.example.demo.models.Student;
 import com.example.demo.repository.InscriptionStudentRepository;
 import com.example.demo.repository.StudentRepository;
@@ -40,7 +41,7 @@ public class InscriptionStudentController {
         }
         Student etudiant= stuRepo.findByMatricule(matricule).orElseThrow(() -> new RuntimeException("Country not found"));
 
-        com.example.demo.models.inscriptionStudent inscription= inscriptService.inscriptionEtudiant(etudiant,firsttranche,secondtranche,totalitetranche);
+        InscriptionStudent inscription= inscriptService.inscriptionEtudiant(etudiant,firsttranche,secondtranche,totalitetranche);
         return ResponseEntity.ok(inscription);
     }
 }

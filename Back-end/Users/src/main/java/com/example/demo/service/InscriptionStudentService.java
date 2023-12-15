@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.example.demo.models.InscriptionStudent;
 import com.example.demo.models.Student;
-import com.example.demo.models.inscriptionStudent;
 import com.example.demo.repository.InscriptionStudentRepository;
 
 @Service
@@ -23,14 +23,14 @@ public class InscriptionStudentService {
     private InscriptionStudentRepository inscripRepo;
 
     //fonction permettant de faire son inscription a l'université
-    public inscriptionStudent inscriptionEtudiant(
+    public InscriptionStudent inscriptionEtudiant(
             Student etudiant,
             MultipartFile firsttranche,
             MultipartFile secondtranche,
             MultipartFile totalitetranche
 
     ) throws IOException {
-        inscriptionStudent student = new inscriptionStudent();
+        InscriptionStudent student = new InscriptionStudent();
         student.setStudent(etudiant);
         final String folder1 = new ClassPathResource("static/firsttranche/").getFile().getAbsolutePath();
         final String route1 = ServletUriComponentsBuilder.fromCurrentContextPath().path("/firsttranche/").path(firsttranche.getOriginalFilename()).toUriString();

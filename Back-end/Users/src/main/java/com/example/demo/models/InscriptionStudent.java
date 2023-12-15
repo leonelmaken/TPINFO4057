@@ -9,7 +9,7 @@ import jakarta.persistence.ManyToOne;
 
 @Entity
 //@Data
-public class inscriptionStudent {
+public class InscriptionStudent {
 
     @Id
     private int idins;
