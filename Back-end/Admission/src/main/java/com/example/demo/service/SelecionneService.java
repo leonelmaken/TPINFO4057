@@ -1,12 +1,11 @@
 package com.example.demo.service;
 
-import java.util.List;
-
+import com.example.demo.models.Admin;
+import com.example.demo.models.Selectionne;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
 
-import com.example.demo.models.Admin;
-import com.example.demo.models.Selectionne;
+import java.util.List;
 
 public interface SelecionneService {
 
