@@ -149,17 +149,17 @@ class _LoginState extends State<Login> {
                 onTap: () async{
                   //save();
 
-                  // if (formkey.currentState!.validate()) {
-                  //  await  loading_popup(context);
-                  //   Navigator.push(
-                  //     context,
-                  //     PageRouteBuilder(
-                  //       pageBuilder: (_, __, ___) =>
-                  //           HomePage(),
-                  //     ));
-                  // }
+                  if (formkey.currentState!.validate()) {
+                  // await  loading_popup(context);
+                    Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (_, __, ___) =>
+                            HomePage(),
+                      ));
+                  }
 
-                  Service.getClient();
+                 
                    
                 },
                 child: Container(
