@@ -8,7 +8,8 @@ import 'Utils/Global.dart';
 
 class Service {
   static String saveEtudiantUrl = '${root}/preinscription';   
-  static String saveClienUrl = '${root}/client';                                                                             
+  static String saveClienUrl = '${root}/registerclient';
+  static String getClientUrl = '${root}/displayclient';                                                                     
 
   static Future<String> saveEtudiant(
       nom,
@@ -61,51 +62,51 @@ class Service {
        etat) async {
     try {
       var map = Map<String, dynamic>();
-      map['name'] = json.encode(nom);
-      map['surname'] = json.encode(prenom);
-      map['dateNaiss'] = json.encode(dateNaiss);
-      map['lieurNaiss'] = json.encode(lieuNaiss);
-      map['numerocni'] = json.encode(numCni);
-      map['photouser'] = json.encode(photoEtudiant);
-      map['adresse'] = json.encode(adresse);
-      map['sexe'] = json.encode(sexe);
-      map['email'] = json.encode(adresseMail);
-      map['statusMarital'] = json.encode(statutMatrimonial);
-      map['langue'] = json.encode(langue);
-      map['statusprofess'] = json.encode(statutProfessionel);
-      map['numerotel'] = json.encode(numeroTelephone);
-      map['nationalite'] = json.encode(nationalite);
-      map['relevebac'] = json.encode(photoReleveBac);
-      map['releveproba'] = json.encode(photoReleveProbatoire);
-      map['actenaiss'] = json.encode(photoActenaissance);
-      map['recu'] = json.encode(photoRecuPaiement);
-      map['premierchoix'] = json.encode(firstChoice);
-      map['deuxiemechoix'] = json.encode(secondChoice);
-      map['troisiemechoix'] = json.encode(thirdChoice);
-      map['specialite'] = json.encode(specialite);
-      map['niveau'] = json.encode(niveau);
-      map['dernierdiplom'] = json.encode(typeDiplome);
-      map['anneeObtent'] = json.encode(anneeObtention);
-      map['moyenne'] = json.encode(moyenne);
-      map['matriculediplo'] = json.encode(matriculeDiplome);
-      map['delivrepar'] = json.encode(delivreurDiplome);
-      map['infojury'] = json.encode(infosJury);
-      map['datedeliv'] = json.encode(dateDelivrance);
-      map['nompere'] = json.encode(nomPere);
-      map['professpere'] = json.encode(professionPere);
-      map['nommere'] = json.encode(nomMere);
-      map['professmere'] = json.encode(professionMere);
-      map['nomtuteur'] = json.encode(nomTuteur);
-      map['professtuteur'] = json.encode(professionTuteur);
-      map['nomurgent'] = json.encode(nomUrgence);
-      map['numerourgent'] = json.encode(numUrgence);
-      map['villeurgent'] = json.encode(villeUrgence);
-      map['sport'] = json.encode(sport);
-      map['art'] = json.encode(art);
-      map['codepreins'] = json.encode(codePreinscription);
-      map['numeroTransaction'] = json.encode(numeroTransaction);
-      map['matricule'] = json.encode(matricule);
-      map['etat'] = json.encode(etat);
+      map['name'] = nom.toString();
+      map['surname'] = prenom.toString();
+      map['dateNaiss'] = dateNaiss.toString();
+      map['lieurNaiss'] = lieuNaiss.toString();
+      map['numerocni'] = numCni.toString();
+      map['photouser'] = photoEtudiant.toString();
+      map['adresse'] = adresse.toString();
+      map['sexe'] = sexe.toString();
+      map['email'] = adresseMail.toString();
+      map['statusMarital'] = statutMatrimonial.toString();
+      map['langue'] = langue.toString();
+      map['statusprofess'] = statutProfessionel.toString();
+      map['numerotel'] = numeroTelephone.toString();
+      map['nationalite'] = nationalite.toString();
+      map['relevebac'] = photoReleveBac.toString();
+      map['releveproba'] = photoReleveProbatoire.toString();
+      map['actenaiss'] = photoActenaissance.toString();
+      map['recu'] = photoRecuPaiement.toString();
+      map['premierchoix'] = firstChoice.toString();
+      map['deuxiemechoix'] = secondChoice.toString();
+      map['troisiemechoix'] = thirdChoice.toString();
+      map['specialite'] = specialite.toString();
+      map['niveau'] = niveau.toString();
+      map['dernierdiplom'] = typeDiplome.toString();
+      map['anneeObtent'] = anneeObtention.toString();
+      map['moyenne'] = moyenne.toString();
+      map['matriculediplo'] = matriculeDiplome.toString();
+      map['delivrepar'] = delivreurDiplome.toString();
+      map['infojury'] = infosJury.toString();
+      map['datedeliv'] = dateDelivrance.toString();
+      map['nompere'] = nomPere.toString();
+      map['professpere'] = professionPere.toString();
+      map['nommere'] = nomMere.toString();
+      map['professmere'] = professionMere.toString();
+      map['nomtuteur'] = nomTuteur.toString();
+      map['professtuteur'] = professionTuteur.toString();
+      map['nomurgent'] = nomUrgence.toString();
+      map['numerourgent'] = numUrgence.toString();
+      map['villeurgent'] = villeUrgence.toString();
+      map['sport'] = sport.toString();
+      map['art'] = art.toString();
+      map['codepreins'] = codePreinscription.toString();
+      map['numeroTransaction'] = numeroTransaction.toString();
+      map['matricule'] = matricule.toString();
+      map['etat'] = etat.toString();
 
       print("My map $map");
      // saveEtudiantUrl = 'https://7068-41-202-207-3.ngrok-free.app/preinscription';
@@ -129,8 +130,11 @@ class Service {
   static Future<String> addClient(String nom,String age)async{
     try{
       var map = Map<String, dynamic>();
+      map['idclient'] = "250";
       map['nom'] = nom.toString();
       map['age'] = age.toString();
+
+      print("Le map--------:$map");
 
        final response = await http.post(Uri.parse(saveClienUrl), body: map);
       print('addEtudiant Response: ${response.statusCode}');
@@ -144,6 +148,25 @@ class Service {
     } catch (e) {
       print(e);
       return "error";
+    }
+  }
+
+  static Future<String> getClient() async {
+    try {
+      var map = Map<String, dynamic>();
+      
+      
+      final response = await http.post(Uri.parse(getClientUrl), body: map);
+      print("------------la reponse -------------------");
+      print("response:: ${response.body}");
+      if (response.statusCode == 200) {
+        
+        return response.body;
+      } else {
+        return "error";
+      }
+    } catch (e) {
+      return "error"; 
     }
   }
 }

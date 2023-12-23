@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:unieduc/Screen/HomePage.dart';
 import 'package:unieduc/Screen/Login.dart';
 import 'package:unieduc/Utils/theme.dart';
 import 'package:unieduc/Widget/ScrollableWidget.dart';
@@ -287,7 +288,13 @@ class _CreateAccountState extends State<CreateAccount> {
               ),
               const SizedBox(height: 40),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                   Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                              pageBuilder: (_, __, ___) => HomePage(),
+                            ));
+                },
                 child: Container(
                   margin: EdgeInsets.only(left: 30, right: 30),
                   height: 55,

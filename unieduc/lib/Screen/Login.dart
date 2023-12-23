@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:unieduc/Screen/CreateAccount.dart';
+import 'package:unieduc/Screen/HomePage.dart';
 import 'package:unieduc/Service.dart';
 import 'package:unieduc/Utils/theme.dart';
+import 'package:unieduc/Widget/Loading.dart';
 import 'package:unieduc/Widget/ScrollableWidget.dart';
 
 class Login extends StatefulWidget {
@@ -17,11 +19,22 @@ class _LoginState extends State<Login> {
   TextEditingController _passwordController = new TextEditingController();
   bool _obscuring = true;
 
+  final formkey = GlobalKey<FormState>(); 
+
   void save(){
     String nom = _emailController.text;
     String age = _passwordController.text;
     Service.addClient(nom, age);
   }
+
+  loading_popup(context) {
+  return showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: ((context) {
+        return const Loading();
+      }));
+}
 
   @override
   void initState() {
@@ -37,19 +50,20 @@ class _LoginState extends State<Login> {
         backgroundColor: SECONDARY_COLOR,
         body: Center(
             child: Form(
+              key:formkey,
           child: ScrollableWidget(child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const SizedBox(
                 height: 150,
               ),
-              const Text(
-                "Login",
-                style: TextStyle(
-                    color: Colors.blue,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25),
-              ),
+              // const Text(
+              //   "Login",
+              //   style: TextStyle(
+              //       color: Colors.blue,
+              //       fontWeight: FontWeight.bold,
+              //       fontSize: 25),
+              // ),
               const SizedBox(
                 height: 30,
               ),
@@ -111,7 +125,7 @@ class _LoginState extends State<Login> {
                 ),
               ),
               const SizedBox(
-                height: 10,
+                height: 1,
               ),
               
               Row(
@@ -120,8 +134,8 @@ class _LoginState extends State<Login> {
                   Container(
                     margin: EdgeInsets.only(left: 30, right: 30),
                     child:  TextButton(onPressed: (){}, child: const Text("Mot de passe oublié?",style: TextStyle(
-                    fontSize: 15,
-                    fontStyle: FontStyle.italic,
+                    fontSize: 10,
+                    fontStyle: FontStyle.normal,
                     //fontWeight: FontWeight.bold,
                     color: Colors.black
                   ),)) ,
@@ -132,8 +146,21 @@ class _LoginState extends State<Login> {
                const SizedBox(height: 30),
 
               GestureDetector(
-                onTap: () {
-                  save();
+                onTap: () async{
+                  //save();
+
+                  // if (formkey.currentState!.validate()) {
+                  //  await  loading_popup(context);
+                  //   Navigator.push(
+                  //     context,
+                  //     PageRouteBuilder(
+                  //       pageBuilder: (_, __, ___) =>
+                  //           HomePage(),
+                  //     ));
+                  // }
+
+                  Service.getClient();
+                   
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 30, right: 30),

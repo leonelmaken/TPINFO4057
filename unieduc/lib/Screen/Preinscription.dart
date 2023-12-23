@@ -63,7 +63,7 @@ class _PreinscriptionState extends State<Preinscription> {
 
   late final List<String> _listStatutMatrimonial = [
     'Celibataire',
-    'Marie',
+    'Marié',
     'Divorce',
   ];
   String? selectedStatutMatrimonial;
@@ -347,6 +347,9 @@ class _PreinscriptionState extends State<Preinscription> {
                               )
                             ],
                           ),
+                          const SizedBox(
+                    height: 10,
+                  ),
                           Container(
                               decoration: BoxDecoration(
                                   boxShadow: [
@@ -988,7 +991,7 @@ class _PreinscriptionState extends State<Preinscription> {
                                         ),
                                         Row(children: const [
                                           SizedBox(width: 12),
-                                          Text("Langue Parlee",
+                                          Text("Langue Parlée",
                                               style: TextStyle(
                                                   color: TEXT_COLOR,
                                                   fontSize: 17,
@@ -1206,7 +1209,7 @@ class _PreinscriptionState extends State<Preinscription> {
                                                           newValue;
                                                     },
                                                     hint: Text(
-                                                      "Selectionner votre statut matrimonial",
+                                                      "Selectionner statut matrimonial",
                                                       style: TextStyle(
                                                         color: Colors
                                                             .grey.shade600,
