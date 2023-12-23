@@ -19,7 +19,6 @@ public class StudentBean extends UserBean{
     private String troisiemechoix;
     
     private String specialite;
-    @ManyToOne
     //photo scannee à uploader
     private String dernierdiplom;
 
