@@ -323,7 +323,7 @@ public class StudentServiceImpl implements StudentService {
     public ResponseEntity<Object> deleteStudent(Long studentId) {
         // Logique pour supprimer un étudiant avec studentService.deleteStudent
         // ...
-        studentrepo.deleteById(studentId);
+        studentrepo.deleteStudentByUserId(studentId);
         return ResponseEntity.ok("Student deleted successfully!");
     }
 
