@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage> {
                 ])),
               ),
               Container(
-                decoration: BoxDecoration(color: selected_drawer==1?Color.fromARGB(255, 229, 242, 248):null),
+                decoration: BoxDecoration(color: selected_drawer==1?const Color.fromARGB(255, 229, 242, 248):null),
                 child: ListTile(
                   leading: const Icon(Icons.account_box),
                   title: const Text('Creer un compte',
@@ -103,7 +103,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Container(
-                decoration: BoxDecoration(color: selected_drawer==11?Color.fromARGB(255, 229, 242, 248):null),
+                decoration: BoxDecoration(color: selected_drawer==11?const Color.fromARGB(255, 229, 242, 248):null),
                 child: ListTile(
                   leading: const Icon(Icons.login),
                   title: const Text('Se connecter',
@@ -120,7 +120,7 @@ class _HomePageState extends State<HomePage> {
               ),
               const Divider(height: 40),
               Container(
-                decoration: BoxDecoration(color: selected_drawer==2?Color.fromARGB(255, 229, 242, 248):null),
+                decoration: BoxDecoration(color: selected_drawer==2?const Color.fromARGB(255, 229, 242, 248):null),
                 child: ListTile(
                 leading: const Icon(Icons.home),
                 title: const Text('Accueil',
@@ -143,7 +143,7 @@ class _HomePageState extends State<HomePage> {
               ),
               
               Container(
-                decoration: BoxDecoration(color: selected_drawer==3?Color.fromARGB(255, 229, 242, 248):null),
+                decoration: BoxDecoration(color: selected_drawer==3?const Color.fromARGB(255, 229, 242, 248):null),
                 child: ListTile(
                   leading: const Icon(Icons.school),
                   title: const Text("S'inscrire a l'universite",
@@ -159,7 +159,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Container(
-                decoration: BoxDecoration(color: selected_drawer==4?Color.fromARGB(255, 229, 242, 248):null),
+                decoration: BoxDecoration(color: selected_drawer==4?const Color.fromARGB(255, 229, 242, 248):null),
                 child: ListTile(
                   leading: const Icon(Icons.settings),
                   title: const Text("Parametres",
@@ -173,7 +173,7 @@ class _HomePageState extends State<HomePage> {
               ),
               const Divider(height: 40),
               Container(
-                decoration: BoxDecoration(color: selected_drawer==5?Color.fromARGB(255, 229, 242, 248):null),
+                decoration: BoxDecoration(color: selected_drawer==5?const Color.fromARGB(255, 229, 242, 248):null),
                 child: ListTile(
                   leading: const Icon(Icons.share),
                   title: const Text("Partager l'Application",
@@ -184,7 +184,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               Container(
-                decoration: BoxDecoration(color: selected_drawer==6?Color.fromARGB(255, 229, 242, 248):null),
+                decoration: BoxDecoration(color: selected_drawer==6?const Color.fromARGB(255, 229, 242, 248):null),
                 child: ListTile(
                   leading: const Icon(Icons.info),
                   title: const Text('A propos',
@@ -197,7 +197,7 @@ class _HomePageState extends State<HomePage> {
               const Divider(height: 40),
 
               Container(
-                decoration: BoxDecoration(color: selected_drawer==7?Color.fromARGB(255, 229, 242, 248):null),
+                decoration: BoxDecoration(color: selected_drawer==7?const Color.fromARGB(255, 229, 242, 248):null),
                 child: ListTile(
                   leading: const Icon(Icons.logout),
                   title: const Text('Deconnexion',
@@ -212,17 +212,9 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       appBar: AppBar(
-        
+        toolbarHeight: 40,
         title: const Text('UY1App'),
-        // actions: [
-        //   IconButton(
-        //     icon: const Icon(Icons.menu),
-        //     tooltip: 'Menu',
-        //     onPressed: () {
-             
-        //     },
-        //   ),
-        // ],
+        
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient:LinearGradient(
@@ -248,7 +240,7 @@ class _HomePageState extends State<HomePage> {
                 
                 child: IconButton(
                   key: accueilKey,
-                  icon:  Icon(Icons.newspaper,
+                  icon:  Icon(Icons.newspaper,size: 25,
                   color: selectedIndex==1?Colors.blue:null,),
                   onPressed: () {
                     setState(() {
@@ -271,15 +263,15 @@ class _HomePageState extends State<HomePage> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              SizedBox(width: 30),
+                              const SizedBox(width: 30),
                               Container(
                                 width: 20,
                                 height: 20,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   color: Colors.red,
                                   shape: BoxShape.circle
                                 ),
-                                child: Center(child: Text("15",style: TextStyle(color: Colors.white),)),
+                                child: const Center(child: Text("15",style: TextStyle(color: Colors.white),)),
                               )
                             ],
                           )
@@ -292,7 +284,7 @@ class _HomePageState extends State<HomePage> {
                 children: [
                    IconButton(
                 key: accountKey,
-                icon:  Icon(Icons.message,
+                icon:  Icon(Icons.message,size: 25,
                 color: selectedIndex==2?Colors.blue:null,
                 ),
                 onPressed: () {
@@ -310,15 +302,15 @@ class _HomePageState extends State<HomePage> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              SizedBox(width: 30),
+                              const SizedBox(width: 30),
                               Container(
                                 width: 20,
                                 height: 20,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   color: Colors.red,
                                   shape: BoxShape.circle
                                 ),
-                                child: Center(child: Text("2",style: TextStyle(color: Colors.white),)),
+                                child: const Center(child: Text("2",style: TextStyle(color: Colors.white),)),
                               )
                             ],
                           )
@@ -330,7 +322,7 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   IconButton(
                 key:schoolKey,
-                icon:  Icon(Icons.notifications,
+                icon:  Icon(Icons.notifications,size: 25,
                 color: selectedIndex==3?Colors.blue:null,),
                 onPressed: () {
                    setState(() {
@@ -351,15 +343,15 @@ class _HomePageState extends State<HomePage> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              SizedBox(width: 25),
+                              const SizedBox(width: 25),
                               Container(
                                 width: 20,
                                 height: 20,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   color: Colors.red,
                                   shape: BoxShape.circle
                                 ),
-                                child: Center(child: Text("8",style: TextStyle(color: Colors.white),)),
+                                child: const Center(child: Text("8",style: TextStyle(color: Colors.white),)),
                               )
                             ],
                           )
@@ -373,7 +365,7 @@ class _HomePageState extends State<HomePage> {
               
               IconButton(
                 key: messageKey,
-                icon:  Icon(Icons.school,
+                icon:  Icon(Icons.school,size: 30,
                 color: selectedIndex==4?Colors.blue:null,),
                 onPressed: () {
                    setState(() {
@@ -401,6 +393,19 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         const SizedBox(width: 5,),
                         const Icon(Icons.account_circle_rounded,color: Colors.grey,size:30),
+                        // Container(
+                        //   decoration: BoxDecoration(
+                        //     shape: BoxShape.circle,
+                        //     color: Colors.grey,
+                        //     //image: DecorationImage(image: image)
+                        //   ),
+                        //   width: 30,
+                        //   height: 30,
+                        //   child: Image.asset("assets/images/fc7ea768-how-to-reduce-the-waiting-time-in-your-restaurant-fr.png",width: double.maxFinite,height: double.maxFinite,),
+                        // ),
+                        // CircleAvatar(
+                        //   child: Image.asset("assets/images/159911965-icône-de-l-homme-sans-emploi-déprimé-style-cartoon.jpg",fit: BoxFit.fill,),
+                        // ),
                         Expanded(
                           flex: 2,
                           child: 
@@ -451,10 +456,20 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                   //trailing: IconButton(onPressed: (){}, icon: Icon(Icons.pool_sharp)),
                                 ),
-
+                                Visibility(
+                                  visible: true,
+                                  child: Container(
+                                    margin: EdgeInsets.all(10),
+                                  child: const Text("Le travail est très important, cela éloigne de nous trois grands maux: L'ennuis, le vice et le besoin",style: TextStyle(color: Colors.black,fontSize: 12),),
+                                )),
+                                Visibility(
+                                  visible: true,
+                                  
+                                  child: 
+                                
                                 Container(
                                   child: Image.asset("assets/images/fc7ea768-how-to-reduce-the-waiting-time-in-your-restaurant-fr.png",width: double.infinity,),
-                                ),
+                                )),
 
                                 const SizedBox(
                                   height: 5,

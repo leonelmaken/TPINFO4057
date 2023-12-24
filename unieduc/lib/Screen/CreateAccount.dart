@@ -49,6 +49,18 @@ class _CreateAccountState extends State<CreateAccount> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: SECONDARY_COLOR,
+        appBar: AppBar(
+          toolbarHeight: 40,
+          leading: IconButton(onPressed: () {
+            Navigator.pop(context);
+          },
+          
+          icon: const  Icon(Icons.arrow_back_ios,size: 20,color: Colors.white,),
+          
+          ),
+          
+          elevation: 0.0,
+        ),
         body: Center(
             child: Form(
           child: ScrollableWidget(child: Column(

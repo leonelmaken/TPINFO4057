@@ -10,6 +10,8 @@ import 'package:intl/intl.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 
+import 'HomePage.dart';
+
 class Inscription extends StatefulWidget {
   @override
   _InscriptionState createState() => _InscriptionState();
@@ -90,7 +92,7 @@ class _InscriptionState extends State<Inscription>
   TextEditingController _noTelController = new TextEditingController();
 
   final _formKeyInscriptionUy1 = GlobalKey<FormState>();
-   final  GlobalKey<SignatureState>_sigatureKey = GlobalKey();
+  final GlobalKey<SignatureState> _sigatureKey = GlobalKey();
 
   bool ue1 = false;
   bool ue2 = false;
@@ -125,10 +127,10 @@ class _InscriptionState extends State<Inscription>
   @override
   void initState() {
     super.initState();
-     recuTotalite = null;
-     recuFirstTranche = null;
-      recuSecondTanche = null;
-       photo4x4 = null;
+    recuTotalite = null;
+    recuFirstTranche = null;
+    recuSecondTanche = null;
+    photo4x4 = null;
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 200),
@@ -138,124 +140,125 @@ class _InscriptionState extends State<Inscription>
         _currentPage = _pageController.page!.round();
       });
     });
-    setState(() {
-      
-    });
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: SECONDARY_COLOR,
-        drawer: Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: <Widget>[
-              DrawerHeader(
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        PRIMARY_COLOR,
-                        Color.fromARGB(255, 38, 83, 129)
-                      ]),
-                  // color: Colors.blue,
-                ),
-                child: Center(
-                    child: Column(children: [
-                  Container(
-                    width: 75,
-                    height: 75,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(100)),
-                    child: const Icon(
-                      Icons.person,
-                      size: 75,
-                      color: Color.fromARGB(255, 77, 76, 76),
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  Text("$salutation Giresse",
-                      style: const TextStyle(color: Colors.white, fontSize: 20))
-                ])),
-              ),
-              ListTile(
-                leading: const Icon(Icons.home),
-                title: const Text('Accueil',
-                    style: TextStyle(color: TEXT_COLOR, fontSize: 17)),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      PageRouteBuilder(
-                        pageBuilder: (_, __, ___) => Preinscription(),
-                      ));
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.school),
-                title: const Text("S'inscrire a l'universite",
-                    style: TextStyle(color: TEXT_COLOR, fontSize: 17)),
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      PageRouteBuilder(
-                        pageBuilder: (_, __, ___) => Inscription(),
-                      ));
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.settings),
-                title: const Text("Parametres",
-                    style: TextStyle(color: TEXT_COLOR, fontSize: 17)),
-                onTap: () {
-                  
-                },
-              ),
-              const Divider(height: 40),
-              ListTile(
-                leading: const Icon(Icons.share),
-                title: const Text("Partager l'Application",
-                    style: TextStyle(color: TEXT_COLOR, fontSize: 17)),
-                onTap: () {
-                  
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.info),
-                title: const Text('A propos',
-                    style: TextStyle(color: TEXT_COLOR, fontSize: 17)),
-                onTap: () {
-                  
-                },
-              ),
-              const Divider(height: 40),
-              ListTile(
-                leading: const Icon(Icons.logout),
-                title: const Text('Deconnexion',
-                    style: TextStyle(color: TEXT_COLOR, fontSize: 17)),
-                onTap: () {
-                  // Action à effectuer lorsque l'élément est cliqué
-                  // Par exemple, naviguer vers la page d'accueil
-                },
-              ),
-              // Ajoutez d'autres éléments de menu ici
-            ],
-          ),
-        ),
         appBar: AppBar(
-          toolbarHeight: 50,
+          toolbarHeight: 40,
           leading: Builder(
             builder: (BuildContext context) {
               return IconButton(
-                icon: const Icon(Icons.menu, size: 40),
+                icon: const Icon(Icons.arrow_back_ios, size: 20),
                 onPressed: () {
-                  Scaffold.of(context).openDrawer();
+                  Navigator.pop(context);
                 },
               );
             },
           ),
+          elevation: 0.0,
+          title: Text(
+            "INSCRIPTION UY1",
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          actions: [
+            PopupMenuButton(
+                position: PopupMenuPosition.under,
+                splashRadius: 10,
+                child: Row(
+                  // ignore: prefer_const_literals_to_create_immutables
+                  children: [
+                    const Icon(
+                      Icons.more_vert, size: 20,
+                      //color: Color(0xffCCCCCC),
+                      color: Colors.white,
+                    ),
+                  ],
+                ),
+                itemBuilder: (BuildContext context) {
+                  return [
+                    PopupMenuItem(
+                      child: ListTile(
+                        hoverColor: Colors.transparent,
+                        minLeadingWidth: 5,
+                        contentPadding: const EdgeInsets.all(0),
+                        title: const Text("Voir fiche d'inscription",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w400,
+                            )),
+                        onTap: () async {
+                          Navigator.pop(context);
+                          showDialog(
+                              barrierDismissible: false,
+                              context: context,
+                              builder: (BuildContext) {
+                                return AlertDialog(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  title: Row(
+                                    children: [
+                                      const Icon(
+                                        Icons.warning,
+                                        color: Colors.red,
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
+                                        "Alerte".toUpperCase(),
+                                        style: const TextStyle(fontSize: 13),
+                                      )
+                                    ],
+                                  ),
+                                  content: const Text(
+                                    "Vous n'avez pas de fiche d'inscription enregistée",
+                                  ),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () => Navigator.pop(context),
+                                      child: const Text("D'accord"),
+                                    ),
+                                  ],
+                                );
+                              });
+                        },
+                        leading: const Icon(
+                          Icons.remove_red_eye,
+                          color: Colors.grey,
+                          size: 18,
+                        ),
+                      ),
+                    ),
+                    PopupMenuItem(
+                      child: ListTile(
+                        hoverColor: Colors.transparent,
+                        minLeadingWidth: 5,
+                        contentPadding: const EdgeInsets.all(0),
+                        title: const Text("Voir fiche de preinscripion",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w400,
+                            )),
+                        onTap: () async {
+                          Navigator.pop(context);
+                        },
+                        leading: const Icon(
+                          Icons.remove_red_eye,
+                          color: Colors.grey,
+                          size: 18,
+                        ),
+                      ),
+                    )
+                  ];
+                }),
+          ],
           //  IconButton(icon: Icon(Icons.menu,size:40), onPressed:(){}),
           // title: Text('UNIVERSITY APP')
           // actions: <Widget>[Row(
@@ -312,19 +315,7 @@ class _InscriptionState extends State<Inscription>
               child: Column(
                 children: [
                   const SizedBox(
-                    height: 50,
-                  ),
-                  const Text(
-                    "INSCRIPTION UY1",
-                    style: TextStyle(
-                      fontSize: 40,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 25,
+                    height: 40,
                   ),
 
                   Column(
@@ -350,8 +341,8 @@ class _InscriptionState extends State<Inscription>
                         ],
                       ),
                       const SizedBox(
-                    height: 10,
-                  ),
+                        height: 10,
+                      ),
                       Container(
                           decoration: BoxDecoration(
                               boxShadow: [
@@ -392,7 +383,6 @@ class _InscriptionState extends State<Inscription>
                                     const SizedBox(
                                       height: 27,
                                     ),
-                                    
                                     Row(children: const [
                                       SizedBox(width: 12),
                                       Text("Matricule",
@@ -424,12 +414,11 @@ class _InscriptionState extends State<Inscription>
                                               style: const TextStyle(
                                                   color: TEXT_COLOR),
                                               decoration: InputDecoration(
-                                                  
                                                   helperText:
                                                       "Nombre de caracteres autorisés",
                                                   //labelText: "Matricule",
-                                                  prefixIcon:
-                                                      const Icon(Icons.abc_outlined),
+                                                  prefixIcon: const Icon(
+                                                      Icons.abc_outlined),
                                                   hintText:
                                                       "Entrer votre matricule",
                                                   labelStyle: const TextStyle(
@@ -452,9 +441,10 @@ class _InscriptionState extends State<Inscription>
                                                   ),
                                                   focusedBorder:
                                                       OutlineInputBorder(
-                                                    borderSide: const BorderSide(
-                                                        color: Colors.blue,
-                                                        width: 2),
+                                                    borderSide:
+                                                        const BorderSide(
+                                                            color: Colors.blue,
+                                                            width: 2),
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             10),
@@ -465,7 +455,6 @@ class _InscriptionState extends State<Inscription>
                                     const SizedBox(
                                       height: 35,
                                     ),
-                                   
                                     Row(children: const [
                                       SizedBox(width: 12),
                                       Text("Photo 4 x 4",
@@ -500,7 +489,8 @@ class _InscriptionState extends State<Inscription>
                                               bottom: BorderSide(
                                                   color: Colors.blue),
                                             ),
-                                            borderRadius: const BorderRadius.only(
+                                            borderRadius: const BorderRadius
+                                                    .only(
                                                 topLeft: Radius.circular(15),
                                                 topRight: Radius.circular(15),
                                                 bottomLeft: Radius.circular(15),
@@ -623,8 +613,8 @@ class _InscriptionState extends State<Inscription>
                                                       "Nombre de caracteres autorisés",
                                                   hintText:
                                                       'Entrer le numero du recu de la 1ere tranche',
-                                                  prefixIcon:
-                                                      const Icon(Icons.payment_sharp),
+                                                  prefixIcon: const Icon(
+                                                      Icons.payment_sharp),
                                                   //labelText: "Nom",
                                                   labelStyle: const TextStyle(
                                                       color: TEXT_COLOR,
@@ -646,9 +636,10 @@ class _InscriptionState extends State<Inscription>
                                                   ),
                                                   focusedBorder:
                                                       OutlineInputBorder(
-                                                    borderSide: const BorderSide(
-                                                        color: Colors.blue,
-                                                        width: 2),
+                                                    borderSide:
+                                                        const BorderSide(
+                                                            color: Colors.blue,
+                                                            width: 2),
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             10),
@@ -694,7 +685,8 @@ class _InscriptionState extends State<Inscription>
                                               bottom: BorderSide(
                                                   color: Colors.blue),
                                             ),
-                                            borderRadius: const BorderRadius.only(
+                                            borderRadius: const BorderRadius
+                                                    .only(
                                                 topLeft: Radius.circular(15),
                                                 topRight: Radius.circular(15),
                                                 bottomLeft: Radius.circular(15),
@@ -799,8 +791,8 @@ class _InscriptionState extends State<Inscription>
                                                       "Nombre de caracteres autorisés",
                                                   hintText:
                                                       'Entrer le numero du recu de la 2eme tranche',
-                                                  prefixIcon:
-                                                      const Icon(Icons.payment_sharp),
+                                                  prefixIcon: const Icon(
+                                                      Icons.payment_sharp),
                                                   //labelText: "Nom",
                                                   labelStyle: const TextStyle(
                                                       color: TEXT_COLOR,
@@ -822,9 +814,10 @@ class _InscriptionState extends State<Inscription>
                                                   ),
                                                   focusedBorder:
                                                       OutlineInputBorder(
-                                                    borderSide: const BorderSide(
-                                                        color: Colors.blue,
-                                                        width: 2),
+                                                    borderSide:
+                                                        const BorderSide(
+                                                            color: Colors.blue,
+                                                            width: 2),
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             10),
@@ -870,13 +863,14 @@ class _InscriptionState extends State<Inscription>
                                               bottom: BorderSide(
                                                   color: Colors.blue),
                                             ),
-                                            borderRadius: const BorderRadius.only(
+                                            borderRadius: const BorderRadius
+                                                    .only(
                                                 topLeft: Radius.circular(15),
                                                 topRight: Radius.circular(15),
                                                 bottomLeft: Radius.circular(15),
                                                 bottomRight:
                                                     Radius.circular(15))),
-                                        child: recuSecondTanche !=null
+                                        child: recuSecondTanche != null
                                             ? const Text("")
                                             : const Icon(Icons.description,
                                                 color: Colors.white,
@@ -997,9 +991,10 @@ class _InscriptionState extends State<Inscription>
                                                   ),
                                                   focusedBorder:
                                                       OutlineInputBorder(
-                                                    borderSide: const BorderSide(
-                                                        color: Colors.blue,
-                                                        width: 2),
+                                                    borderSide:
+                                                        const BorderSide(
+                                                            color: Colors.blue,
+                                                            width: 2),
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             10),
@@ -1045,7 +1040,8 @@ class _InscriptionState extends State<Inscription>
                                               bottom: BorderSide(
                                                   color: Colors.blue),
                                             ),
-                                            borderRadius: const BorderRadius.only(
+                                            borderRadius: const BorderRadius
+                                                    .only(
                                                 topLeft: Radius.circular(15),
                                                 topRight: Radius.circular(15),
                                                 bottomLeft: Radius.circular(15),
@@ -1063,7 +1059,7 @@ class _InscriptionState extends State<Inscription>
                                         onTap: () async {
                                           recuTotalite =
                                               await _getImageFromGallery();
-                                              setState(() {});
+                                          setState(() {});
                                         },
                                         child: Container(
                                             margin: const EdgeInsets.only(
@@ -1127,48 +1123,50 @@ class _InscriptionState extends State<Inscription>
                                       height: 27,
                                     ),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
                                           children: const [
-                                              SizedBox(
-                                          width: 20,
+                                            SizedBox(
+                                              width: 20,
+                                            ),
+                                            Text(
+                                              "1er semestre",
+                                              style: TextStyle(
+                                                  decorationStyle:
+                                                      TextDecorationStyle.solid,
+                                                  color: Colors.black,
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ],
                                         ),
-                                        Text(
-                                          "1er semestre",
-                                          style: TextStyle(
-                                              decorationStyle:
-                                                  TextDecorationStyle.solid,
-                                              color: Colors.black,
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        ],),
-                                         Row(
-                                          mainAxisAlignment: MainAxisAlignment.end,
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
                                           children: [
-                                              
-                                        Checkbox(
-                                          value: alls1,
-                                          onChanged: (value) {
-                                            setState(() {
-                                              alls1 = value!;
-                                              ue1 = value;
-                                              ue2 = value;
-                                              ue3 = value;
-                                              ue4 = value;
-                                              ue5 = value;
-                                              ue6 = value;
-                                            });
-                                          },
+                                            Checkbox(
+                                              value: alls1,
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  alls1 = value!;
+                                                  ue1 = value;
+                                                  ue2 = value;
+                                                  ue3 = value;
+                                                  ue4 = value;
+                                                  ue5 = value;
+                                                  ue6 = value;
+                                                });
+                                              },
+                                            ),
+                                            const SizedBox(
+                                              width: 17,
+                                            ),
+                                          ],
                                         ),
-                                         const SizedBox(
-                                          width: 17,
-                                        ),
-                                        ],),
-                                        
-                                       
                                       ],
                                     ),
                                     const Divider(height: 20),
@@ -1254,47 +1252,50 @@ class _InscriptionState extends State<Inscription>
                                       height: 35,
                                     ),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Row(mainAxisAlignment: MainAxisAlignment.start,
-                                        children: const [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: const [
                                             SizedBox(
-                                          width: 20,
+                                              width: 20,
+                                            ),
+                                            Text(
+                                              "2nd semestre",
+                                              style: TextStyle(
+                                                  decorationStyle:
+                                                      TextDecorationStyle.solid,
+                                                  color: Colors.black,
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ],
                                         ),
-                                        Text(
-                                          "2nd semestre",
-                                          style: TextStyle(
-                                              decorationStyle:
-                                                  TextDecorationStyle.solid,
-                                              color: Colors.black,
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: [
+                                            Checkbox(
+                                              value: alls2,
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  alls2 = value!;
+                                                  ue7 = value;
+                                                  ue8 = value;
+                                                  ue9 = value;
+                                                  ue10 = value;
+                                                  ue11 = value;
+                                                  ue12 = value;
+                                                });
+                                              },
+                                            ),
+                                            const SizedBox(
+                                              width: 17,
+                                            ),
+                                          ],
                                         ),
-                                        ],),
-                                        Row(mainAxisAlignment: MainAxisAlignment.end,
-                                        children:  [
-                                          
-                                        Checkbox(
-                                          value: alls2,
-                                          onChanged: (value) {
-                                            setState(() {
-                                              alls2 = value!;
-                                              ue7 = value;
-                                              ue8 = value;
-                                              ue9 = value;
-                                              ue10 = value;
-                                              ue11 = value;
-                                              ue12 = value;
-                                            });
-                                          },
-                                        ),
-                                          const SizedBox(
-                                          width: 17,
-                                        ),
-                                        ],),
-                                        
-                                        
-                                        
                                       ],
                                     ),
                                     const Divider(height: 20),
@@ -1434,7 +1435,8 @@ class _InscriptionState extends State<Inscription>
                                                       "Nombre de caracteres autorisés",
                                                   hintText:
                                                       'Entrer votre numero de telephone',
-                                                  prefixIcon: const Icon(Icons.phone),
+                                                  prefixIcon:
+                                                      const Icon(Icons.phone),
                                                   //labelText: "Nom",
                                                   labelStyle: const TextStyle(
                                                       color: TEXT_COLOR,
@@ -1456,9 +1458,10 @@ class _InscriptionState extends State<Inscription>
                                                   ),
                                                   focusedBorder:
                                                       OutlineInputBorder(
-                                                    borderSide: const BorderSide(
-                                                        color: Colors.blue,
-                                                        width: 2),
+                                                    borderSide:
+                                                        const BorderSide(
+                                                            color: Colors.blue,
+                                                            width: 2),
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             10),
@@ -1470,28 +1473,36 @@ class _InscriptionState extends State<Inscription>
                                       height: 35,
                                     ),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children:  [
-                                        Row(children: const [
-                                             SizedBox(width: 12),
-                                      Text("Signature",
-                                          style: TextStyle(
-                                              color: TEXT_COLOR,
-                                              fontSize: 17,
-                                              fontWeight: FontWeight.bold)),
-                                        ],),
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.end,
-                                          children:[
-                                          
-                                            
-                                      IconButton(onPressed: (){
-                                        _sigatureKey.currentState?.clear();
-                                      }, icon: const Icon(Icons.delete,size: 20,color:Colors.red)),
-                                       const SizedBox(width: 12),        
-                                        ])
-                                    
-                                    ]),
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Row(
+                                            children: const [
+                                              SizedBox(width: 12),
+                                              Text("Signature",
+                                                  style: TextStyle(
+                                                      color: TEXT_COLOR,
+                                                      fontSize: 17,
+                                                      fontWeight:
+                                                          FontWeight.bold)),
+                                            ],
+                                          ),
+                                          Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              children: [
+                                                IconButton(
+                                                    onPressed: () {
+                                                      _sigatureKey.currentState
+                                                          ?.clear();
+                                                    },
+                                                    icon: const Icon(
+                                                        Icons.delete,
+                                                        size: 20,
+                                                        color: Colors.red)),
+                                                const SizedBox(width: 12),
+                                              ])
+                                        ]),
                                     const SizedBox(
                                       height: 10,
                                     ),
@@ -1500,21 +1511,21 @@ class _InscriptionState extends State<Inscription>
                                             left: 15, right: 15),
                                         width: 400,
                                         height: 250,
-                                        decoration:  BoxDecoration(
+                                        decoration: BoxDecoration(
                                             border: Border.all(
                                               color: Colors.blue,
-                                              
                                             ),
-                                            borderRadius: const BorderRadius.only(
+                                            borderRadius: const BorderRadius
+                                                    .only(
                                                 topLeft: Radius.circular(15),
                                                 topRight: Radius.circular(15),
                                                 bottomLeft: Radius.circular(15),
                                                 bottomRight:
                                                     Radius.circular(15))),
                                         child: Signature(
-                                          color:Colors.black,
+                                          color: Colors.black,
                                           strokeWidth: 2.0,
-                                          key:_sigatureKey,
+                                          key: _sigatureKey,
                                         )),
                                   ],
                                 )),
@@ -1559,15 +1570,14 @@ class _InscriptionState extends State<Inscription>
                                   onPressed: () {
                                     if (_formKeyInscriptionUy1.currentState!
                                         .validate()) {
-
-                                          print("Ok pour les champs");
-                                      // Navigator.push(
-                                      //     context,
-                                      //     PageRouteBuilder(
-                                      //       pageBuilder: (_, __, ___) =>
-                                      //           FicheInscription(),
-                                      //     ));
+                                      print("Ok pour les champs");
                                     }
+                                    Navigator.push(
+                                        context,
+                                        PageRouteBuilder(
+                                          pageBuilder: (_, __, ___) =>
+                                              HomePage(),
+                                        ));
                                   },
                                   child: const Text('Envoyer',
                                       style: TextStyle(
