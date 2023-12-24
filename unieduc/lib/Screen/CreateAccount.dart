@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:unieduc/Screen/HomePage.dart';
 import 'package:unieduc/Screen/Login.dart';
+import 'package:unieduc/Utils/Global.dart';
 import 'package:unieduc/Utils/theme.dart';
 import 'package:unieduc/Widget/ScrollableWidget.dart';
 
@@ -288,7 +289,9 @@ class _CreateAccountState extends State<CreateAccount> {
               ),
               const SizedBox(height: 40),
               GestureDetector(
-                onTap: () {
+                onTap: () async{
+                  loading_popup(context);
+                  await Future.delayed(Duration(seconds: 2));
                    Navigator.push(
                             context,
                             PageRouteBuilder(
@@ -350,7 +353,9 @@ class _CreateAccountState extends State<CreateAccount> {
                         fontSize: 15),
                   ),
                   TextButton(
-                      onPressed: () {
+                      onPressed: () async{
+                        loading_popup(context);
+                  await Future.delayed(Duration(seconds: 1));
                         Navigator.push(
                             context,
                             PageRouteBuilder(

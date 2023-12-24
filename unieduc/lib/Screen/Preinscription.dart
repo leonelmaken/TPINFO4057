@@ -26,7 +26,7 @@ class _PreinscriptionState extends State<Preinscription> {
   String _sexe = "Masculin";
   bool _okSport = false;
   bool _okArt = false;
-  static const _kDuration = const Duration(milliseconds: 300);
+  static const _kDuration = const Duration(milliseconds: 10);
   static const _kCurve = Curves.ease;
 
   final _currentPageNotifier = ValueNotifier<int>(0);
@@ -4835,7 +4835,7 @@ class _PreinscriptionState extends State<Preinscription> {
                                           _currentPage -
                                               1, // Index du mini-écran suivant
                                           duration:
-                                              const Duration(milliseconds: 200),
+                                              const Duration(milliseconds: 10),
                                           curve: Curves
                                               .easeInOut, // Courbe d'animation
                                         );
@@ -4883,7 +4883,7 @@ class _PreinscriptionState extends State<Preinscription> {
                                           _currentPage +
                                               1, // Index du mini-écran suivant
                                           duration:
-                                              const Duration(milliseconds: 200),
+                                              const Duration(milliseconds: 10),
                                           curve: Curves
                                               .easeInOut, // Courbe d'animation
                                         );

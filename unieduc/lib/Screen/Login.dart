@@ -6,6 +6,8 @@ import 'package:unieduc/Utils/theme.dart';
 import 'package:unieduc/Widget/Loading.dart';
 import 'package:unieduc/Widget/ScrollableWidget.dart';
 
+import '../Utils/Global.dart';
+
 class Login extends StatefulWidget {
   const Login({super.key});
 
@@ -27,14 +29,7 @@ class _LoginState extends State<Login> {
     Service.addClient(nom, age);
   }
 
-  loading_popup(context) {
-  return showDialog(
-      barrierDismissible: false,
-      context: context,
-      builder: ((context) {
-        return const Loading();
-      }));
-}
+ 
 
   @override
   void initState() {
@@ -150,7 +145,8 @@ class _LoginState extends State<Login> {
                   //save();
 
                   if (formkey.currentState!.validate()) {
-                  // await  loading_popup(context);
+                  loading_popup(context);
+                  await Future.delayed(Duration(seconds: 3));
                     Navigator.push(
                       context,
                       PageRouteBuilder(
@@ -218,7 +214,9 @@ class _LoginState extends State<Login> {
                         fontSize: 15),
                   ),
                   TextButton(
-                      onPressed: () {
+                      onPressed: () async{
+                        loading_popup(context);
+                  await Future.delayed(Duration(seconds: 1));
                         Navigator.push(
                       context,
                       PageRouteBuilder(
