@@ -19,12 +19,12 @@ public class AnnonceController {
         this.annonceService = annonceService;
     }
 
-    @PostMapping
+    @PostMapping(path = "/create")
     public Annonce createAnnonce(@RequestBody Annonce annonce) {
         return annonceService.createAnnonce(annonce);
     }
 
-    @GetMapping
+    @GetMapping(path = "/read")
     public List<Annonce> getAllAnnonces() {
         return annonceService.getAllAnnonces();
     }

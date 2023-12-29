@@ -1,12 +1,14 @@
 package com.example.demo.models;
 
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 
 @Entity
 public class Annonce {
@@ -17,7 +19,7 @@ public class Annonce {
 
     private String title;
     private String content;
-    private Date timestamp;
+    private LocalDateTime timestamp;
 
     // Constructeurs, getters et setters
 
@@ -25,10 +27,9 @@ public class Annonce {
         // Constructeur par défaut
     }
 
-    public Annonce(String title, String content, Date timestamp) {
+    public Annonce(String title, String content) {
         this.title = title;
         this.content = content;
-        this.timestamp = timestamp;
     }
 
     // Getters et Setters
@@ -57,11 +58,16 @@ public class Annonce {
         this.content = content;
     }
 
-    public Date getTimestamp() {
+    public LocalDateTime getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Date timestamp) {
+    public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
+    }
+    @PrePersist
+    @PreUpdate
+    public void prePersist() {
+        timestamp = LocalDateTime.now();
     }
 }
