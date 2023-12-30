@@ -39,7 +39,7 @@ public class InscriptionStudentController {
             return ResponseEntity.status(HttpStatus.UNSUPPORTED_MEDIA_TYPE).body("Seulement les images jpeg,png,jpg, ou les fichiers pdf sont acceptees");
 
         }
-        Student etudiant= stuRepo.findByMatricule(matricule).orElseThrow(() -> new RuntimeException("Country not found"));
+        Student etudiant= stuRepo.findByMatricule(matricule).orElseThrow(() -> new RuntimeException("student is not found"));
 
         InscriptionStudent inscription= inscriptService.inscriptionEtudiant(etudiant,firsttranche,secondtranche,totalitetranche);
         return ResponseEntity.ok(inscription);
