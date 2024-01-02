@@ -32,5 +32,5 @@ public class MessageController {
     @GetMapping("/receiver/{receiverId}")
     public List<Message> getMessagesByReceiverId(@PathVariable Long receiverId) {
         return messageService.getMessagesByReceiverId(receiverId);
-    }
+    }    
 }

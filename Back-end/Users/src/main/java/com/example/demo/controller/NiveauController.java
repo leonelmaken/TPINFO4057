@@ -15,13 +15,13 @@ public class NiveauController {
     @Autowired
     private NiveauService niveauService;
 
-    //enregistrer un niveau avec ses UE
+    // enregistrer un niveau avec ses UE
     @PostMapping("/niveau")
-    public Niveau addNiveau(@RequestParam String name, @RequestParam String ue,@RequestParam String intitule) {
-        return niveauService.addNiveau(name, ue ,intitule);
+    public Niveau addNiveau(@RequestBody Niveau niveau) {
+        return niveauService.addNiveau(niveau.getName(), niveau.getEu());
     }
 
-    //afficher toutes les UE d'un niveau precis
+    // afficher toutes les UE d'un niveau precis
     @RequestMapping(value = "/searchby/ue", method = RequestMethod.GET)
     public List<UE> getUEsByNiveauName(@RequestParam String name) {
         return niveauService.getUEsByNiveauName(name);

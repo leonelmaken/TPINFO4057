@@ -32,5 +32,4 @@ public class AnnonceController {
     @GetMapping("/{id}")
     public Annonce getAnnonceById(@PathVariable Long id) {
         return annonceService.getAnnonceById(id);
-    }
-}
+    }}

@@ -2,13 +2,13 @@ package com.example.demo.models;
 
 
 
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
-
 import java.time.LocalDateTime;
 
 @Entity
@@ -76,11 +76,11 @@ public class Message {
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
+    
     @PrePersist
     @PreUpdate
     public void prePersist() {
         timestamp = LocalDateTime.now();
     }
-
 }
 

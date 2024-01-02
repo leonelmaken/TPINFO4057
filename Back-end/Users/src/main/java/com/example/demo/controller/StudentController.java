@@ -1,38 +1,31 @@
 package com.example.demo.controller;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.http.HttpStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.models.Niveau;
+import com.example.demo.models.Specialite;
 import com.example.demo.models.Student;
-import com.example.demo.repository.NiveauRepository;
-import com.example.demo.repository.SpecialiteRepository;
 import com.example.demo.service.StudentService;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.Optional;
+
 @RestController
+@RequestMapping("/api/students")
 public class StudentController {
+
     @Autowired
     private StudentService studentService;
 
-    @Autowired
-    private SpecialiteRepository specialiteRepository;
-
-    @Autowired
-    private NiveauRepository niveauRepository;
-
-    @RequestMapping(method = RequestMethod.POST, value = "/preinscription")
-    public ResponseEntity<?> preinscription(
+    @PostMapping("/preinscription")
+    public ResponseEntity<Object> preinscription(
             @RequestParam String name,
             @RequestParam String surname,
-            @RequestParam Date dateNaiss,
+            @RequestParam String dateNaiss,
             @RequestParam String lieuNaiss,
             @RequestParam String numerocni,
             @RequestParam MultipartFile photouser,
@@ -54,8 +47,8 @@ public class StudentController {
             @RequestParam String premierchoix,
             @RequestParam String deuxiemechoix,
             @RequestParam String troisiemechoix,
-            @RequestParam String specialite,
-            @RequestParam int niveau,
+            @RequestParam Specialite specialite,
+            @RequestParam Niveau niveau,
             @RequestParam MultipartFile dernierdiplom,
             @RequestParam String anneeObtent,
             @RequestParam Double moyenne,
@@ -78,43 +71,68 @@ public class StudentController {
             @RequestParam boolean art) {
 
         try {
-            // Vérifier le type de fichier pour chaque champ MultipartFile
-            if (!isValidFileType(photouser, photocni, actenaiss, relevebac, releveproba, recu, dernierdiplom)) {
-                return ResponseEntity.status(HttpStatus.UNSUPPORTED_MEDIA_TYPE)
-                        .body("Seulement les images jpeg, png, jpg, ou les fichiers pdf sont acceptés");
-            }
+            // Assuming your MultipartFile fields are now part of the Student object
+            // Set the file paths or perform any other necessary processing
+            String photouserPath = "/photouser/" + photouser.getOriginalFilename();
+            String photocniPath = "/photocni/" + photocni.getOriginalFilename();
+            // Add similar processing for other files
 
-            // Vérifier si l'email existe déjà
-            if (studentService.findByEmail(email).isPresent()) {
-                return ResponseEntity.status(HttpStatus.CONFLICT).body("L'utilisateur existe déjà");
-            }
+            // Calling studentService.preinscription method with the modified Student object
+            studentService.preinscription(
+                    name, surname, new Date(), lieuNaiss,
+                    numerocni, photouserPath, adresse, sexe,
+                    email, statusMarital, langue, statusprofess,
+                    numerotel, nationalite, region, departmt,
+                    photocni.getBytes(), relevebac.getBytes(), releveproba.getBytes(), actenaiss.getBytes(),
+                    recu.getBytes(), premierchoix, deuxiemechoix, troisiemechoix,
+                    specialite, niveau, dernierdiplom.getOriginalFilename(), anneeObtent,
+                    moyenne, infojury, matriculediplo, delivrepar,
+                    Datedeliv, nompere, professpere, nommere,
+                    professmere, nomurgent, numerourgent, villeurgent,
+                    nomtuteur, professtuteur, numerotransaction, codepreins,
+                    sport, art);
 
-            // Récupérer le niveau
-            Niveau niveauObj = niveauRepository.findById(niveau)
-                    .orElseThrow(() -> new RuntimeException("Le niveau spécifié n'a pas été trouvé"));
-
-            // Appeler le service pour créer l'étudiant
-            Student etudiant = studentService.preinscription(
-                    name, surname, dateNaiss, lieuNaiss, numerocni, photouser, adresse, sexe, email, statusMarital,
-                    langue, statusprofess, numerotel, nationalite, region, departmt, photocni, relevebac, releveproba,
-                    actenaiss, recu, premierchoix, deuxiemechoix, troisiemechoix, specialite, niveauObj, dernierdiplom,
-                    anneeObtent, moyenne, infojury, matriculediplo, delivrepar, Datedeliv, nompere, professpere, nommere,
-                    professmere, nomurgent, numerourgent, villeurgent, nomtuteur, professtuteur, numerotransaction, codepreins, sport, art);
-
-            return ResponseEntity.ok(etudiant);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Une exception s'est produite lors de la préinscription : " + e.getMessage());
+            // Returning a success response
+            return ResponseEntity.ok("Preinscription successful");
+        } catch (IOException e) {
+            e.printStackTrace(); // Handle the exception according to your logic
+            // Return an error response if needed
+            return ResponseEntity.status(500).body("Error processing files");
         }
     }
 
-    // Méthode pour vérifier le type de fichier
-    private boolean isValidFileType(MultipartFile... files) {
-        for (MultipartFile file : files) {
-            if (!file.getContentType().startsWith("image/") && !file.getContentType().equals("application/pdf")) {
-                return false;
-            }
-        }
-        return true;
+    @PostMapping("/envoyerMessage")
+    public ResponseEntity<Object> envoyerMessage(
+            @RequestParam Long senderId,
+            @RequestParam Long receiverId,
+            @RequestParam String content) {
+        // Call the appropriate method in the service to send the message
+        studentService.sendMessage(senderId, receiverId, content);
+        // Returning a success response
+        return ResponseEntity.ok("Message sent successfully");
+    }
+
+
+
+    @GetMapping("/byEmail")
+    public ResponseEntity<Optional<Student>> getByEmail(@RequestParam String email) {
+        return ResponseEntity.ok(studentService.findByEmail(email));
+    }
+
+    @GetMapping("/byNom")
+    public ResponseEntity<Object> getByNom(@RequestParam String name) {
+        return studentService.findByNom(name);
+    }
+
+    @DeleteMapping("/delete/{studentId}")
+    public ResponseEntity<Object> deleteStudent(@PathVariable Long studentId) {
+        return studentService.deleteStudent(studentId);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<Object> getAllStudents() {
+        return studentService.getAllStudents();
     }
 }
+
+    

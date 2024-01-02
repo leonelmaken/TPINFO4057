@@ -6,10 +6,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import java.util.Date;
+import java.util.Optional;
 
+import com.example.demo.models.MessageBean;
 import com.example.demo.models.Niveau;
+import com.example.demo.models.Specialite;
 import com.example.demo.models.Student;
 import com.example.demo.repository.StudentRepository;
+import com.example.demo.service.CommunicationFeignClient;
 import com.example.demo.service.StudentService;
 
 import java.io.File;
@@ -17,22 +22,23 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Date;
-import java.util.Optional;
 
 @Service
 public class StudentServiceImpl implements StudentService {
 
     @Autowired
     private StudentRepository studentrepo;
+    
+    @Autowired
+    private CommunicationFeignClient communicationFeignClient;
 
     @Override
     public Student preinscription(
-            String name,
+    		String name,
             String surname,
             Date dateNaiss,
             String lieuNaiss,
-            String numerocni, MultipartFile photouser,
+            String numerocni, String photouser,
 
             String adresse,
             String sexe,
@@ -44,22 +50,18 @@ public class StudentServiceImpl implements StudentService {
             String nationalite,
             String region,
             String departmt,
-            //photo scannee à uploader
-            MultipartFile photocni,
-            MultipartFile relevebac,
-            MultipartFile releveproba,
-            MultipartFile actenaiss,
-            MultipartFile recu,
-            // >>
-            
+            byte[] photocni,
+            byte[] relevebac,
+            byte[] releveproba,
+            byte[] actenaiss,
+            byte[] recu,
+
             String premierchoix,
             String deuxiemechoix,
             String troisiemechoix,
-            String specialite,
+            Specialite specialite,
             Niveau niveau,
-            //photo scannee à uploader
-            MultipartFile dernierdiplom,
-
+            String dernierdiplom,
             String anneeObtent, Double moyenne,
             String infojury,
             String matriculediplo,
@@ -78,7 +80,6 @@ public class StudentServiceImpl implements StudentService {
             Double codepreins,
             boolean sport,
             boolean art
-            
 
     ) {
         Student etudiant = new Student();
@@ -88,174 +89,6 @@ public class StudentServiceImpl implements StudentService {
         etudiant.setLieuNaiss(lieuNaiss);
 
         etudiant.setNumerocni(numerocni);
-        String folder1 = null;
-		try {
-			folder1 = new ClassPathResource("static/photouser/").getFile().getAbsolutePath();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-        final String route1 = ServletUriComponentsBuilder.fromCurrentContextPath().path("/photouser/").path(photouser.getOriginalFilename()).toUriString();
-        byte[] bytes1 = null;
-		try {
-			bytes1 = photouser.getBytes();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-        Path path1 = Paths.get(folder1 + File.separator + photouser.getOriginalFilename());
-        try {
-			Files.write(path1, bytes1);
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-        System.out.println(route1);
-
-        String folder2 = null;
-		try {
-			folder2 = new ClassPathResource("static/photocni/").getFile().getAbsolutePath();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-        final String route2 = ServletUriComponentsBuilder.fromCurrentContextPath().path("/photocni/").path(photocni.getOriginalFilename()).toUriString();
-        byte[] bytes2 = null;
-		try {
-			bytes2 = photocni.getBytes();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-        Path path2 = Paths.get(folder2 + File.separator + photocni.getOriginalFilename());
-        try {
-			Files.write(path2, bytes2);
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-        System.out.println(route2);
-
-        String folder3 = null;
-		try {
-			folder3 = new ClassPathResource("static/actenaiss/").getFile().getAbsolutePath();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        final String route3 = ServletUriComponentsBuilder.fromCurrentContextPath().path("/actenaiss/").path(actenaiss.getOriginalFilename()).toUriString();
-        byte[] bytes3 = null;
-		try {
-			bytes3 = actenaiss.getBytes();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        Path path3 = Paths.get(folder3 + File.separator + actenaiss.getOriginalFilename());
-        try {
-			Files.write(path3, bytes3);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        System.out.println(route3);
-
-        String folder4 = null;
-		try {
-			folder4 = new ClassPathResource("static/recu/").getFile().getAbsolutePath();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        final String route4 = ServletUriComponentsBuilder.fromCurrentContextPath().path("/recu/").path(recu.getOriginalFilename()).toUriString();
-        byte[] bytes4 = null;
-		try {
-			bytes4 = recu.getBytes();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        Path path4 = Paths.get(folder4 + File.separator + recu.getOriginalFilename());
-        try {
-			Files.write(path4, bytes4);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        System.out.println(route4);
-
-        String folder5 = null;
-		try {
-			folder5 = new ClassPathResource("static/relevebac/").getFile().getAbsolutePath();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        final String route5 = ServletUriComponentsBuilder.fromCurrentContextPath().path("/relevebac/").path(relevebac.getOriginalFilename()).toUriString();
-        byte[] bytes5 = null;
-		try {
-			bytes5 = relevebac.getBytes();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        Path path5 = Paths.get(folder5 + File.separator + relevebac.getOriginalFilename());
-        try {
-			Files.write(path5, bytes5);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        System.out.println(route5);
-
-        String folder6 = null;
-		try {
-			folder6 = new ClassPathResource("static/releveproba/").getFile().getAbsolutePath();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        final String route6 = ServletUriComponentsBuilder.fromCurrentContextPath().path("/releveproba/").path(releveproba.getOriginalFilename()).toUriString();
-        byte[] bytes6 = null;
-		try {
-			bytes6 = releveproba.getBytes();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        Path path6 = Paths.get(folder6 + File.separator + releveproba.getOriginalFilename());
-        try {
-			Files.write(path6, bytes6);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        System.out.println(route6);
-
-        String folder7 = null;
-		try {
-			folder7 = new ClassPathResource("static/dernierdiplom/").getFile().getAbsolutePath();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        final String route7 = ServletUriComponentsBuilder.fromCurrentContextPath().path("/dernierdiplom/").path(dernierdiplom.getOriginalFilename()).toUriString();
-        byte[] bytes7 = null;
-		try {
-			bytes7 = dernierdiplom.getBytes();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        Path path7 = Paths.get(folder7 + File.separator + dernierdiplom.getOriginalFilename());
-        try {
-			Files.write(path7, bytes7);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        System.out.println(route7);
-
         etudiant.setAdresse(adresse);
         etudiant.setEmail(email);
         etudiant.setStatusMarital(statusMarital);
@@ -272,19 +105,17 @@ public class StudentServiceImpl implements StudentService {
         etudiant.setAnneeObtent(anneeObtent);
         etudiant.setDelivrepar(delivrepar);
         etudiant.setDatedeliv(Datedeliv);
-
+        etudiant.setPhotocniFile(photocni);
+		 etudiant.setRelevebacFile(relevebac);
+		 etudiant.setReleveprobaFile(releveproba);
+		 etudiant.setActenaissFile(actenaiss);
+		 etudiant.setRecuFile(recu);
         etudiant.setInfojury(infojury);
         etudiant.setMatriculediplo(matriculediplo);
         etudiant.setMoyenne(moyenne);
         etudiant.setSpecialite(specialite);
         etudiant.setNiveau(niveau);
-        etudiant.setDernierdiplom("/dernierdiplom/" + dernierdiplom.getOriginalFilename());
-        etudiant.setRelevebac("/relevebac/" + relevebac.getOriginalFilename());
-        etudiant.setReleveproba("/relevaproba/" + releveproba.getOriginalFilename());
-        etudiant.setRecu("/recu/" + recu.getOriginalFilename());
-        etudiant.setPhotocni("/photocni/" + photocni.getOriginalFilename());
-        etudiant.setActenaiss("/actenaiss/" + actenaiss.getOriginalFilename());
-        etudiant.setPhotouser("/photouser/" + photouser.getOriginalFilename());
+        etudiant.setPhotouser(photouser);
         etudiant.setNompere(nompere);
         etudiant.setProfesspere(professpere);
         etudiant.setNommere(nommere);
@@ -293,17 +124,29 @@ public class StudentServiceImpl implements StudentService {
         etudiant.setNumerourgent(numerourgent);
         etudiant.setVilleurgent(villeurgent);
         etudiant.setEtat(1);
+        etudiant.setProfesstuteur(professtuteur);
         etudiant.setNomtuteur(nomtuteur);
         etudiant.setProfesspere(professtuteur);
         etudiant.setNumerotransaction(numerotransaction);
         etudiant.setCodepreins(codepreins);
         etudiant.setSport(sport);
         etudiant.setArt(art);
-        etudiant.setType("student");
         studentrepo.save(etudiant);
+        String content = null;
+		sendMessage(etudiant.getIdUser(),etudiant.getIdUser(),content);
         return etudiant;
     }
 
+    @Override
+    public void sendMessage(Long senderId, Long receiverId, String content) {
+        // Utilisation du Feign Client pour envoyer le message
+        MessageBean message = new MessageBean();
+        message.setSenderId(senderId);
+        message.setReceiverId(receiverId);
+        message.setContent(content);
+
+        communicationFeignClient.saveMessage(message);
+    }
 
     // Autres méthodes du service...
     @Override

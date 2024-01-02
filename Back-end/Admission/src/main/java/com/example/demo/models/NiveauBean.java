@@ -1,26 +1,29 @@
 package com.example.demo.models;
 
-import jakarta.persistence.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
-//@Data
-@Entity
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+
 @Table(name = "niveau")
-public class Niveau {
+public class NiveauBean {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idNiveau;
     private String name;
     @OneToMany(cascade = CascadeType.ALL)
-    private List<UE> eu= new ArrayList<>();
-	public Niveau() {
+    private List<UEBean> eu= new ArrayList<>();
+	public NiveauBean() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Niveau(String name, List<UE> eu) {
+	public NiveauBean(String name, List<UEBean> eu) {
 		super();
 		this.name = name;
 		this.eu = eu;
@@ -37,10 +40,10 @@ public class Niveau {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public List<UE> getEu() {
+	public List<UEBean> getEu() {
 		return eu;
 	}
-	public void setEu(List<UE> eu) {
+	public void setEu(List<UEBean> eu) {
 		this.eu = eu;
 	}
 	@Override

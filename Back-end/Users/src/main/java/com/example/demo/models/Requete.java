@@ -1,4 +1,4 @@
-package com.example.demo.models;
+/*package com.example.demo.models;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -14,3 +14,4 @@ public class Requete {
     @ManyToMany
     private List<Student> etudiant=new ArrayList<>();
 }
+*/

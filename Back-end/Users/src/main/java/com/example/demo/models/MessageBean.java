@@ -1,38 +1,29 @@
 package com.example.demo.models;
 
+import java.time.LocalDateTime;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 
-import java.time.LocalDateTime;
-@Entity
-public class Annonce {
+public class MessageBean {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String title;
+    private Long senderId;
+    private Long receiverId;
     private String content;
     private LocalDateTime timestamp;
 
-
     // Constructeurs, getters et setters
 
-    public Annonce() {
+    public MessageBean() {
         // Constructeur par défaut
     }
 
-    public Annonce(String title, String content) {
-        this.title = title;
+    public MessageBean(Long senderId, Long receiverId, String content) {
+        this.senderId = senderId;
+        this.receiverId = receiverId;
         this.content = content;
     }
-
-    // Getters et Setters
 
     public Long getId() {
         return id;
@@ -42,12 +33,20 @@ public class Annonce {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public Long getSenderId() {
+        return senderId;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setSenderId(Long senderId) {
+        this.senderId = senderId;
+    }
+
+    public Long getReceiverId() {
+        return receiverId;
+    }
+
+    public void setReceiverId(Long receiverId) {
+        this.receiverId = receiverId;
     }
 
     public String getContent() {

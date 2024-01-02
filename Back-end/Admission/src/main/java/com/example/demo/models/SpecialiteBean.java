@@ -1,24 +1,23 @@
 package com.example.demo.models;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-
-
 @Entity
-public class Specialite {
+public class SpecialiteBean {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idspecialite;
     private String name;
     private String description;
-	public Specialite() {
+	public SpecialiteBean() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Specialite(String name, String description) {
+	public SpecialiteBean(String name, String description) {
 		super();
 		this.name = name;
 		this.description = description;

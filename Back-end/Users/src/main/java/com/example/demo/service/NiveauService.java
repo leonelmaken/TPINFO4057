@@ -19,26 +19,18 @@ public class NiveauService {
     @Autowired
     private UERepository ueRepository;
 
-    //enregistrer un niveau avec toutes ces UE
-    public Niveau addNiveau(String name, String ue, String intitule) {
+    public Niveau addNiveau(String name, List<UE> ues) {
         Niveau niveau = new Niveau();
         niveau.setName(name);
 
-
-        String[] codeArray = ue.split(",");
-        String[] ueArray = intitule.split(",");
-        for (int i = 0; i < codeArray.length; i++) {
-            UE ues = new UE();
-            ues.setIntitule(ueArray[i]);
-            ues.setCode(codeArray[i]);
-            ues = ueRepository.save(ues); // save UE to database
-            niveau.getEu().add(ues);
+        for (UE ue : ues) {
+            ue = ueRepository.save(ue);
+            niveau.getEu().add(ue);
         }
 
-        return niveauRepository.save(niveau); // save Niveau to database
+        return niveauRepository.save(niveau);
     }
 
-    //Afficher toutes les UE d'un niveau precis
     public List<UE> getUEsByNiveauName(String name) {
         Niveau niveau = niveauRepository.findByNameIgnoreCase(name);
         if (niveau != null) {

@@ -11,10 +11,12 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int idUser;
+    private Long idUser;
 
     private String name;
     private String surname;
+
+    @Temporal(TemporalType.DATE)
     private Date dateNaiss;
     private String lieuNaiss;
 
@@ -33,25 +35,19 @@ public class User {
     private String nationalite;
     private String region;
     private String departmt;
-    private String type;
+    private Statut statut;
 
     
-    
-    
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
-	}
-
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+
 	public User(String name, String surname, Date dateNaiss, String lieuNaiss, String numerocni, String photouser,
 			String adresse, String sexe, String matricule, String email, String password, String statusMarital,
-			String langue, String statusprofess, Double numerotel, String nationalite, String region, String departmt) {
+			String langue, String statusprofess, Double numerotel, String nationalite, String region, String departmt,
+			Statut statut) {
 		super();
 		this.name = name;
 		this.surname = surname;
@@ -71,123 +67,208 @@ public class User {
 		this.nationalite = nationalite;
 		this.region = region;
 		this.departmt = departmt;
+		this.statut = statut;
 	}
-	public int getIdUser() {
+
+
+	public Long getIdUser() {
 		return idUser;
 	}
-	public void setIdUser(int idUser) {
+
+
+	public void setIdUser(Long idUser) {
 		this.idUser = idUser;
 	}
+
+
 	public String getName() {
 		return name;
 	}
+
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
+
 	public String getSurname() {
 		return surname;
 	}
+
+
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
+
+
 	public Date getDateNaiss() {
 		return dateNaiss;
 	}
+
+
 	public void setDateNaiss(Date dateNaiss) {
 		this.dateNaiss = dateNaiss;
 	}
+
+
 	public String getLieuNaiss() {
 		return lieuNaiss;
 	}
+
+
 	public void setLieuNaiss(String lieuNaiss) {
 		this.lieuNaiss = lieuNaiss;
 	}
+
+
 	public String getNumerocni() {
 		return numerocni;
 	}
+
+
 	public void setNumerocni(String numerocni) {
 		this.numerocni = numerocni;
 	}
+
+
 	public String getPhotouser() {
 		return photouser;
 	}
+
+
 	public void setPhotouser(String photouser) {
 		this.photouser = photouser;
 	}
+
+
 	public String getAdresse() {
 		return adresse;
 	}
+
+
 	public void setAdresse(String adresse) {
 		this.adresse = adresse;
 	}
+
+
 	public String getSexe() {
 		return sexe;
 	}
+
+
 	public void setSexe(String sexe) {
 		this.sexe = sexe;
 	}
+
+
 	public String getMatricule() {
 		return matricule;
 	}
+
+
 	public void setMatricule(String matricule) {
 		this.matricule = matricule;
 	}
+
+
 	public String getEmail() {
 		return email;
 	}
+
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+
 	public String getPassword() {
 		return password;
 	}
+
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+
 	public String getStatusMarital() {
 		return statusMarital;
 	}
+
+
 	public void setStatusMarital(String statusMarital) {
 		this.statusMarital = statusMarital;
 	}
+
+
 	public String getLangue() {
 		return langue;
 	}
+
+
 	public void setLangue(String langue) {
 		this.langue = langue;
 	}
+
+
 	public String getStatusprofess() {
 		return statusprofess;
 	}
+
+
 	public void setStatusprofess(String statusprofess) {
 		this.statusprofess = statusprofess;
 	}
+
+
 	public Double getNumerotel() {
 		return numerotel;
 	}
+
+
 	public void setNumerotel(Double numerotel) {
 		this.numerotel = numerotel;
 	}
+
+
 	public String getNationalite() {
 		return nationalite;
 	}
+
+
 	public void setNationalite(String nationalite) {
 		this.nationalite = nationalite;
 	}
+
+
 	public String getRegion() {
 		return region;
 	}
+
+
 	public void setRegion(String region) {
 		this.region = region;
 	}
+
+
 	public String getDepartmt() {
 		return departmt;
 	}
+
+
 	public void setDepartmt(String departmt) {
 		this.departmt = departmt;
 	}
 
 
+	public Statut getStatut() {
+		return statut;
+	}
+
+
+	public void setStatut(Statut statut) {
+		this.statut = statut;
+	}
 
 
 	@Override
@@ -197,6 +278,6 @@ public class User {
 				+ adresse + ", sexe=" + sexe + ", matricule=" + matricule + ", email=" + email + ", password="
 				+ password + ", statusMarital=" + statusMarital + ", langue=" + langue + ", statusprofess="
 				+ statusprofess + ", numerotel=" + numerotel + ", nationalite=" + nationalite + ", region=" + region
-				+ ", departmt=" + departmt + "]";
+				+ ", departmt=" + departmt + ", statut=" + statut + "]";
 	}
 }
