@@ -17,7 +17,7 @@ public interface StudentService{
 	            String surname,
 	            Date dateNaiss,
 	            String lieuNaiss,
-	            String numerocni, String photouser,
+	            String numerocni, MultipartFile photouser,
 
 	            String adresse,
 	            String sexe,
@@ -30,12 +30,11 @@ public interface StudentService{
 	            String region,
 	            String departmt,
 	            //photo scannee à uploader
-	            byte[] photocni,
-	            byte[] relevebac,
-	            byte[] releveproba,
-	            byte[] actenaiss,
-	            byte[] recu,
-
+	            MultipartFile photocni,
+	            MultipartFile relevebac,
+	            MultipartFile releveproba,
+	            MultipartFile actenaiss,
+	            MultipartFile recu,
 	            // >>
 	            
 	            String premierchoix,
@@ -44,7 +43,7 @@ public interface StudentService{
 	            Specialite specialite,
 	            Niveau niveau,
 	            //photo scannee à uploader
-	            String dernierdiplom,
+	            MultipartFile dernierdiplom,
 
 	            String anneeObtent, Double moyenne,
 	            String infojury,
@@ -70,10 +69,11 @@ public interface StudentService{
 
     Optional<Student> findByEmail(String email);
 
-    ResponseEntity<Object> findByNom(String name);
+    ResponseEntity<Object> findByNom(String nom);
 
     ResponseEntity<Object> deleteStudent(Long studentId);
 
     ResponseEntity<Object> getAllStudents();
     void sendMessage(Long senderId, Long receiverId, String content);
 }
+

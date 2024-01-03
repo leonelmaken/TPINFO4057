@@ -16,4 +16,5 @@ public class Annonces {
 
     @ManyToOne
     private Dean doyen;
+    
 }
