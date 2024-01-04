@@ -1,13 +1,15 @@
 package com.example.demo.controller;
-
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.models.Niveau;
-import com.example.demo.models.Specialite;
 import com.example.demo.models.Student;
 import com.example.demo.repository.NiveauRepository;
 import com.example.demo.repository.SpecialiteRepository;
@@ -15,20 +17,16 @@ import com.example.demo.service.StudentService;
 
 import java.io.IOException;
 import java.util.Date;
-import java.util.Optional;
-
 @RestController
-@RequestMapping("/api/students")
 public class StudentController {
-
     @Autowired
     private StudentService studentService;
-    
+
     @Autowired
     private SpecialiteRepository specialiteRepository;
 
+    @Autowired
     private NiveauRepository niveauRepository;
-
 
     @RequestMapping(method = RequestMethod.POST, value = "/preinscription")
     public ResponseEntity<?> preinscription(
@@ -56,7 +54,7 @@ public class StudentController {
             @RequestParam String premierchoix,
             @RequestParam String deuxiemechoix,
             @RequestParam String troisiemechoix,
-            @RequestParam Specialite specialite,
+            @RequestParam String specialite,
             @RequestParam int niveau,
             @RequestParam MultipartFile dernierdiplom,
             @RequestParam String anneeObtent,
@@ -83,19 +81,7 @@ public class StudentController {
             // Vérifier le type de fichier pour chaque champ MultipartFile
             if (!isValidFileType(photouser, photocni, actenaiss, relevebac, releveproba, recu, dernierdiplom)) {
                 return ResponseEntity.status(HttpStatus.UNSUPPORTED_MEDIA_TYPE)
-                        .body("Seulement les images jpeg, @PostMapping(\"/sendMessage\")\n"
-                        		+ "    public ResponseEntity<Object> sendMessage(\n"
-                        		+ "            @RequestParam Long senderId,\n"
-                        		+ "            @RequestParam Long receiverId,\n"
-                        		+ "            @RequestParam String content) {\n"
-                        		+ "        try {\n"
-                        		+ "            // Appeler le service pour envoyer le message\n"
-                        		+ "            studentService.sendMessage(senderId, receiverId, content);\n"
-                        		+ "            return ResponseEntity.ok(\"Message sent successfully!\");\n"
-                        		+ "        } catch (Exception e) {\n"
-                        		+ "            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)\n"
-                        		+ "                    .body(\"Une exception s'est produite lors de l'envoi du message : \" + e.getMessage());\n"
-                        		+ "        } png, jpg, ou les fichiers pdf sont acceptés");
+                        .body("Seulement les images jpeg, png, jpg, ou les fichiers pdf sont acceptés");
             }
 
             // Vérifier si l'email existe déjà
@@ -131,43 +117,4 @@ public class StudentController {
         }
         return true;
     }
-
-
-
-    @GetMapping("/byEmail")
-    public ResponseEntity<Optional<Student>> getByEmail(@RequestParam String email) {
-        return ResponseEntity.ok(studentService.findByEmail(email));
-    }
-
-    @GetMapping("/byNom")
-    public ResponseEntity<Object> getByNom(@RequestParam String name) {
-        return studentService.findByNom(name);
-    }
-
-    @DeleteMapping("/delete/{studentId}")
-    public ResponseEntity<Object> deleteStudent(@PathVariable Long studentId) {
-        return studentService.deleteStudent(studentId);
-    }
-
-    @GetMapping("/all")
-    public ResponseEntity<Object> getAllStudents() {
-        return studentService.getAllStudents();
-    }
-    
-    @PostMapping("/sendMessage")
-    public ResponseEntity<Object> sendMessage1(
-            @RequestParam Long senderId,
-            @RequestParam Long receiverId,
-            @RequestParam String content) {
-        try {
-            // Appeler le service pour envoyer le message
-            studentService.sendMessage(senderId, receiverId, content);
-            return ResponseEntity.ok("Message sent successfully!");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Une exception s'est produite lors de l'envoi du message : " + e.getMessage());
-        }
 }
-}
-
-    

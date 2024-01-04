@@ -14,7 +14,8 @@ import jakarta.persistence.ManyToOne;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class UserBean {
 
-	@Id
+
+    @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int idUser;
 
@@ -204,5 +205,4 @@ public class UserBean {
 				+ statusprofess + ", numerotel=" + numerotel + ", nationalite=" + nationalite + ", region=" + region
 				+ ", departmt=" + departmt + "]";
 	}
-
 }

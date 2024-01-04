@@ -2,12 +2,20 @@ package com.example.demo.models;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 
+@Entity
 public class MessageBean {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private Long senderId;
     private Long receiverId;
     private String content;
@@ -24,6 +32,8 @@ public class MessageBean {
         this.receiverId = receiverId;
         this.content = content;
     }
+
+    // Getters et Setters
 
     public Long getId() {
         return id;
@@ -64,6 +74,7 @@ public class MessageBean {
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
+    
     @PrePersist
     @PreUpdate
     public void prePersist() {

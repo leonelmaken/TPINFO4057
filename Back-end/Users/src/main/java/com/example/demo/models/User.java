@@ -197,7 +197,6 @@ public class User {
 				+ adresse + ", sexe=" + sexe + ", matricule=" + matricule + ", email=" + email + ", password="
 				+ password + ", statusMarital=" + statusMarital + ", langue=" + langue + ", statusprofess="
 				+ statusprofess + ", numerotel=" + numerotel + ", nationalite=" + nationalite + ", region=" + region
-			
 				+ ", departmt=" + departmt + "]";
 	}
 }

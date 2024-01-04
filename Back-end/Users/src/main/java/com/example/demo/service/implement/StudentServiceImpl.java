@@ -7,12 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.example.demo.models.MessageBean;
 import com.example.demo.models.Niveau;
-import com.example.demo.models.Specialite;
 import com.example.demo.models.Student;
 import com.example.demo.repository.StudentRepository;
-import com.example.demo.service.CommunicationFeignClient;
 import com.example.demo.service.StudentService;
 
 import java.io.File;
@@ -28,14 +25,6 @@ public class StudentServiceImpl implements StudentService {
 
     @Autowired
     private StudentRepository studentrepo;
-	private CommunicationFeignClient communicationFeignClient;
-    
-   
-
-    @Autowired
-    public StudentServiceImpl(CommunicationFeignClient communicationFeignClient) {
-        this.communicationFeignClient = communicationFeignClient;
-    }
 
     @Override
     public Student preinscription(
@@ -66,7 +55,7 @@ public class StudentServiceImpl implements StudentService {
             String premierchoix,
             String deuxiemechoix,
             String troisiemechoix,
-            Specialite specialite,
+            String specialite,
             Niveau niveau,
             //photo scannee à uploader
             MultipartFile dernierdiplom,
@@ -344,12 +333,5 @@ public class StudentServiceImpl implements StudentService {
         // ...
         studentrepo.findAll();
         return ResponseEntity.ok("List of students goes here");
-    }
-
-    @Override
-    public void sendMessage(Long senderId, Long receiverId, String content) {
-        // Utilisez le client Feign pour envoyer le message à Communication
-        MessageBean message = new MessageBean(senderId, receiverId, content);
-        communicationFeignClient.saveMessage(message);
     }
 }

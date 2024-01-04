@@ -24,7 +24,7 @@ public class Student extends User{
     private String deuxiemechoix;
     private String troisiemechoix;
     
-    private Specialite specialite;
+    private String specialite;
     @ManyToOne
     private Niveau niveau;
     //photo scannee à uploader
@@ -59,7 +59,7 @@ public class Student extends User{
 	
     
 	public Student(String photocni, String relevebac, String releveproba, String actenaiss, String recu,
-			String premierchoix, String deuxiemechoix, String troisiemechoix, Specialite specialite, Niveau niveau,
+			String premierchoix, String deuxiemechoix, String troisiemechoix, String specialite, Niveau niveau,
 			String dernierdiplom, String anneeObtent, Double moyenne, String infojury, String matriculediplo,
 			String delivrepar, Date datedeliv, String nompere, String professpere, String nommere, String professmere,
 			String nomtuteur, String emailtuteur, String professtuteur, String nomurgent, Double numerourgent,
@@ -168,12 +168,12 @@ public class Student extends User{
 	public void setTroisiemechoix(String troisiemechoix) {
 		this.troisiemechoix = troisiemechoix;
 	}
-	public Specialite getSpecialite() {
+	public String getSpecialite() {
 		return specialite;
 	}
 
 
-	public void setSpecialite(Specialite specialite) {
+	public void setSpecialite(String specialite) {
 		this.specialite = specialite;
 	}
 
@@ -413,6 +413,3 @@ public class Student extends User{
 	}
 
 }
-
-    
-	

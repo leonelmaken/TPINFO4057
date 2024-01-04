@@ -3,8 +3,6 @@ package com.example.demo.service;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.demo.models.Niveau;
-import com.example.demo.models.Specialite;
 import com.example.demo.models.Student;
 
 import java.util.Date;
@@ -40,8 +38,8 @@ public interface StudentService{
 	            String premierchoix,
 	            String deuxiemechoix,
 	            String troisiemechoix,
-	            Specialite specialite,
-	            Niveau niveau,
+	            String specialite,
+	            com.example.demo.models.Niveau niveau,
 	            //photo scannee à uploader
 	            MultipartFile dernierdiplom,
 
@@ -74,6 +72,4 @@ public interface StudentService{
     ResponseEntity<Object> deleteStudent(Long studentId);
 
     ResponseEntity<Object> getAllStudents();
-    void sendMessage(Long senderId, Long receiverId, String content);
 }
-
