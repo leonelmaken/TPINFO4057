@@ -15,7 +15,7 @@ public class User {
 
     private String name;
     private String surname;
-    private Date dateNaiss;
+    private String dateNaiss;
     private String lieuNaiss;
 
     private String numerocni;
@@ -49,7 +49,7 @@ public class User {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public User(String name, String surname, Date dateNaiss, String lieuNaiss, String numerocni, String photouser,
+	public User(String name, String surname, String dateNaiss, String lieuNaiss, String numerocni, String photouser,
 			String adresse, String sexe, String matricule, String email, String password, String statusMarital,
 			String langue, String statusprofess, Double numerotel, String nationalite, String region, String departmt) {
 		super();
@@ -90,10 +90,10 @@ public class User {
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
-	public Date getDateNaiss() {
+	public String getDateNaiss() {
 		return dateNaiss;
 	}
-	public void setDateNaiss(Date dateNaiss) {
+	public void setDateNaiss(String dateNaiss) {
 		this.dateNaiss = dateNaiss;
 	}
 	public String getLieuNaiss() {
