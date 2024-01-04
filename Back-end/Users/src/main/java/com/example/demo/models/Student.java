@@ -35,7 +35,7 @@ public class Student extends User{
     private String infojury;
     private String matriculediplo;
     private String delivrepar;
-    private Date Datedeliv;
+    private String Datedeliv;
     private String emailtuteur;
     private String nompere;
     private String professpere;
@@ -61,7 +61,7 @@ public class Student extends User{
 	public Student(String photocni, String relevebac, String releveproba, String actenaiss, String recu,
 			String premierchoix, String deuxiemechoix, String troisiemechoix, Specialite specialite, Niveau niveau,
 			String dernierdiplom, String anneeObtent, Double moyenne, String infojury, String matriculediplo,
-			String delivrepar, Date datedeliv, String nompere, String professpere, String nommere, String professmere,
+			String delivrepar, String datedeliv, String nompere, String professpere, String nommere, String professmere,
 			String nomtuteur, String emailtuteur, String professtuteur, String nomurgent, Double numerourgent,
 			String villeurgent, int etat, Double numerotransaction, Double codepreins, boolean sport, boolean art) {
 		super();
@@ -248,12 +248,12 @@ public class Student extends User{
 	}
 
 
-	public Date getDatedeliv() {
+	public String getDatedeliv() {
 		return Datedeliv;
 	}
 
 
-	public void setDatedeliv(Date datedeliv) {
+	public void setDatedeliv(String datedeliv) {
 		Datedeliv = datedeliv;
 	}
 

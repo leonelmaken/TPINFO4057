@@ -41,7 +41,7 @@ public class StudentServiceImpl implements StudentService {
     public Student preinscription(
             String name,
             String surname,
-            Date dateNaiss,
+            String dateNaiss,
             String lieuNaiss,
             String numerocni, MultipartFile photouser,
 
@@ -75,7 +75,7 @@ public class StudentServiceImpl implements StudentService {
             String infojury,
             String matriculediplo,
             String delivrepar,
-            Date Datedeliv,
+            String Datedeliv,
             String nompere,
             String professpere,
             String nommere,

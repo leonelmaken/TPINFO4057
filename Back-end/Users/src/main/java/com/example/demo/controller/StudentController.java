@@ -34,7 +34,7 @@ public class StudentController {
     public ResponseEntity<?> preinscription(
             @RequestParam String name,
             @RequestParam String surname,
-            @RequestParam Date dateNaiss,
+            @RequestParam String dateNaiss,
             @RequestParam String lieuNaiss,
             @RequestParam String numerocni,
             @RequestParam MultipartFile photouser,
@@ -64,7 +64,7 @@ public class StudentController {
             @RequestParam String infojury,
             @RequestParam String matriculediplo,
             @RequestParam String delivrepar,
-            @RequestParam Date Datedeliv,
+            @RequestParam String Datedeliv,
             @RequestParam String nompere,
             @RequestParam String professpere,
             @RequestParam String nommere,
