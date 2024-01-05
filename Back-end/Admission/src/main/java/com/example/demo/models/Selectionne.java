@@ -17,8 +17,8 @@ public class Selectionne {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "etudiant_id", nullable = false)
-    private Long etudiantId;
+    @Column(name = "idUser", nullable = false)
+    private Long idUser;
 
     @Column(name = "nom", nullable = false)
     private String nom;
@@ -39,9 +39,9 @@ public class Selectionne {
         // constructeur par défaut
     }
 
-	public Selectionne(Long etudiantId, String nom, String prenom, String matricule, String niveau, Admin admin) {
+	public Selectionne(Long idUser, String nom, String prenom, String matricule, String niveau, Admin admin) {
 		super();
-		this.etudiantId = etudiantId;
+		this.idUser = idUser;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.matricule = matricule;
@@ -57,12 +57,14 @@ public class Selectionne {
 		this.id = id;
 	}
 
-	public Long getEtudiantId() {
-		return etudiantId;
+
+
+	public Long getIdUser() {
+		return idUser;
 	}
 
-	public void setEtudiantId(Long etudiantId) {
-		this.etudiantId = etudiantId;
+	public void setIdUser(Long idUser) {
+		this.idUser = idUser;
 	}
 
 	public String getNom() {
@@ -107,7 +109,7 @@ public class Selectionne {
 
 	@Override
 	public String toString() {
-		return "Selectionne [id=" + id + ", etudiantId=" + etudiantId + ", nom=" + nom + ", prenom=" + prenom
+		return "Selectionne [id=" + id + ", etudiantId=" + idUser + ", nom=" + nom + ", prenom=" + prenom
 				+ ", matricule=" + matricule + ", niveau=" + niveau + ", admin=" + admin + "]";
 	}
 
