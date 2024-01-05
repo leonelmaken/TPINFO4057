@@ -10,14 +10,10 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.ManyToOne;
 
-@Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class UserBean {
 
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int idUser;
+       private int idUser;
 
     private String name;
     private String surname;

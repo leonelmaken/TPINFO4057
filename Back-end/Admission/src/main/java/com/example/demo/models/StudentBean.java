@@ -11,7 +11,7 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
-@Entity
+
 public class StudentBean extends UserBean{
 	 private String photocni;
 	    private String relevebac;
