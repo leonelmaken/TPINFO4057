@@ -5,6 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.models.Student;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.Optional;
 
@@ -63,7 +64,7 @@ public interface StudentService{
 	            boolean art
 	            
 
-	    );
+	    ) throws IOException;
 
     Optional<Student> findByEmail(String email);
 
