@@ -11,7 +11,7 @@ public interface SelecionneService {
 
     void addSelectionne(Selectionne selectionne);
 
-    ResponseEntity<String> selectStudent(Long etudiantId, KafkaTemplate<String, Object> kafkaTemplate, Admin admin);
+    ResponseEntity<String> selectStudentByAdmin(Long adminId, Long etudiantId);
 
     List<Selectionne> getSelectionnes();
 

@@ -16,6 +16,7 @@ import java.util.Optional;
 public class AdminServiceImpl implements AdminService {
 
     private final AdminRepository adminRepository;
+    
 
     @Autowired
     public AdminServiceImpl(AdminRepository adminRepository) {
@@ -53,7 +54,6 @@ public class AdminServiceImpl implements AdminService {
         }
     }
 
-    @Override
     public ResponseEntity<Admin> getAdminById(Long id) {
         Optional<Admin> adminOptional = adminRepository.findById(id);
         if(adminOptional.isPresent()){

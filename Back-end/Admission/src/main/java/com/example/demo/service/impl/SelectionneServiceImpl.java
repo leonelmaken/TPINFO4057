@@ -1,10 +1,9 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.service.AdminService;
 import com.example.demo.service.MicroServiceUser;
 import com.example.demo.models.Admin;
-import com.example.demo.models.SelectionEvent;
 import com.example.demo.models.Selectionne;
-import com.example.demo.models.UserBean;
 import com.example.demo.repository.SelectionneRepository;
 import com.example.demo.service.SelecionneService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,14 +22,17 @@ public class SelectionneServiceImpl implements SelecionneService {
     private final SelectionneRepository selectionneRepository;
     private final KafkaTemplate<String, Object> kafkaTemplate;
     private final MicroServiceUser microServiceUser;
+    private final AdminService adminService;
 
     @Autowired
     public SelectionneServiceImpl(SelectionneRepository selectionneRepository,
                                   KafkaTemplate<String, Object> kafkaTemplate,
-                                  MicroServiceUser microServiceUser) {
+                                  MicroServiceUser microServiceUser,
+                                  AdminService adminService) {
         this.selectionneRepository = selectionneRepository;
         this.kafkaTemplate = kafkaTemplate;
         this.microServiceUser = microServiceUser;
+        this.adminService = adminService;
     }
 
     @Override
@@ -69,34 +71,15 @@ public class SelectionneServiceImpl implements SelecionneService {
     }
 
     @Override
-    public ResponseEntity<String> selectStudent(Long etudiantId, KafkaTemplate<String, Object> kafkaTemplate,
-                                                Admin admin) {
-        try {
-            // Utilisez Feign pour obtenir les informations de l'étudiant depuis le micro-service Users
-            // Remplacez "etudiantId" par l'ID réel de l'étudiant
-            UserBean student = microServiceUser.getUserById(etudiantId);
+    public ResponseEntity<String> selectStudentByAdmin(Long adminId, Long etudiantId) {
+        // Créez un objet Selectionne en utilisant l'ID de l'étudiant et de l'admin
+        Admin selectingAdmin = adminService.getAdminById(adminId).getBody();
+        Selectionne selectionne = new Selectionne(etudiantId, selectingAdmin);
 
-            // Génère le matricule unique
-            // Temporairement utilisé une valeur statique pour le matricule, car l'accès à Feign n'est pas défini ici
-            String matricule = generateMatricule("NomTemp", "PrenomTemp", "INFO");
+        // Enregistrez la sélection dans la base de données (utilisez la logique appropriée)
+        selectionneRepository.save(selectionne);
 
-            // Enregistre le matricule dans la base de données (si nécessaire)
-            // Vous devrez implémenter la logique d'enregistrement dans la base de données ici
-            // Selectionne selectionne = new Selectionne(etudiantId, matricule);
-            // selectionneRepository.save(selectionne);
-
-            // Publie un événement Kafka pour informer d'une nouvelle sélection
-            SelectionEvent selectionEvent = new SelectionEvent();
-            selectionEvent.setAdminId(admin.getAdminId());
-            selectionEvent.setEtudiantId(etudiantId);
-            selectionEvent.setMatricule(matricule);
-            kafkaTemplate.send("Gestion", selectionEvent);
-
-            // Retourne une réponse indiquant que l'étudiant a été sélectionné avec succès
-            return new ResponseEntity<>("Étudiant sélectionné avec succès. Matricule : " + matricule, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>("Une exception s'est produite : " + e.getMessage(),
-                    HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        return ResponseEntity.ok("Étudiant sélectionné avec succès par l'admin.");
     }
 }
+

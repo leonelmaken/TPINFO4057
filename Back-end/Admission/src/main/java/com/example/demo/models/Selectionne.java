@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -20,100 +21,41 @@ public class Selectionne {
     @Column(name = "idUser", nullable = false)
     private Long idUser;
 
-    @Column(name = "nom", nullable = false)
-    private String nom;
-
-    @Column(name = "prenom", nullable = false)
-    private String prenom;
-
-    @Column(name = "matricule")
-    private String matricule;
-
-    @Column(name = "niveau")
-    private String niveau;
-
     @ManyToOne
+    @JoinColumn(name = "admin_id", nullable = false)
     private Admin admin;
 
     public Selectionne() {
         // constructeur par défaut
     }
 
-	public Selectionne(Long idUser, String nom, String prenom, String matricule, String niveau, Admin admin) {
-		super();
-		this.idUser = idUser;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.matricule = matricule;
-		this.niveau = niveau;
-		this.admin = admin;
-	}
+    public Selectionne(Long idUser, Admin admin) {
+        this.idUser = idUser;
+        this.admin = admin;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
+    public Long getIdUser() {
+        return idUser;
+    }
 
+    public void setIdUser(Long idUser) {
+        this.idUser = idUser;
+    }
 
-	public Long getIdUser() {
-		return idUser;
-	}
+    public Admin getAdmin() {
+        return admin;
+    }
 
-	public void setIdUser(Long idUser) {
-		this.idUser = idUser;
-	}
-
-	public String getNom() {
-		return nom;
-	}
-
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-
-	public String getPrenom() {
-		return prenom;
-	}
-
-	public void setPrenom(String prenom) {
-		this.prenom = prenom;
-	}
-
-	public String getMatricule() {
-		return matricule;
-	}
-
-	public void setMatricule(String matricule) {
-		this.matricule = matricule;
-	}
-
-	public String getNiveau() {
-		return niveau;
-	}
-
-	public void setNiveau(String niveau) {
-		this.niveau = niveau;
-	}
-
-	public Admin getAdmin() {
-		return admin;
-	}
-
-	public void setAdmin(Admin admin) {
-		this.admin = admin;
-	}
-
-	@Override
-	public String toString() {
-		return "Selectionne [id=" + id + ", etudiantId=" + idUser + ", nom=" + nom + ", prenom=" + prenom
-				+ ", matricule=" + matricule + ", niveau=" + niveau + ", admin=" + admin + "]";
-	}
-
-    // Constructeurs, getters, setters, et autres méthodes ...
-    
-
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
+    }
 }
+
