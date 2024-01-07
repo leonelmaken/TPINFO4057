@@ -2,7 +2,10 @@
 
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart';
+import 'package:path/path.dart';
 
 import 'Model/Ue.dart';
 import 'Utils/Global.dart';
@@ -128,6 +131,95 @@ class Service {
     }
   }
 
+  static Future<String> saveEtudiant2(File photoUser) async {
+    try {
+      var map = Map<String, dynamic>();
+      var stream = new http.ByteStream((photoUser.openRead()));
+      var length = await photoUser.length();
+      var photoUsers = http.MultipartFile('photouser', stream, length,
+          filename: basename(photoUser.path));
+      var relevebacs = http.MultipartFile('relevebac', stream, length,
+          filename: basename(photoUser.path));
+      var releveprobas = http.MultipartFile('releveproba', stream, length,
+          filename: basename(photoUser.path));
+      var actenaisss = http.MultipartFile('actenaiss', stream, length,
+          filename: basename(photoUser.path));
+      var recus = http.MultipartFile('recu', stream, length,
+          filename: basename(photoUser.path));
+      var request = http.MultipartRequest("POST", Uri.parse(saveEtudiantUrl));
+      request.files.add(photoUsers);
+      request.files.add(relevebacs);
+      request.files.add(releveprobas);
+      request.files.add(actenaisss);
+      request.files.add(recus);
+      request.fields['name'] = "Antony";
+      request.fields['surname'] = "Marcial";
+      request.fields['dateNaiss'] = "26/10/2000";
+      request.fields['lieuNaiss'] = "Yaounde";
+      request.fields['numerocni'] = "658CTBSL";
+      //request.fields['photouser'] = photoEtudiant;
+      request.fields['adresse'] = "Mendong";
+      request.fields['sexe'] = "M";
+      request.fields['email'] = "antony@gmail.com";
+      request.fields['statusMarital'] = "Celibataire";
+      request.fields['langue'] = "Francais";
+      request.fields['statusprofess'] = "Etudiant";
+      request.fields['numerotel'] = "6585214568";
+      request.fields['nationalite'] = "Camerounais";
+      request.fields['region'] = "centre";
+      request.fields['departmt'] = "hong kam";
+      //request.fields['relevebac'] = photoEtudiant;
+      //request.fields['releveproba'] = photoEtudiant;
+      //request.fields['actenaiss'] = photoEtudiant;
+      //request.fields['recu'] = photoEtudiant;
+      request.fields['premierchoix'] = "Infos";
+      request.fields['deuxiemechoix'] = "physique";
+      request.fields['troisiemechoix'] = "Chimie";
+      request.fields['specialite'] = "gelo";
+      request.fields['niveau'] = "1";
+      request.fields['dernierdiplom'] = "Bac C";
+      request.fields['anneeObtent'] = "2022";
+      request.fields['moyenne'] = "18";
+      request.fields['matriculediplo'] = "254769156";
+      request.fields['delivrepar'] = "OBC";
+      request.fields['infojury'] = "Admis";
+      request.fields['Datedeliv'] = "24/10/2018";
+      request.fields['nompere'] = "Gaston";
+      request.fields['professpere'] = "Infos";
+      request.fields['nommere'] = "Milene";
+      request.fields['professmere'] = "Physicienne";
+      request.fields['nomtuteur'] = "";
+      request.fields['professtuteur'] = "";
+      request.fields['nomurgent'] = "Gaston";
+      request.fields['numerourgent'] = "685457521";
+      request.fields['villeurgent'] = "yaounde";
+      request.fields['sport'] = "true";
+      request.fields['art'] = "false";
+      request.fields['codepreins'] = "65284512556556";
+      request.fields['numerotransaction'] = "65198991919566";
+      //request.fields['photouser'] = photoEtudiant;
+
+      print(saveEtudiantUrl);
+      //print("la requete: ${request.headers}");
+      print("Avant");
+      var response = await request.send();
+      print('addEtudiant Response: ${response.statusCode}');
+      // print('addEtudiant Body: ${response.body}');
+
+      if (200 == response.statusCode) {
+        print("tout est ok");
+        return "success";
+      } else {
+        print("pas bon");
+        return "error";
+      }
+    } catch (e) {
+      print(e);
+      print("Vraiment pas bon");
+      return "error";
+    }
+  }
+
   // static Future<String> addClient(String nom,String age)async{
   //   try{
   //     var map = Map<String, dynamic>();
@@ -158,7 +250,37 @@ class Service {
       Ue ue = Ue(id: 10, intitule: "ras", code: "inf3055", teacher: "null");
 
       map['name'] = "M2-DS";
-     // map["ue"] = json.encode(ue.toMap());
+      // map["ue"] = json.encode(ue.toMap());
+      map["ue"] = "inf4077";
+      map["intitule"] = "codage mobile";
+
+      print("Le map--------:$map");
+
+      final response = await http.post(
+        Uri.parse(saveUeUrl),
+        body: map,
+      );
+      print('addEtudiant Response: ${response.statusCode}');
+      print('addEtudiant Body: ${response.body}');
+
+      if (200 == response.statusCode) {
+        return "success";
+      } else {
+        return "error";
+      }
+    } catch (e) {
+      print(e);
+      return "error";
+    }
+  }
+
+  static Future<String> addUser() async {
+    try {
+      var map = Map<String, dynamic>();
+      Ue ue = Ue(id: 10, intitule: "ras", code: "inf3055", teacher: "null");
+
+      map['name'] = "M2-DS";
+      // map["ue"] = json.encode(ue.toMap());
       map["ue"] = "inf4077";
       map["intitule"] = "codage mobile";
 

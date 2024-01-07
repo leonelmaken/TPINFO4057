@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:unieduc/Screen/Accueil.dart';
+import 'package:unieduc/Screen/CreateAccount.dart';
+import 'package:unieduc/Screen/HomePage.dart';
 import 'package:unieduc/Screen/Inscription.dart';
 import 'package:unieduc/Screen/Preinscription.dart';
 import 'package:unieduc/Utils/theme.dart';
@@ -13,44 +15,39 @@ class AttenteValidation extends StatefulWidget {
 
 class _AttenteValidationState extends State<AttenteValidation> {
   final String salutation = DateTime.now().hour < 12 ? "Bonjour" : "Bonsoir";
-  int etat = 1;
+  int etat = 2;
 
   @override
   void initState() {
     super.initState();
     setState(() {
-      etat=1;
+      etat = 2;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:etat==1? Color.fromARGB(255, 239, 237, 237):Colors.white,
-
-      // appBar: AppBar(
-      //   toolbarHeight: 50,
-      //   leading: Builder(
-      //     builder: (BuildContext context) {
-      //       return IconButton(
-      //         icon: const Icon(Icons.arrow_back_ios, size: 40),
-      //         onPressed: () {
-      //           Navigator.push(
-      //               context,
-      //               PageRouteBuilder(
-      //                 pageBuilder: (_, __, ___) => Preinscription(),
-      //               ));
-      //         },
-      //       );
-      //     },
-      //   ),
-      //   //  IconButton(icon: Icon(Icons.menu,size:40), onPressed:(){}),
-      //   // title: Text('UNIVERSITY APP')
-      //   // actions: <Widget>[Row(
-      //   //   mainAxisAlignment: MainAxisAlignment.start,
-      //   //   children:[Icon(Icons.menu)])]
-      // ),
-
+      backgroundColor:
+          etat == 1 ? Color.fromARGB(255, 239, 237, 237) : Colors.white,
+      appBar: AppBar(
+        toolbarHeight: 40,
+        leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              icon: const Icon(Icons.arrow_back_ios, size: 20),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (_, __, ___) => HomePage(),
+                    ));
+              },
+            );
+          },
+        ),
+        elevation: 0.0,
+      ),
       body: etat == 1
           ? Center(
               child: Column(
@@ -155,32 +152,32 @@ class _AttenteValidationState extends State<AttenteValidation> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                      //const Text(''),
-                      ElevatedButton(
-                      style: ButtonStyle(
-                          shape: MaterialStatePropertyAll(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(25),
-                            ),
-                          ),
-                          backgroundColor:
-                              const MaterialStatePropertyAll(Colors.green),
-                          fixedSize:
-                              const MaterialStatePropertyAll(Size(220, 55))),
-                      onPressed: () {
-                        // Navigator.push(
-                        //     context,
-                        //     PageRouteBuilder(
-                        //       pageBuilder: (_, __, ___) =>
-                        //           FicheInscription(),
-                        //     ));
-                      },
-                      child: const Text('Creer un compte',
-                          style: TextStyle(color: Colors.white, fontSize: 20)),
+                        //const Text(''),
+                        ElevatedButton(
+                          style: ButtonStyle(
+                              shape: MaterialStatePropertyAll(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(25),
+                                ),
+                              ),
+                              backgroundColor:
+                                  const MaterialStatePropertyAll(Colors.green),
+                              fixedSize: const MaterialStatePropertyAll(
+                                  Size(220, 55))),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                PageRouteBuilder(
+                                  pageBuilder: (_, __, ___) =>
+                                      CreateAccount(),
+                                ));
+                          },
+                          child: const Text('Creer un compte',
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20)),
+                        )
+                      ],
                     )
-
-                    ],)
-                    
                   ],
                 ))
               : Center(
@@ -190,7 +187,6 @@ class _AttenteValidationState extends State<AttenteValidation> {
                     Image.asset(
                       "assets/images/never2.jpg",
                       width: 300,
-                      
                     ),
                     Text(
                       "Vous n'avez pas ete selectionne en infos!😓",
@@ -232,7 +228,7 @@ class _AttenteValidationState extends State<AttenteValidation> {
                         ),
                       ],
                     ),
-                     Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: const [
                         Text(

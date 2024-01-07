@@ -260,6 +260,35 @@ class _PreinscriptionState extends State<Preinscription> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: SECONDARY_COLOR,
+        appBar: AppBar(
+          toolbarHeight: 40,
+          leading: Builder(
+            builder: (BuildContext context) {
+              return IconButton(
+                icon: const Icon(Icons.arrow_back_ios, size: 20),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              );
+            },
+          ),
+          elevation: 0.0,
+          // title: const Text(
+          //   "PREINSCRIPTION UY1",
+          //   style: TextStyle(
+          //     fontSize: 16,
+          //     color: Colors.white,
+          //     fontWeight: FontWeight.bold,
+          //   ),
+          // ),
+          
+          
+          //  IconButton(icon: Icon(Icons.menu,size:40), onPressed:(){}),
+          // title: Text('UNIVERSITY APP')
+          // actions: <Widget>[Row(
+          //   mainAxisAlignment: MainAxisAlignment.start,
+          //   children:[Icon(Icons.menu)])]
+        ),
         body: Stack(
           alignment: AlignmentDirectional.topCenter,
           children: [
@@ -308,7 +337,7 @@ class _PreinscriptionState extends State<Preinscription> {
               child: Column(
                 children: [
                   const SizedBox(
-                    height: 100,
+                    height: 60,
                   ),
                   const Text(
                     "PRE-INSCRIPTION UY1",

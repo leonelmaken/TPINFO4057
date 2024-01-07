@@ -160,14 +160,14 @@ class _InscriptionState extends State<Inscription>
             },
           ),
           elevation: 0.0,
-          title: Text(
-            "INSCRIPTION UY1",
-            style: TextStyle(
-              fontSize: 16,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          // title: Text(
+          //   "INSCRIPTION UY1",
+          //   style: TextStyle(
+          //     fontSize: 16,
+          //     color: Colors.white,
+          //     fontWeight: FontWeight.bold,
+          //   ),
+          // ),
           actions: [
             PopupMenuButton(
                 position: PopupMenuPosition.under,
@@ -271,29 +271,21 @@ class _InscriptionState extends State<Inscription>
             Column(
               children: [
                 Expanded(
-                    child: Column(
-                      children: [
-                        Container(
+                    child: Container(
                   width: double.infinity,
                   decoration: const BoxDecoration(
-                          gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [
-                                PRIMARY_COLOR,
-                                Color.fromARGB(255, 38, 83, 129)
-                              ]),
-                          borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(50),
-                              bottomRight: Radius.circular(50))),
-                ),
-                      ],
-                    )),
-                Expanded(child: Row(
-                  children: [
-                    Container(),
-                  ],
+                      gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            PRIMARY_COLOR,
+                            Color.fromARGB(255, 38, 83, 129)
+                          ]),
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(50),
+                          bottomRight: Radius.circular(50))),
                 )),
+                Expanded(child: Container()),
               ],
             ),
             // Padding(
@@ -322,8 +314,19 @@ class _InscriptionState extends State<Inscription>
               key: _formKeyInscriptionUy1,
               child: Column(
                 children: [
+                   const SizedBox(
+                    height: 60,
+                  ),
+                  const Text(
+                    "INSCRIPTION UY1",
+                    style: TextStyle(
+                      fontSize: 40,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   const SizedBox(
-                    height: 40,
+                    height: 25,
                   ),
 
                   Column(

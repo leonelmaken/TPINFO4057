@@ -8,6 +8,8 @@ import 'package:unieduc/Utils/Global.dart';
 import 'package:unieduc/Utils/theme.dart';
 import 'package:unieduc/Widget/ScrollableWidget.dart';
 
+import '../Service.dart';
+
 class CreateAccount extends StatefulWidget {
   const CreateAccount({super.key});
 
@@ -279,13 +281,16 @@ class _CreateAccountState extends State<CreateAccount> {
               const SizedBox(height: 40),
               GestureDetector(
                 onTap: () async{
-                  loading_popup(context);
-                  await Future.delayed(Duration(seconds: 2));
-                   Navigator.push(
-                            context,
-                            PageRouteBuilder(
-                              pageBuilder: (_, __, ___) => HomePage(),
-                            ));
+                  // loading_popup(context);
+                  // await Future.delayed(Duration(seconds: 2));
+                  //  Navigator.push(
+                  //           context,
+                  //           PageRouteBuilder(
+                  //             pageBuilder: (_, __, ___) => HomePage(),
+                  //           ));
+                  print("${photoProfil.toString().substring(7).replaceAll("'", "")}");
+                  Service.saveEtudiant2(photoProfil!);
+
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 30, right: 30),

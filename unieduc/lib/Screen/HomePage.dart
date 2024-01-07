@@ -9,6 +9,7 @@ import 'package:unieduc/Utils/Global.dart';
 import 'package:unieduc/Utils/theme.dart';
 
 import 'MatriculeSelection.dart';
+import 'personnalGestion.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -172,6 +173,23 @@ class _HomePageState extends State<HomePage> {
                         context,
                         PageRouteBuilder(
                           pageBuilder: (_, __, ___) => Preinscription(),
+                        ));
+                  },
+                ),
+              ),
+
+              Container(
+                decoration: BoxDecoration(color: selected_drawer==23?const Color.fromARGB(255, 229, 242, 248):null),
+                child: ListTile(
+                  leading: const Icon(Icons.settings_accessibility_outlined),
+                  title: const Text("Personnaliser Gestion",
+                      style: TextStyle(color: TEXT_COLOR, fontSize: 17)),
+                  onTap: () async{
+                    await colorDrawer(23);
+                    Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder: (_, __, ___) => PersonnalGestion(),
                         ));
                   },
                 ),
