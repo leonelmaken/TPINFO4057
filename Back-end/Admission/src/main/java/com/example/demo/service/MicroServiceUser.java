@@ -4,9 +4,12 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(name = "microservice-users", url = "http://localhost:8083")
+import com.example.demo.config.FeignConfig;
+import com.example.demo.models.StudentBean;
+
+@FeignClient(name = "microservice-users", configuration = FeignConfig.class, url = "http://localhost:8083")
 public interface MicroServiceUser {
 
-    @GetMapping("/Users/{userId}")
-    Long getUserIdById(@PathVariable("userId") Long userId);
+    @GetMapping("/getStudentInfoById")
+    StudentBean getStudentInfoById(@PathVariable long etudiantId);
 }

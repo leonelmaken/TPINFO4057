@@ -120,4 +120,30 @@ public class StudentController {
     public ResponseEntity<Student> getStudentById(@RequestParam int id) {
         return ResponseEntity.ok(studentService.getStudentById(id));
     }
+    @GetMapping("/getStudentInfoById")
+    public ResponseEntity<Object> getStudentInfoById(@RequestParam int id) {
+        try {
+            // Récupère l'étudiant par ID
+            Student student = studentService.getStudentById(id);
+
+            // Vérifie si l'étudiant existe
+            if (student != null) {
+                // Construit la réponse avec le nom, le prénom et la date de naissance
+                Object response = new Object() {
+                    public final String name = student.getName();
+                    public final String surname = student.getSurname();
+                    public final String dateNaiss = student.getDateNaiss();
+                };
+
+                // Retourne la réponse
+                return ResponseEntity.ok(response);
+            } else {
+                // Si l'étudiant n'est pas trouvé, retourne une réponse appropriée
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Aucun étudiant trouvé avec l'ID : " + id);
+            }
+        } catch (Exception e) {
+            // En cas d'erreur, retourne une réponse d'erreur
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erreur lors de la récupération des informations de l'étudiant.");
+        }
+    }
 }

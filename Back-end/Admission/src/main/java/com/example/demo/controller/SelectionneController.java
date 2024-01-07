@@ -1,10 +1,9 @@
 package com.example.demo.controller;
 
 import com.example.demo.models.Selectionne;
-import com.example.demo.models.UserBean;
-import com.example.demo.service.SelecionneService;
+import com.example.demo.models.StudentBean;
 import com.example.demo.service.MicroServiceUser;
-import com.example.demo.models.Admin;
+import com.example.demo.service.SelecionneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -30,15 +29,15 @@ public class SelectionneController {
     }
 
     @PostMapping("/select/{etudiantId}")
-    public ResponseEntity<String> selectStudent(@PathVariable Long etudiantId) {
-        // Appelez le service Feign pour obtenir les informations de l'étudiant
-        Long student = microServiceUser.getUserIdById(etudiantId);
+    public ResponseEntity<String> selectStudent(@PathVariable Long etudiantId, @RequestParam Long adminId) {
+        // Utilisez le service Feign pour obtenir les informations sur l'étudiant
+        StudentBean studentBean = microServiceUser.getStudentInfoById(etudiantId);
 
-        // Vous devez définir l'objet Admin avec les bonnes valeurs
-        Admin admin = new Admin();  
+        // Vérifiez si l'objet StudentBean est valide
+       // if (studentBean != null && studentBean.isValid()) {
+            // Appelez la méthode du service pour la sélection en utilisant les informations de l'étudiant
+            return selecionneService.selectStudentByAdmin(adminId, studentBean.getIdUser());
         
-        // Appelez la méthode du service pour la sélection en utilisant les informations de l'étudiant
-        return selecionneService.selectStudentByAdmin(admin.getAdminId(), etudiantId);
     }
 
     @GetMapping("/list")
