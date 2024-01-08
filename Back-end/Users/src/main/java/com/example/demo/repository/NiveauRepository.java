@@ -5,9 +5,14 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.models.Niveau;
 
+import java.util.Optional;
+
 @Repository
 public interface NiveauRepository extends JpaRepository<Niveau,Integer> {
 
-    Niveau findByNameIgnoreCase(String name);
+
+
+
+    Optional<Niveau> findByNameIgnoreCase(String name);
 }
 

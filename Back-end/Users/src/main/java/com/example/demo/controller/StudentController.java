@@ -63,7 +63,7 @@ public class StudentController {
             @RequestParam String deuxiemechoix,
             @RequestParam String troisiemechoix,
             @RequestParam String specialite,
-            @RequestParam int niveau,
+            @RequestParam String niveau,
             @RequestPart(value = "dernierdiplom", required = false) MultipartFile dernierdiplom,
             @RequestParam String anneeObtent,
             @RequestParam Double moyenne,
@@ -98,7 +98,7 @@ public class StudentController {
 
         }
 
-        Niveau niveau1 = niveaurepo.findById(niveau).orElseThrow(() -> new RuntimeException("type of this annonce is not found"));
+        Niveau niveau1 = niveaurepo.findByNameIgnoreCase(niveau).orElseThrow(() -> new RuntimeException("type of this annonce is not found"));
 
         Student etudiant = studentService.preinscription(name, surname, dateNaiss, lieuNaiss, numerocni, photouser, adresse, sexe, email, statusMarital, langue, statusprofess, numerotel, nationalite, region, departmt, photocni, relevebac, releveproba, actenaiss, recu, premierchoix, deuxiemechoix, troisiemechoix, specialite, niveau1, dernierdiplom, anneeObtent, moyenne, infojury, matriculediplo, delivrepar, Datedeliv, nompere, professpere, nommere, professmere, nomurgent, numerourgent, villeurgent, nomtuteur, professtuteur, numerotransaction, codepreins, sport, art);
 
