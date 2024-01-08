@@ -40,7 +40,7 @@ public class NiveauService {
 
     //Afficher toutes les UE d'un niveau precis
     public List<UE> getUEsByNiveauName(String name) {
-        Niveau niveau = niveauRepository.findByNameIgnoreCase(name);
+        Niveau niveau = niveauRepository.findByNameIgnoreCase(name).orElseThrow(() -> new RuntimeException("type of this annonce is not found"));
         if (niveau != null) {
             return niveau.getEu();
         } else {

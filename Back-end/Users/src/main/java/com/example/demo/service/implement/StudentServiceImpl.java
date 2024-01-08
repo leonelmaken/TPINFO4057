@@ -56,7 +56,7 @@ public class StudentServiceImpl implements StudentService {
             String deuxiemechoix,
             String troisiemechoix,
             String specialite,
-            com.example.demo.models.Niveau niveau,
+            Niveau niveau,
             //photo scannee à uploader
             MultipartFile dernierdiplom,
 
