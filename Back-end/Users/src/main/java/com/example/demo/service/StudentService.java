@@ -3,10 +3,12 @@ package com.example.demo.service;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.demo.models.MessageBean;
 import com.example.demo.models.Student;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 public interface StudentService{
@@ -72,5 +74,7 @@ public interface StudentService{
 
     ResponseEntity<Object> deleteStudent(Long studentId);
 
+    MessageBean sendMessageToUser(MessageBean message);
     ResponseEntity<Object> getAllStudents();
+    public List<MessageBean> getReceivedMessages(int receiverId);
 }

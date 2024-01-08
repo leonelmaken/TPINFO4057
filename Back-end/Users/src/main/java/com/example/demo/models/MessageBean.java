@@ -9,17 +9,20 @@ import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 
-@Entity
+
 public class MessageBean {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
 
-    private Long senderId;
-    private Long receiverId;
+    private int senderId;
+    private int receiverId;
     private String content;
     private LocalDateTime timestamp;
+    private String message;
+    private String senderName;
+    private String receiverName;
+
 
     // Constructeurs, getters et setters
 
@@ -27,7 +30,7 @@ public class MessageBean {
         // Constructeur par défaut
     }
 
-    public MessageBean(Long senderId, Long receiverId, String content) {
+    public MessageBean(int senderId, int receiverId, String content) {
         this.senderId = senderId;
         this.receiverId = receiverId;
         this.content = content;
@@ -35,7 +38,27 @@ public class MessageBean {
 
     // Getters et Setters
 
-    public Long getId() {
+    public String getSenderName() {
+		return senderName;
+	}
+
+	public void setSenderName(String senderName) {
+		this.senderName = senderName;
+	}
+
+	public String getReceiverName() {
+		return receiverName;
+	}
+
+	public void setReceiverName(String receiverName) {
+		this.receiverName = receiverName;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public Long getId() {
         return id;
     }
 
@@ -43,19 +66,20 @@ public class MessageBean {
         this.id = id;
     }
 
-    public Long getSenderId() {
+    public int getSenderId() {
         return senderId;
     }
 
-    public void setSenderId(Long senderId) {
+    
+    public void setSenderId(int senderId) {
         this.senderId = senderId;
     }
 
-    public Long getReceiverId() {
+    public int getReceiverId() {
         return receiverId;
     }
 
-    public void setReceiverId(Long receiverId) {
+    public void setReceiverId(int receiverId) {
         this.receiverId = receiverId;
     }
 
@@ -73,6 +97,9 @@ public class MessageBean {
 
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
+    }
+    public void setMessage(String message) {
+        this.message = message;
     }
     
     @PrePersist

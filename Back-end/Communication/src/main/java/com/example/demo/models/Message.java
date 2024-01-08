@@ -22,6 +22,9 @@ public class Message {
     private Long receiverId;
     private String content;
     private LocalDateTime timestamp;
+    private String senderName;
+    private String receiverName;
+
 
     // Constructeurs, getters et setters
 
@@ -49,7 +52,23 @@ public class Message {
         return senderId;
     }
 
-    public void setSenderId(Long senderId) {
+    public String getSenderName() {
+		return senderName;
+	}
+
+	public void setSenderName(String senderName) {
+		this.senderName = senderName;
+	}
+
+	public String getReceiverName() {
+		return receiverName;
+	}
+
+	public void setReceiverName(String receiverName) {
+		this.receiverName = receiverName;
+	}
+
+	public void setSenderId(Long senderId) {
         this.senderId = senderId;
     }
 

@@ -5,6 +5,7 @@ import com.example.demo.service.AnnonceService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -20,8 +21,8 @@ public class AnnonceController {
     }
 
     @PostMapping(path = "/create")
-    public Annonce createAnnonce(@RequestBody Annonce annonce) {
-        return annonceService.createAnnonce(annonce);
+    public Annonce createAnnonce(@RequestPart("annonce") Annonce annonce, @RequestPart(value = "image", required = false) MultipartFile imageFile) {
+        return annonceService.createAnnonce(annonce, imageFile);
     }
 
     @GetMapping(path = "/read")
