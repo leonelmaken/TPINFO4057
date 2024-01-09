@@ -9,6 +9,8 @@ import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 
 import java.time.LocalDateTime;
+
+import org.springframework.web.multipart.MultipartFile;
 @Entity
 public class Annonce {
 
@@ -19,6 +21,7 @@ public class Annonce {
     private String title;
     private String content;
     private LocalDateTime timestamp;
+    private String imageFile;
 
 
     // Constructeurs, getters et setters
@@ -61,8 +64,18 @@ public class Annonce {
     public LocalDateTime getTimestamp() {
         return timestamp;
     }
+    
 
-    public void setTimestamp(LocalDateTime timestamp) {
+
+	public String getImageFile() {
+		return imageFile;
+	}
+
+	public void setImageFile(String fileName) {
+		this.imageFile = fileName;
+	}
+
+	public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
     @PrePersist
@@ -70,4 +83,11 @@ public class Annonce {
     public void prePersist() {
         timestamp = LocalDateTime.now();
     }
+
+	@Override
+	public String toString() {
+		return "Annonce [id=" + id + ", title=" + title + ", content=" + content + ", timestamp=" + timestamp
+				+ ", image=" + imageFile + "]";
+	}
+    
 }

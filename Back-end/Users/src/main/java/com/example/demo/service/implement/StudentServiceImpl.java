@@ -7,9 +7,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.example.demo.models.MessageBean;
 import com.example.demo.models.Niveau;
 import com.example.demo.models.Student;
 import com.example.demo.repository.StudentRepository;
+import com.example.demo.service.CommunicationFeignClient;
 import com.example.demo.service.StudentService;
 
 import java.io.File;
@@ -223,4 +225,34 @@ public class StudentServiceImpl implements StudentService {
             throw new RuntimeException("Student not found for id : " + id);
         }
     }
+    @Autowired
+    private CommunicationFeignClient communicationFeignClient;
+
+    @Override
+    public MessageBean sendMessageToUser(MessageBean message) {
+        int senderId = message.getSenderId();
+        int receiverId = message.getReceiverId();
+
+        Student sender = getStudentById(senderId);
+        Student receiver = getStudentById(receiverId);
+
+        if (sender != null && receiver != null) {
+            // Si l'expéditeur et le récepteur existent, définissez les noms dans le message
+            message.setSenderName(sender.getName());
+            message.setReceiverName(receiver.getName());
+
+            // Continuez avec l'envoi du message
+            return communicationFeignClient.sendMessage(message);
+        } else {
+            // Si l'expéditeur ou le récepteur n'existe pas, retournez un message d'erreur
+            MessageBean errorMessage = new MessageBean();
+            errorMessage.setMessage("Sender or receiver not found");
+            return errorMessage;
+        }
+    }
+    @Override
+    public List<MessageBean> getReceivedMessages(int receiverId) {
+        return communicationFeignClient.getMessagesByReceiverId((long) receiverId);
+    }
+
 }

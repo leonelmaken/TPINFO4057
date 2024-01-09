@@ -29,7 +29,7 @@ public class SelectionneController {
     }
 
     @PostMapping("/select/{etudiantId}")
-    public ResponseEntity<String> selectStudent(@PathVariable Long etudiantId, @RequestParam Long adminId) {
+    public StudentBean selectStudent(@PathVariable Long etudiantId, @RequestParam Long adminId) {
         // Utilisez le service Feign pour obtenir les informations sur l'étudiant
         StudentBean studentBean = microServiceUser.getStudentInfoById(etudiantId);
 

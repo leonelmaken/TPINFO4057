@@ -8,15 +8,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.demo.models.MessageBean;
 import com.example.demo.models.Niveau;
 import com.example.demo.models.Student;
 import com.example.demo.repository.NiveauRepository;
 import com.example.demo.repository.SpecialiteRepository;
+import com.example.demo.service.CommunicationFeignClient;
 import com.example.demo.service.StudentService;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 @RestController
@@ -26,6 +29,9 @@ public class StudentController {
 
     @Autowired
     private SpecialiteRepository specialiteRepository;
+    
+    @Autowired
+    private CommunicationFeignClient communicationFeignClient;
 
     @Autowired
     private NiveauRepository niveaurepo;
@@ -120,30 +126,25 @@ public class StudentController {
     public ResponseEntity<Student> getStudentById(@RequestParam int id) {
         return ResponseEntity.ok(studentService.getStudentById(id));
     }
-    @GetMapping("/getStudentInfoById")
-    public ResponseEntity<Object> getStudentInfoById(@RequestParam int id) {
+    @GetMapping("/getStudentInfoById/{id}") // Mise à jour du chemin et de la variable de chemin
+    public Student getStudentInfoById(@PathVariable("id") int id) {
         try {
             // Récupère l'étudiant par ID
-            Student student = studentService.getStudentById(id);
-
-            // Vérifie si l'étudiant existe
-            if (student != null) {
-                // Construit la réponse avec le nom, le prénom et la date de naissance
-                Object response = new Object() {
-                    public final String name = student.getName();
-                    public final String surname = student.getSurname();
-                    public final String dateNaiss = student.getDateNaiss();
-                };
-
-                // Retourne la réponse
-                return ResponseEntity.ok(response);
-            } else {
-                // Si l'étudiant n'est pas trouvé, retourne une réponse appropriée
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Aucun étudiant trouvé avec l'ID : " + id);
-            }
+            return studentService.getStudentById(id);
         } catch (Exception e) {
-            // En cas d'erreur, retourne une réponse d'erreur
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erreur lors de la récupération des informations de l'étudiant.");
+            // En cas d'erreur, vous pouvez gérer l'erreur ici, par exemple, en journalisant l'erreur.
+            return null; // ou jeter une exception
         }
     }
+    @PostMapping("/send-message")
+    public MessageBean sendMessageToUser(@RequestBody MessageBean message) {
+        return studentService.sendMessageToUser(message);
+    }
+    @GetMapping("/received-messages/{userId}")
+    public ResponseEntity<List<MessageBean>> getReceivedMessages(@PathVariable("userId") int userId) {
+        List<MessageBean> receivedMessages = studentService.getReceivedMessages(userId);
+        return ResponseEntity.ok(receivedMessages);
+    }
+
+
 }

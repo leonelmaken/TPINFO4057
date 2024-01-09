@@ -62,13 +62,13 @@ public class SelectionneServiceImpl implements SelecionneService {
     }
 
     @Override
-    public ResponseEntity<String> selectStudentByAdmin(Long adminId, int idUser) {
+    public StudentBean selectStudentByAdmin(Long adminId, int idUser) {
         try {
             // Utilisez le service Feign pour obtenir les informations sur l'étudiant
             StudentBean studentBean = microServiceUser.getStudentInfoById(idUser);
 
             // Vérifiez si l'objet StudentBean est valide
-           
+            if (studentBean != null) {
                 // Créez un objet Selectionne en utilisant les informations de l'étudiant et de l'admin
                 Admin selectingAdmin = adminService.getAdminById(adminId).getBody();
 
@@ -80,11 +80,15 @@ public class SelectionneServiceImpl implements SelecionneService {
                 // Enregistrez la sélection dans la base de données (utilisez la logique appropriée)
                 selectionneRepository.save(selectionne);
 
-                return ResponseEntity.ok("Étudiant sélectionné avec succès par l'admin. Matricule : " + matricule);
-           
+                // Retournez l'objet StudentBean
+                return studentBean;
+            } else {
+                // Gérez le cas où l'objet StudentBean est nul (peut-être définir une exception personnalisée)
+                throw new ClassNotFoundException("Étudiant non trouvé pour l'ID : " + idUser);
+            }
         } catch (Exception e) {
-            return new ResponseEntity<>("Une exception s'est produite : " + e.getMessage(),
-                    HttpStatus.INTERNAL_SERVER_ERROR);
+            // Gérez l'exception de manière appropriée (peut-être définir une exception personnalisée)
+            throw new RuntimeException("Une exception s'est produite : " + e.getMessage());
         }
     }
 

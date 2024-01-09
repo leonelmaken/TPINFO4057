@@ -8,14 +8,14 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import com.example.demo.config.FeignConfig;
+//import com.example.demo.config.FeignConfig;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {"com.example.demo", "com.example.demo.config"})
 @EntityScan(basePackages = "com.example.demo.models")
 @EnableJpaRepositories(basePackages = "com.example.demo.repository")
 @EnableFeignClients(basePackages = "com.example.demo.service")
-@Import(FeignConfig.class)
+//@Import(FeignConfig.class)
 public class AdmissionApplication {
     public static void main(String[] args) {
         SpringApplication.run(AdmissionApplication.class, args);
