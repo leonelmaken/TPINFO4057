@@ -271,116 +271,121 @@ class _TeacherGestionState extends State<TeacherGestion> {
               ),
             ],
           ),
-          DataTable(
-            columns: const [
-              DataColumn2(
-                label: Text(
-                  'Matricule',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                  overflow: TextOverflow.ellipsis,
-                ),
-                fixedWidth: 120,
-                size: ColumnSize.S,
-              ),
-              DataColumn2(
+          Row(
+            children: [
+              Expanded(child:
+              DataTable(
+                columns: const [
+                  DataColumn2(
+                    label: Text(
+                      'Matricule',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    fixedWidth: 120,
+                    size: ColumnSize.S,
+                  ),
+                  DataColumn2(
 
-                label: Text(
-                  'Nom & Prenom',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                  overflow: TextOverflow.ellipsis,
-                ),
-                fixedWidth: 120,
-                size: ColumnSize.M,
-              ),
-             
-              DataColumn2(
-                label: Text('Action',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                fixedWidth: 120,
-                size: ColumnSize.S,
-              ),
-            ],
-            rows: [
-              DataRow(cells: [
-                const DataCell(Text(
-                  "20V4425",
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
-                )),
-                const DataCell(Text(
-                  "Jean Mbarga",
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
-                )),
-                
-                DataCell(Row(
-                  children: [
-                    Container(
-                      child: InkWell(
-                        onTap: () {},
-                        child: const Icon(
-                          Icons.remove_red_eye,
-                          size: 18,
-                          color: Colors.blue,
-                        ),
-                      ),
+                    label: Text(
+                      'Nom & Prenom',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    Container(
-                      margin: const EdgeInsets.only(left: 7, right: 7),
-                      child: InkWell(
-                        onTap: () {
-                          _deleteFormDialog();
-                        },
-                        child: const Icon(
-                          Icons.delete,
-                          size: 18,
-                          color: Colors.red,
+                    fixedWidth: 120,
+                    size: ColumnSize.M,
+                  ),
+                 
+                  DataColumn2(
+                    label: Text('Action',
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+                    fixedWidth: 120,
+                    size: ColumnSize.S,
+                  ),
+                ],
+                rows: [
+                  DataRow(cells: [
+                    const DataCell(Text(
+                      "20V4425",
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
+                    )),
+                    const DataCell(Text(
+                      "Jean Mbarga",
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
+                    )),
+                    
+                    DataCell(Row(
+                      children: [
+                        Container(
+                          child: InkWell(
+                            onTap: () {},
+                            child: const Icon(
+                              Icons.remove_red_eye,
+                              size: 18,
+                              color: Colors.blue,
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  ],
-                ))
-              ]),
-              DataRow(cells: [
-                const DataCell(Text(
-                  "20V4425",
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
-                )),
-                const DataCell(Text(
-                  "Jean Mbarga",
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
-                )),
-                
-                DataCell(Row(
-                  children: [
-                    Container(
-                      child: InkWell(
-                        onTap: () {},
-                        child: const Icon(
-                          Icons.remove_red_eye,
-                          size: 18,
-                          color: Colors.blue,
+                        Container(
+                          margin: const EdgeInsets.only(left: 7, right: 7),
+                          child: InkWell(
+                            onTap: () {
+                              _deleteFormDialog();
+                            },
+                            child: const Icon(
+                              Icons.delete,
+                              size: 18,
+                              color: Colors.red,
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(left: 7, right: 7),
-                      child: InkWell(
-                        onTap: () {
-                          _deleteFormDialog();
-                        },
-                        child: const Icon(
-                          Icons.delete,
-                          size: 18,
-                          color: Colors.red,
+                      ],
+                    ))
+                  ]),
+                  DataRow(cells: [
+                    const DataCell(Text(
+                      "20V4425",
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
+                    )),
+                    const DataCell(Text(
+                      "Jean Mbarga",
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
+                    )),
+                    
+                    DataCell(Row(
+                      children: [
+                        Container(
+                          child: InkWell(
+                            onTap: () {},
+                            child: const Icon(
+                              Icons.remove_red_eye,
+                              size: 18,
+                              color: Colors.blue,
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  ],
-                ))
-              ])
+                        Container(
+                          margin: const EdgeInsets.only(left: 7, right: 7),
+                          child: InkWell(
+                            onTap: () {
+                              _deleteFormDialog();
+                            },
+                            child: const Icon(
+                              Icons.delete,
+                              size: 18,
+                              color: Colors.red,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ))
+                  ])
+                ],
+              )),
             ],
           )
         ]))));

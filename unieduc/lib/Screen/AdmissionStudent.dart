@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:unieduc/Screen/AdmissionStudent.dart';
 import 'package:unieduc/Screen/CreateAccount.dart';
 import 'package:unieduc/Screen/HomePage.dart';
 import 'package:unieduc/Service.dart';
@@ -11,14 +10,14 @@ import '../Utils/Global.dart';
 import 'RecuperationPassword.dart';
 import 'package:data_table_2/data_table_2.dart';
 
-class StudentGestion extends StatefulWidget {
-  const StudentGestion({super.key});
+class AdmissionStudent extends StatefulWidget {
+  const AdmissionStudent({super.key});
 
   @override
-  State<StudentGestion> createState() => _StudentGestionState();
+  State<AdmissionStudent> createState() => _AdmissionStudentState();
 }
 
-class _StudentGestionState extends State<StudentGestion> {
+class _AdmissionStudentState extends State<AdmissionStudent> {
   TextEditingController _matriculeController = new TextEditingController();
 
   TextEditingController _intituleController = new TextEditingController();
@@ -208,99 +207,27 @@ class _StudentGestionState extends State<StudentGestion> {
                 child: Column(children: [
           Row(
             children: [
-              Flexible(
-                child: Container(
-                  margin: const EdgeInsets.only(
-                    left: 2,
-                    right: 2,
-                    top: 2,
-                  ),
-                  height: 40,
-                  decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 235, 235, 235),
-                  ),
-                  child: TextField(
-                    controller: _searchcontroler,
-                    onChanged: (text) {},
-                    decoration: InputDecoration(
-                        suffixIcon: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Tooltip(
-                              message:
-                                  'Cliquer ici pour ajouter un utilisateur',
-                              child: InkWell(
-                                onTap: () async {
-                                  Navigator.push(
-                                      context,
-                                      PageRouteBuilder(
-                                        pageBuilder: (_, __, ___) =>
-                                            AdmissionStudent(),
-                                      ));
-                                },
-                                child: Container(
-                                  color: Colors.blue,
-                                  height: 40,
-                                  width: 50,
-                                  child: const Icon(
-                                    Icons.add_circle_outline,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Tooltip(
-                              message:
-                                  'Cliquer ici pour imprimer la liste des utilisateurs',
-                              child: InkWell(
-                                onTap: () async {}, //produit trouve
-                                child: Container(
-                                  margin: const EdgeInsets.only(left: 2),
-                                  color: Colors.orange,
-                                  height: 40,
-                                  width: 50,
-                                  child: const Icon(
-                                    Icons.print,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        hintText: 'Rechercher un etudiant',
-                        hintStyle: const TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.w600),
-                        border: InputBorder.none,
-                        contentPadding: const EdgeInsets.only(
-                            left: 10, top: 30, bottom: 15)),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Row(
-            children: [
               Expanded(child:
               DataTable(
                 columns: const [
-                  DataColumn2(
-                    label: Text(
-                      'Matricule',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    fixedWidth: 95,
-                    size: ColumnSize.S,
-                  ),
+                 
                   DataColumn2(
                     label: Text(
                       'Nom & Prenom',
                       style: TextStyle(fontWeight: FontWeight.bold),
-                      overflow: TextOverflow.ellipsis,
+                      overflow: TextOverflow.fade,
                     ),
                     fixedWidth: 95,
                     size: ColumnSize.M,
+                  ),
+                   DataColumn2(
+                    label: Text(
+                      'Niveau ',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                      overflow: TextOverflow.fade,
+                    ),
+                    fixedWidth: 95,
+                    size: ColumnSize.S,
                   ),
                   // DataColumn2(
                   //   label: Text(
@@ -320,13 +247,14 @@ class _StudentGestionState extends State<StudentGestion> {
                 ],
                 rows: [
                   DataRow(cells: [
+                    
                     const DataCell(Text(
-                      "20V4425",
+                      "Jean Mbarga",
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
                     )),
                     const DataCell(Text(
-                      "Jean Mbarga",
+                      "M1",
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
                     )),
@@ -347,13 +275,26 @@ class _StudentGestionState extends State<StudentGestion> {
                           ),
                         ),
                         Container(
+                           margin: const EdgeInsets.only(left: 7),
+                          child: InkWell(
+                            onTap: () {
+                              _addFormDialog();
+                            },
+                            child: const Icon(
+                              Icons.thumb_up_rounded,
+                              size: 18,
+                              color: Colors.green,
+                            ),
+                          ),
+                        ),
+                        Container(
                           margin: const EdgeInsets.only(left: 7, right: 7),
                           child: InkWell(
                             onTap: () {
                               _deleteFormDialog();
                             },
                             child: const Icon(
-                              Icons.delete,
+                              Icons.thumb_down,
                               size: 18,
                               color: Colors.red,
                             ),
@@ -363,13 +304,14 @@ class _StudentGestionState extends State<StudentGestion> {
                     ))
                   ]),
                   DataRow(cells: [
+                    
                     const DataCell(Text(
-                      "20V4425",
+                      "Pierre Jacob",
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
                     )),
                     const DataCell(Text(
-                      "Jean Mbarga",
+                      "L3",
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
                     )),
@@ -390,13 +332,26 @@ class _StudentGestionState extends State<StudentGestion> {
                           ),
                         ),
                         Container(
+                           margin: const EdgeInsets.only(left: 7),
+                          child: InkWell(
+                            onTap: () {
+                              _addFormDialog();
+                            },
+                            child: const Icon(
+                              Icons.thumb_up_rounded,
+                              size: 18,
+                              color: Colors.green,
+                            ),
+                          ),
+                        ),
+                        Container(
                           margin: const EdgeInsets.only(left: 7, right: 7),
                           child: InkWell(
                             onTap: () {
                               _deleteFormDialog();
                             },
                             child: const Icon(
-                              Icons.delete,
+                              Icons.thumb_down,
                               size: 18,
                               color: Colors.red,
                             ),
@@ -431,13 +386,62 @@ class _StudentGestionState extends State<StudentGestion> {
                   width: 10,
                 ),
                 Text(
-                  "Attention Exclusion".toUpperCase(),
+                  "Attention Refus".toUpperCase(),
                   style: const TextStyle(fontSize: 13),
                 )
               ],
             ),
             content: const Text(
-              'Voulez vous vraiment exclure cet etudiant?',
+              'Voulez vous vraiment Refuser cet etudiant en infos?',
+            ),
+            actions: <Widget>[
+              TextButton(
+                  onPressed: () async {
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => const LoginPage(),
+                    //   ),
+                    // );
+                  },
+                  child: const Text('Oui')),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('Non'),
+              ),
+            ],
+          );
+        });
+  }
+
+   _addFormDialog() {
+    return showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (BuildContext) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(0.0),
+            ),
+            title: Row(
+              children: [
+                const Icon(
+                  Icons.warning_amber_sharp,
+                  color: Colors.red,
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  "Attention Ajout".toUpperCase(),
+                  style: const TextStyle(fontSize: 13),
+                )
+              ],
+            ),
+            content: const Text(
+              'Voulez vous vraiment Accepter cet etudiant en infos?',
             ),
             actions: <Widget>[
               TextButton(
@@ -461,3 +465,7 @@ class _StudentGestionState extends State<StudentGestion> {
         });
   }
 }
+
+
+
+

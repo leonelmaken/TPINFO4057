@@ -271,129 +271,134 @@ class _UeGestionState extends State<UeGestion> {
               ),
             ],
           ),
-          DataTable(
-            columns: const [
-              DataColumn2(
-                label: Text(
-                  'code',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                  overflow: TextOverflow.ellipsis,
-                ),
-                fixedWidth: 95,
-                size: ColumnSize.S,
-              ),
-              DataColumn2(
-                label: Text(
-                  'intitule',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                  overflow: TextOverflow.ellipsis,
-                ),
-                fixedWidth: 95,
-                size: ColumnSize.M,
-              ),
-              // DataColumn2(
-              //   label: Text(
-              //     'Niveau',
-              //     style: TextStyle(fontWeight: FontWeight.bold),
-              //     overflow: TextOverflow.ellipsis,
-              //   ),
-              //   fixedWidth: 95,
-              //   size: ColumnSize.S,
-              // ),
-              DataColumn2(
-                label: Text('Action',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                fixedWidth: 95,
-                size: ColumnSize.S,
-              ),
-            ],
-            rows: [
-              DataRow(cells: [
-                const DataCell(Text(
-                  "INF4017",
-                  overflow: TextOverflow.fade,
-                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
-                )),
-                const DataCell(Text(
-                  "Algo et complexite",
-                  overflow: TextOverflow.fade,
-                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
-                )),
-                // const DataCell(Text(
-                //   "L3",
-                //   style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
-                // )),
-                DataCell(Row(
-                  children: [
-                    Container(
-                      child: InkWell(
-                        onTap: () {},
-                        child: const Icon(
-                          Icons.remove_red_eye,
-                          size: 18,
-                          color: Colors.blue,
-                        ),
-                      ),
+          Row(
+            children: [
+              Expanded(child:
+              DataTable(
+                columns: const [
+                  DataColumn2(
+                    label: Text(
+                      'code',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    Container(
-                      margin: const EdgeInsets.only(left: 7, right: 7),
-                      child: InkWell(
-                        onTap: () {
-                          _deleteFormDialog();
-                        },
-                        child: const Icon(
-                          Icons.delete,
-                          size: 18,
-                          color: Colors.red,
-                        ),
-                      ),
+                    fixedWidth: 95,
+                    size: ColumnSize.S,
+                  ),
+                  DataColumn2(
+                    label: Text(
+                      'intitule',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                      overflow: TextOverflow.ellipsis,
                     ),
-                  ],
-                ))
-              ]),
-              DataRow(cells: [
-                const DataCell(Text(
-                  "INF4077",
-                  overflow: TextOverflow.fade,
-                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
-                )),
-                const DataCell(Text(
-                  "UML et design patterns",
-                  overflow: TextOverflow.fade,
-                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
-                )),
-                // const DataCell(Text(
-                //   "L3",
-                //   style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
-                // )),
-                DataCell(Row(
-                  children: [
-                    Container(
-                      child: InkWell(
-                        onTap: () {},
-                        child: const Icon(
-                          Icons.remove_red_eye,
-                          size: 18,
-                          color: Colors.blue,
+                    fixedWidth: 95,
+                    size: ColumnSize.M,
+                  ),
+                  // DataColumn2(
+                  //   label: Text(
+                  //     'Niveau',
+                  //     style: TextStyle(fontWeight: FontWeight.bold),
+                  //     overflow: TextOverflow.ellipsis,
+                  //   ),
+                  //   fixedWidth: 95,
+                  //   size: ColumnSize.S,
+                  // ),
+                  DataColumn2(
+                    label: Text('Action',
+                        style: TextStyle(fontWeight: FontWeight.bold)),
+                    fixedWidth: 95,
+                    size: ColumnSize.S,
+                  ),
+                ],
+                rows: [
+                  DataRow(cells: [
+                    const DataCell(Text(
+                      "INF4017",
+                      overflow: TextOverflow.fade,
+                      style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
+                    )),
+                    const DataCell(Text(
+                      "Algo et complexite",
+                      overflow: TextOverflow.fade,
+                      style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
+                    )),
+                    // const DataCell(Text(
+                    //   "L3",
+                    //   style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
+                    // )),
+                    DataCell(Row(
+                      children: [
+                        Container(
+                          child: InkWell(
+                            onTap: () {},
+                            child: const Icon(
+                              Icons.remove_red_eye,
+                              size: 18,
+                              color: Colors.blue,
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(left: 7, right: 7),
-                      child: InkWell(
-                        onTap: () {
-                          _deleteFormDialog();
-                        },
-                        child: const Icon(
-                          Icons.delete,
-                          size: 18,
-                          color: Colors.red,
+                        Container(
+                          margin: const EdgeInsets.only(left: 7, right: 7),
+                          child: InkWell(
+                            onTap: () {
+                              _deleteFormDialog();
+                            },
+                            child: const Icon(
+                              Icons.delete,
+                              size: 18,
+                              color: Colors.red,
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
-                  ],
-                ))
-              ])
+                      ],
+                    ))
+                  ]),
+                  DataRow(cells: [
+                    const DataCell(Text(
+                      "INF4077",
+                      overflow: TextOverflow.fade,
+                      style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
+                    )),
+                    const DataCell(Text(
+                      "UML et design patterns",
+                      overflow: TextOverflow.fade,
+                      style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
+                    )),
+                    // const DataCell(Text(
+                    //   "L3",
+                    //   style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
+                    // )),
+                    DataCell(Row(
+                      children: [
+                        Container(
+                          child: InkWell(
+                            onTap: () {},
+                            child: const Icon(
+                              Icons.remove_red_eye,
+                              size: 18,
+                              color: Colors.blue,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(left: 7, right: 7),
+                          child: InkWell(
+                            onTap: () {
+                              _deleteFormDialog();
+                            },
+                            child: const Icon(
+                              Icons.delete,
+                              size: 18,
+                              color: Colors.red,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ))
+                  ])
+                ],
+              )),
             ],
           )
         ]))));

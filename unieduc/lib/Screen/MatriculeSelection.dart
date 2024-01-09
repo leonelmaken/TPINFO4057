@@ -122,8 +122,8 @@ class _MatriculeSelctionState extends State<MatriculeSelction> {
 
         
                         if (formkey.currentState!.validate()) {
-                        loading_popup(context);
-                        await Future.delayed(Duration(seconds: 3));
+                        // loading_popup(context);
+                        // await Future.delayed(Duration(seconds: 3));
                           Navigator.push(
                             context,
                             PageRouteBuilder(
