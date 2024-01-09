@@ -17,7 +17,7 @@ public class User {
     private String surname;
     private String dateNaiss;
     private String lieuNaiss;
-
+	private String username;
     private String numerocni;
     private String photouser;
 
@@ -187,8 +187,13 @@ public class User {
 		this.departmt = departmt;
 	}
 
+	public String getUsername() {
+		return username;
+	}
 
-
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
 	@Override
 	public String toString() {
