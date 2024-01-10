@@ -5,8 +5,10 @@ import com.example.demo.repository.AnnonceRepository;
 import com.example.demo.service.AnnonceService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,13 +28,22 @@ public class AnnonceServiceImpl implements AnnonceService {
     }
 
     @Override
-    public Annonce createAnnonce(Annonce annonce, MultipartFile imageFile) {
+    public Annonce createAnnonce(Annonce annonce, MultipartFile imageFile) throws IOException{
         // Traitement de l'image uniquement si elle est fournie et est du bon type
         if (imageFile != null && !imageFile.isEmpty() && isImageTypeValid(imageFile)) {
             // Ajoutez votre logique de traitement de l'image ici
-            String fileName = "annonce_" + annonce.getId() + "_" + imageFile.getOriginalFilename();
-            saveImageToFileSystem(imageFile, fileName);
-            annonce.setImageFile(fileName);
+            //String fileName = "annonce_" + annonce.getId() + "_" + imageFile.getOriginalFilename();
+            //saveImageToFileSystem(imageFile, fileName);
+            //annonce.setImageFile(fileName);
+            final String folder1 = new ClassPathResource("static/annonces/").getFile().getAbsolutePath();
+            System.out.println(folder1);
+            final String route1 = ServletUriComponentsBuilder.fromCurrentContextPath().path("/annonces/").path(imageFile.getOriginalFilename()).toUriString();
+            byte[] bytes1 = imageFile.getBytes();
+            Path path1 = Paths.get(folder1 + File.separator + imageFile.getOriginalFilename());
+            Files.write(path1, bytes1);
+            System.out.println(Files.exists(path1));
+            System.out.println(route1);
+            annonce.setImageFile("/annonces/" + imageFile.getOriginalFilename());
         }
 
         return annonceRepository.save(annonce);
