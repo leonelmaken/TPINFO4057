@@ -74,7 +74,7 @@ class _RecuperationPasswordState extends State<RecuperationPassword> {
                     ),
                     Center(
                       child: const Text(
-                      "Formulaire de recuperation de mot de passe",
+                      " Recuperation de mot de passe",
                       style: TextStyle(
                           color: Colors.blue,
                           fontWeight: FontWeight.bold,
@@ -93,6 +93,7 @@ class _RecuperationPasswordState extends State<RecuperationPassword> {
                         maxLength: 40,
                         controller: _emailController,
                         validator: (value) {
+                          value=value?.trim();
                           if (value!.isEmpty) {
                             return "Veuillez remplir ce champs";
                           }
@@ -106,43 +107,43 @@ class _RecuperationPasswordState extends State<RecuperationPassword> {
                               size: 25,
                             ),
                             hintText: "Entrer votre Adresse mail",
-                            hintStyle: TextStyle(letterSpacing: 1,fontSize: 10)),
+                            hintStyle: TextStyle(letterSpacing: 1,fontSize: 15)),
                       ),
                     ),
                     const SizedBox(
                       height: 30,
                     ),
-                    Container(
-                      margin: const EdgeInsets.only(left: 15, right: 15),
-                      child: TextFormField(
-                        keyboardType: TextInputType.visiblePassword,
-                        maxLength: 100,
-                        obscureText: _obscuring,
-                        controller: _passwordController,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Veuillez remplir ce champs";
-                          }
-                        },
-                        style:
-                            const TextStyle(color: Colors.black, letterSpacing: 1.2),
-                        decoration: InputDecoration(
-                            counterText: "",
-                            prefixIcon: const Icon(
-                              Icons.key,
-                              size: 25,
-                            ),
-                            hintText: "Entrer le dernier mot de passe dont vous vous rappelez",
-                            hintStyle: const TextStyle(letterSpacing: 1,fontSize: 10),
-                            suffixIcon: IconButton(
-                                onPressed: () {
-                                  _obscuring = !_obscuring;
+                    // Container(
+                    //   margin: const EdgeInsets.only(left: 15, right: 15),
+                    //   child: TextFormField(
+                    //     keyboardType: TextInputType.visiblePassword,
+                    //     maxLength: 100,
+                    //     obscureText: _obscuring,
+                    //     controller: _passwordController,
+                    //     validator: (value) {
+                    //       if (value!.isEmpty) {
+                    //         return "Veuillez remplir ce champs";
+                    //       }
+                    //     },
+                    //     style:
+                    //         const TextStyle(color: Colors.black, letterSpacing: 1.2),
+                    //     decoration: InputDecoration(
+                    //         counterText: "",
+                    //         prefixIcon: const Icon(
+                    //           Icons.key,
+                    //           size: 25,
+                    //         ),
+                    //         hintText: "Entrer le dernier mot de passe dont vous vous rappelez",
+                    //         hintStyle: const TextStyle(letterSpacing: 1,fontSize: 10),
+                    //         suffixIcon: IconButton(
+                    //             onPressed: () {
+                    //               _obscuring = !_obscuring;
         
-                                  setState(() {});
-                                },
-                                icon: const Icon(Icons.remove_red_eye))),
-                      ),
-                    ),
+                    //               setState(() {});
+                    //             },
+                    //             icon: const Icon(Icons.remove_red_eye))),
+                    //   ),
+                    // ),
                    
                     
                     
@@ -154,19 +155,8 @@ class _RecuperationPasswordState extends State<RecuperationPassword> {
                         //Service.addUe();
 
         
-                        // if (formkey.currentState!.validate()) {
-                        // loading_popup(context);
-                        // await Future.delayed(Duration(seconds: 3));
-                        //   Navigator.push(
-                        //     context,
-                        //     PageRouteBuilder(
-                        //       pageBuilder: (_, __, ___) =>
-                        //           HomePage(),
-                        //     ));
-                        // }
-
-                        
-                       showDialog(
+                        if (formkey.currentState!.validate()) {
+                            showDialog(
                               barrierDismissible: false,
                               context: context,
                               builder: (BuildContext) {
@@ -201,10 +191,14 @@ class _RecuperationPasswordState extends State<RecuperationPassword> {
                                 );
                               });
                        
-                         
+
+                        }
+
+                        
+                                                
                       },
                       child: Container(
-                        margin: EdgeInsets.only(left: 30, right: 30),
+                        margin: EdgeInsets.only(left: 10, right: 10),
                         height: 55,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(20)),

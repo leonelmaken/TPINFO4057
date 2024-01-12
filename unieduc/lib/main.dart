@@ -35,7 +35,11 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.light,
      // theme: lightTheme(),
      theme: ThemeData(
-      fontFamily: 'poppins'
+      textTheme: TextTheme(
+        bodyText1: TextStyle(fontFamily: 'poppins'),
+        bodyText2: TextStyle(fontFamily: 'poppins')
+      )
+      //fontFamily: 'poppins'
      ),
     );
   }

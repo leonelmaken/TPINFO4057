@@ -97,9 +97,9 @@ class _CreateAccountState extends State<CreateAccount> {
                                         fit: BoxFit.cover,
                                       )
                                     : null,
-                                border: Border.all(color: Colors.grey),
+                                border: Border.all(color: Colors.blue),
                                 shape: BoxShape.circle,
-                                color: Colors.grey),
+                                color: Colors.blue),
                             child: photoProfil != null
                                 ? Text("")
                                 : const Icon(
@@ -157,7 +157,7 @@ class _CreateAccountState extends State<CreateAccount> {
                         Icons.person_sharp,
                         size: 25,
                       ),
-                      hintText: "Entrer votre nom d'utilisateur",
+                      hintText: "Entrer un nom d'utilisateur",
                       hintStyle: TextStyle(letterSpacing: 1.2)),
                 ),
               ),
@@ -248,7 +248,9 @@ class _CreateAccountState extends State<CreateAccount> {
               const SizedBox(
                 height: 20,
               ),
-              Container(
+              Visibility(
+                
+                child: Container(
                 margin: const EdgeInsets.only(left: 15, right: 15),
                 child: TextFormField(
                   obscureText: _obscuring,
@@ -277,7 +279,8 @@ class _CreateAccountState extends State<CreateAccount> {
                           },
                           icon: Icon(Icons.remove_red_eye))),
                 ),
-              ),
+              ),),
+              
               const SizedBox(height: 40),
               GestureDetector(
                 onTap: () async{
@@ -288,12 +291,15 @@ class _CreateAccountState extends State<CreateAccount> {
                   //           PageRouteBuilder(
                   //             pageBuilder: (_, __, ___) => HomePage(),
                   //           ));
-                  print("${photoProfil.toString().substring(7).replaceAll("'", "")}");
-                  Service.saveEtudiant2(photoProfil!);
+                  // print("${photoProfil.toString().substring(7).replaceAll("'", "")}");
+                  //Service.inscription(photoProfil!,photoProfil!,photoProfil!);
+                  //Service.createAcount(photoProfil!);
 
+                 // Service.addMessage();
+                
                 },
                 child: Container(
-                  margin: EdgeInsets.only(left: 30, right: 30),
+                  margin: EdgeInsets.only(left: 10, right: 10),
                   height: 55,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -348,8 +354,8 @@ class _CreateAccountState extends State<CreateAccount> {
                   ),
                   TextButton(
                       onPressed: () async{
-                        loading_popup(context);
-                  await Future.delayed(Duration(seconds: 1));
+                  //       loading_popup(context);
+                  // await Future.delayed(Duration(seconds: 1));
                         Navigator.push(
                             context,
                             PageRouteBuilder(

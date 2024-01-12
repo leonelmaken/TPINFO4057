@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -134,6 +135,28 @@ class _PreinscriptionState extends State<Preinscription> {
     return imageFile;
   }
 
+  String genererMatricule() {
+    Random random = Random();
+    String lettre = String.fromCharCode(
+        65 + random.nextInt(26)); // Génère une lettre aléatoire de A à Z
+    String matricule =
+        "24" + lettre + random.nextInt(10000).toString().padLeft(4, '0');
+    return matricule;
+  }
+
+  String genererCode() {
+    Random random = new Random();
+    String code = "";
+    for (int i = 0; i < 9; i++) {
+      code += random
+          .nextInt(10)
+          .toString(); // Génère un nombre aléatoire entre 0 et 9 et l'ajoute au code
+    }
+    return code;
+  }
+
+   String leCode="";
+
   saveEtudiant() async {
     String nom = _nomController.text.trim();
     String prenom = _prenomController.text.trim();
@@ -176,7 +199,8 @@ class _PreinscriptionState extends State<Preinscription> {
     bool sport = _okSport;
     bool art = _okArt;
 
-    String codePreinscription = '123456';
+    String codePreinscription = genererCode();
+    print("le code $codePreinscription=========================");
     String numeroTransaction = _noTransacController.text.trim();
     String photoEtudiant = 'tofetudiant';
     String photoReleveBac = 'tofReleveBac';
@@ -185,7 +209,9 @@ class _PreinscriptionState extends State<Preinscription> {
     String photoCni = 'tofCni';
     String photoRecuPaiement = 'tofRecuPaiement';
     String infosJury = 'admis';
-    String matricule = '20V3285';
+
+    String matricule = genererMatricule();
+    print("le matricule $matricule=========================");
     int etat = 0;
 
     await Service.saveEtudiant(
@@ -281,8 +307,7 @@ class _PreinscriptionState extends State<Preinscription> {
           //     fontWeight: FontWeight.bold,
           //   ),
           // ),
-          
-          
+
           //  IconButton(icon: Icon(Icons.menu,size:40), onPressed:(){}),
           // title: Text('UNIVERSITY APP')
           // actions: <Widget>[Row(
@@ -377,8 +402,8 @@ class _PreinscriptionState extends State<Preinscription> {
                             ],
                           ),
                           const SizedBox(
-                    height: 10,
-                  ),
+                            height: 10,
+                          ),
                           Container(
                               decoration: BoxDecoration(
                                   boxShadow: [
@@ -3938,9 +3963,9 @@ class _PreinscriptionState extends State<Preinscription> {
                                               Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
-                                                children: const [
+                                                children:  [
                                                   Text(
-                                                    "1528564252522",
+                                                    "$leCode",
                                                     style: TextStyle(
                                                         color: Colors.black,
                                                         fontSize: 30),
@@ -4887,20 +4912,23 @@ class _PreinscriptionState extends State<Preinscription> {
                                           fixedSize:
                                               const MaterialStatePropertyAll(
                                                   Size(120, 55))),
-                                      onPressed: () async{
+                                      onPressed: () async {
                                         // if (_formKeyPreInscriptionUy1.currentState!
                                         //     .validate()) {
                                         //       saveEtudiant();
-                                        
-                                        
 
                                         // }
-                                        Navigator.push(
-                                            context,
-                                            PageRouteBuilder(
-                                              pageBuilder: (_, __, ___) =>
-                                                  const AttenteValidation(),
-                                            ));
+                                        // Navigator.push(
+                                        //     context,
+                                        //     PageRouteBuilder(
+                                        //       pageBuilder: (_, __, ___) =>
+                                        //           const AttenteValidation(),
+                                        //     ));
+                                        //saveEtudiant();
+                                         String codePreinscription = genererCode();
+                                        print("le code $codePreinscription=========================");
+                                        String matricule = genererMatricule();
+                                         print("le matricule $matricule=========================");
                                       },
                                       child: const Text('Envoyer',
                                           style: TextStyle(

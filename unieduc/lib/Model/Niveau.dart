@@ -3,7 +3,7 @@ import 'package:unieduc/Model/Ue.dart';
 class Niveau{
 
 int id;
-int nom;
+String nom;
 
 
 Niveau({

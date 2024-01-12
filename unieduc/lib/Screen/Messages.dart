@@ -240,8 +240,8 @@ class _MessagesState extends State<Messages> {
                   //backgroundImage: AssetImage('assets/images/avatar.png'),
                   child: Icon(Icons.person, color: Colors.white, size: 30,),
                 ),
-                title: Text('Contact Name'),
-                subtitle: Text('Last message sent or received'),
+                title: Text('Ivana Georgette'),
+                subtitle: Text("Bienvenue sur Uy1App "),
                 // trailing: Icon(Icons.circle),
               ),
               );

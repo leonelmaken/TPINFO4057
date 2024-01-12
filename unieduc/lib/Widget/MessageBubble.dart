@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-
 class MessageBubble extends StatelessWidget {
   final String message;
-  final DateTime time;
+  final String time;
   final bool isMe;
 
   const MessageBubble({
@@ -16,13 +15,18 @@ class MessageBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final formattedTime = DateFormat.yMd().add_jm().format(time);
+    DateTime convertToString(String dateString) {
+      DateFormat format = DateFormat("dd/MM/yyyy HH:mm");
+      return format.parse(dateString);
+    }
+
+    DateTime formattedTime = convertToString(time);
 
     return Row(
-      mainAxisAlignment:
-          isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
+      mainAxisAlignment: isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
       children: [
         Container(
+          
           decoration: BoxDecoration(
             color: isMe ? Colors.blue : Colors.grey[800],
             borderRadius: BorderRadius.only(
@@ -32,7 +36,7 @@ class MessageBubble extends StatelessWidget {
               bottomRight: isMe ? Radius.circular(0) : Radius.circular(20),
             ),
           ),
-          width: 140,
+          width: 280,
           padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
           margin: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
           child: Column(
@@ -48,7 +52,7 @@ class MessageBubble extends StatelessWidget {
               ),
               SizedBox(height: 5),
               Text(
-                formattedTime,
+                "${formattedTime.toString().replaceRange(10, 10, " à ").substring(0,19)}",
                 style: TextStyle(
                   color: Colors.white70,
                   fontSize: 12,

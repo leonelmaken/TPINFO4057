@@ -32,7 +32,7 @@ class Etudiant{
   String firstChoice;
   String secondChoice;
   String thirdChoice;
-  Niveau niveau;
+  String niveau;
   String specialite;
   String typeDiplome;
   int anneeObtention;
@@ -120,7 +120,7 @@ class Etudiant{
       dateNaiss: json['dateNaiss'] as String,
       lieuNaiss: json ['lieurNaiss'] as String,
       numCni: json['numerocni'] as String,
-      photoEtudiant: json['photouser'] as String,
+      photoEtudiant: json['photouser'],
       adresse: json['adresse'] as String,
       sexe: json['sexe'] as String,
       adresseMail: json['email'] as String,
@@ -140,7 +140,7 @@ class Etudiant{
       secondChoice: json['deuxiemechoix'] as String,
       thirdChoice: json['troisiemechoix'] as String,
       specialite: json['specialite'] as String,
-      niveau:  Niveau.fromJson(json['niveau']),
+      niveau:  json['niveau'] as String,
       typeDiplome: json['dernierdiplom'] as String,
       anneeObtention: json ['anneeObtent'] as int,
       moyenne: json ['moyenne'] as double,

@@ -23,11 +23,48 @@ class _MatriculeSelctionState extends State<MatriculeSelction> {
   TextEditingController _passwordController = new TextEditingController();
   bool _obscuring = true;
 
-  final formkey = GlobalKey<FormState>(); 
+  final formkey = GlobalKey<FormState>();
 
-  
-
- 
+  _helpDialog() {
+    return showDialog(
+        barrierDismissible: true,
+        context: context,
+        builder: (BuildContext) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5),
+            ),
+            title: Row(
+              children: [
+                const Icon(
+                  Icons.help,
+                  color: Colors.orange,
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  "Support d'aide".toUpperCase(),
+                  style: const TextStyle(fontSize: 13,fontWeight: FontWeight.bold),
+                )
+              ],
+            ),
+            content: const Text(
+              "Vous avez un problème avec votre matricule? Veuillez nous contacter pour une assistance",
+            ),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text("Nous contacter"),
+              ),
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text("Fermer"),
+              ),
+            ],
+          );
+        });
+  }
 
   @override
   void initState() {
@@ -43,175 +80,177 @@ class _MatriculeSelctionState extends State<MatriculeSelction> {
         backgroundColor: SECONDARY_COLOR,
         appBar: AppBar(
           toolbarHeight: 40,
-          leading: IconButton(onPressed: () {
-            Navigator.pop(context);
-          },
-          
-          icon: const  Icon(Icons.arrow_back_ios,size: 20,color: Colors.white,),
-          
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              size: 20,
+              color: Colors.white,
+            ),
           ),
-          
           elevation: 0.0,
         ),
         body: Container(
-          
-          child:SingleChildScrollView(child: Column(
+            child: SingleChildScrollView(
+          child: Column(
             children: [
-        
               Center(
                   child: Form(
-                    key:formkey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    Image.asset(
-                    "assets/images/logo1.png",
-                    width: 300,
-                  ),
-                  const SizedBox(
-                      height: 30,
-                    ),
-                    const Text(
-                      "CREATION DE COMPTE",
-                      style: TextStyle(
-                          color: Colors.blue,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 25),
-                    ),
-                    const SizedBox(
-                      height: 60,
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(left: 15, right: 15),
-                      child: TextFormField(
-                        keyboardType: TextInputType.emailAddress,
-                        maxLength: 40,
-                        controller: _matriculeController,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Veuillez remplir ce champs";
-                          }
-                        },
-                        style:
-                            const TextStyle(color: Colors.black, letterSpacing: 1.2),
-                        decoration: const InputDecoration(
-                            counterText: "",
-                            prefixIcon: Icon(
-                              Icons.abc,
-                              size: 25,
+                      key: formkey,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          const SizedBox(
+                            height: 30,
+                          ),
+                          Image.asset(
+                            "assets/images/logo1.png",
+                            width: 300,
+                          ),
+                          const SizedBox(
+                            height: 30,
+                          ),
+                          const Text(
+                            "CREATION DE COMPTE",
+                            style: TextStyle(
+                                color: Colors.blue,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 25),
+                          ),
+                          const SizedBox(
+                            height: 60,
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(left: 15, right: 15),
+                            child: TextFormField(
+                              keyboardType: TextInputType.emailAddress,
+                              maxLength: 40,
+                              controller: _matriculeController,
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return "Veuillez remplir ce champs";
+                                }
+                              },
+                              style: const TextStyle(
+                                  color: Colors.black, letterSpacing: 1.2),
+                              decoration: InputDecoration(
+                                  counterText: "",
+                                  prefixIcon: Icon(
+                                    Icons.abc,
+                                    size: 25,
+                                  ),
+                                  suffixIcon: IconButton(
+                                      onPressed: () {
+                                        _helpDialog();
+                                      },
+                                      icon: Icon(Icons.help)),
+                                  hintText: "Entrer votre Matricule",
+                                  hintStyle: TextStyle(letterSpacing: 1.2)),
                             ),
-                            hintText: "Entrer votre Matricule",
-                            hintStyle: TextStyle(letterSpacing: 1.2)),
-                      ),
-                    ),
-                   
-                    const SizedBox(
-                      height: 1,
-                    ),
-                    
-                    
-                     const SizedBox(height: 60),
-        
-                    GestureDetector(
-                      onTap: () async{
-                        //save();
-                        //Service.addUe();
+                          ),
 
-        
-                        if (formkey.currentState!.validate()) {
-                        // loading_popup(context);
-                        // await Future.delayed(Duration(seconds: 3));
-                          Navigator.push(
-                            context,
-                            PageRouteBuilder(
-                              pageBuilder: (_, __, ___) =>
-                                  CreateAccount(),
-                            ));
-                        }
-        
-                       
-                         
-                      },
-                      child: Container(
-                        margin: EdgeInsets.only(left: 30, right: 30),
-                        height: 55,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(20)),
-                            color: Colors.blue),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text("Suivant",
-                                style: TextStyle(color: Colors.white, fontSize: 20))
-                          ],
-                        ),
-                      ),
-                    ),
-                    // ElevatedButton(
-                    //   style: ButtonStyle(
-                    //       shape: MaterialStatePropertyAll(
-                    //         RoundedRectangleBorder(
-                    //           borderRadius: BorderRadius.circular(25),
-                    //         ),
-                    //       ),
-                    //       backgroundColor:
-                    //           const MaterialStatePropertyAll(Colors.blue),
-                    //       fixedSize: const MaterialStatePropertyAll(Size(350, 55))),
-                    //   onPressed: () {
-                    //     // Navigator.push(
-                    //     //     context,
-                    //     //     PageRouteBuilder(
-                    //     //       pageBuilder: (_, __, ___) =>
-                    //     //           FicheInscription(),
-                    //     //     ));
-        
-                    //     save();
-                    //   },
-                    //   child: const Text('Se Connecter',
-                    //       style: TextStyle(
-                    //           color: Colors.white, fontSize: 20, letterSpacing: 1.5)),
-                    // ),
-                    const SizedBox(height: 40),
-                    const Divider(
-                      indent: 18,
-                      endIndent: 18,
-                    ),
-                    const SizedBox(height: 30),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          "Vous avez deja un compte?  ",
-                          style: TextStyle(
-                              color: Color.fromARGB(255, 83, 81, 81),
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15),
-                        ),
-                        TextButton(
-                            onPressed: () async{
-                              loading_popup(context);
-                        await Future.delayed(Duration(seconds: 1));
-                              Navigator.push(
-                            context,
-                            PageRouteBuilder(
-                              pageBuilder: (_, __, ___) =>
-                                  Login(),
-                            ));
+                          const SizedBox(
+                            height: 1,
+                          ),
+
+                          const SizedBox(height: 60),
+
+                          GestureDetector(
+                            onTap: () async {
+                              //save();
+                              //Service.addUe();
+
+                              if (formkey.currentState!.validate()) {
+                                // loading_popup(context);
+                                // await Future.delayed(Duration(seconds: 3));
+                                Navigator.push(
+                                    context,
+                                    PageRouteBuilder(
+                                      pageBuilder: (_, __, ___) =>
+                                          CreateAccount(),
+                                    ));
+                              }
                             },
-                            child: const Text(
-                              "Se connecter",
-                              style: TextStyle(
-                                  color: Colors.blue,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16),
-                            )),
-                      ],
-                    )
-                  ],
-                ))),
+                            child: Container(
+                              margin: EdgeInsets.only(left: 10, right: 10),
+                              height: 55,
+                              decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20)),
+                                  color: Colors.blue),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text("Suivant",
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 20))
+                                ],
+                              ),
+                            ),
+                          ),
+                          // ElevatedButton(
+                          //   style: ButtonStyle(
+                          //       shape: MaterialStatePropertyAll(
+                          //         RoundedRectangleBorder(
+                          //           borderRadius: BorderRadius.circular(25),
+                          //         ),
+                          //       ),
+                          //       backgroundColor:
+                          //           const MaterialStatePropertyAll(Colors.blue),
+                          //       fixedSize: const MaterialStatePropertyAll(Size(350, 55))),
+                          //   onPressed: () {
+                          //     // Navigator.push(
+                          //     //     context,
+                          //     //     PageRouteBuilder(
+                          //     //       pageBuilder: (_, __, ___) =>
+                          //     //           FicheInscription(),
+                          //     //     ));
+
+                          //     save();
+                          //   },
+                          //   child: const Text('Se Connecter',
+                          //       style: TextStyle(
+                          //           color: Colors.white, fontSize: 20, letterSpacing: 1.5)),
+                          // ),
+                          const SizedBox(height: 40),
+                          const Divider(
+                            indent: 18,
+                            endIndent: 18,
+                          ),
+                          const SizedBox(height: 30),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text(
+                                "Vous avez deja un compte?  ",
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 83, 81, 81),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15),
+                              ),
+                              TextButton(
+                                  onPressed: () async {
+                                    loading_popup(context);
+                                    await Future.delayed(Duration(seconds: 1));
+                                    Navigator.push(
+                                        context,
+                                        PageRouteBuilder(
+                                          pageBuilder: (_, __, ___) => Login(),
+                                        ));
+                                  },
+                                  child: const Text(
+                                    "Se connecter",
+                                    style: TextStyle(
+                                        color: Colors.blue,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16),
+                                  )),
+                            ],
+                          )
+                        ],
+                      ))),
             ],
           ),
         )));
