@@ -21,7 +21,7 @@ public class Message {
     private Long senderId;
     private Long receiverId;
     private String content;
-    private LocalDateTime timestamp;
+    private String timestamp;
     private String senderName;
     private String receiverName;
 
@@ -88,18 +88,13 @@ public class Message {
         this.content = content;
     }
 
-    public LocalDateTime getTimestamp() {
+    public String getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(LocalDateTime timestamp) {
+    public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
-    
-    @PrePersist
-    @PreUpdate
-    public void prePersist() {
-        timestamp = LocalDateTime.now();
-    }
+
 }
 
