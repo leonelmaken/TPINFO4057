@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:unieduc/Screen/CreateAccount.dart';
 import 'package:unieduc/Screen/HomePage.dart';
+import 'package:unieduc/Screen/addUe.dart';
 import 'package:unieduc/Service.dart';
 import 'package:unieduc/Utils/theme.dart';
 import 'package:unieduc/Widget/Loading.dart';
@@ -26,151 +27,96 @@ class _UeGestionState extends State<UeGestion> {
 
   bool _obscuring = true;
   late String selectedNiveau;
+  var styleElement = TextStyle(
+    fontWeight: FontWeight.w600,
+  );
 
   final formkey = GlobalKey<FormState>();
 
-  addUe() {
+  infoUe() {
     showDialog(
         barrierDismissible: true,
         context: context,
         builder: (BuildContext) {
           return AlertDialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(5),
-            ),
-            title: Row(
-              children: [
-                const Icon(
-                  Icons.add,
-                  color: Colors.blue,
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              Container(
+                color: Colors.indigoAccent,
+                width: 5,
+                height: 20,
+              ),
+              const SizedBox(width: 10),
+              Text(
+                'Informations'.toUpperCase(),
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
                 ),
-                const SizedBox(
-                  width: 10,
-                ),
-                Text(
-                  "Formulaire d'ajout UE".toUpperCase(),
-                  style: const TextStyle(
-                      fontSize: 13, fontWeight: FontWeight.bold),
-                )
-              ],
-            ),
-            content: Column(
-              children: [
-                Row(children: const [
-                  SizedBox(width: 12),
-                  Text("code",
-                      style: TextStyle(
-                          color: TEXT_COLOR,
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold)),
-                ]),
-                const SizedBox(
-                  height: 10,
-                ),
-                Container(
-                    margin: const EdgeInsets.only(left: 10, right: 10),
-                    decoration: const BoxDecoration(border: Border()),
-                    child: Column(
-                      children: [
-                        TextFormField(
-                          controller: _matriculeController,
-                          maxLength: 10,
-                          keyboardType: TextInputType.text,
-                          cursorColor: Colors.black87,
-                          validator: (value) {
-                            if (value == null) {
-                              return "Veuillez remplir ce champs";
-                            }
-                          },
-                          style: const TextStyle(color: TEXT_COLOR),
-                          decoration: InputDecoration(
-
-                              //labelText: "Matricule",
-                              prefixIcon: const Icon(Icons.abc_outlined),
-                              hintText: "Entrer votre matricule",
-                              labelStyle: const TextStyle(
-                                  color: TEXT_COLOR, fontSize: 20),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.blue.shade700, width: 0.5),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    color: Colors.blue, width: 2),
-                                borderRadius: BorderRadius.circular(10),
-                              )),
-                        ),
-                      ],
-                    )),
-                const SizedBox(
-                  height: 35,
-                ),
-                Row(children: const [
-                  SizedBox(width: 12),
-                  Text("code",
-                      style: TextStyle(
-                          color: TEXT_COLOR,
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold)),
-                ]),
-                const SizedBox(
-                  height: 10,
-                ),
-                Container(
-                    margin: const EdgeInsets.only(left: 10, right: 10),
-                    decoration: const BoxDecoration(border: Border()),
-                    child: Column(
-                      children: [
-                        TextFormField(
-                          controller: _matriculeController,
-                          maxLength: 10,
-                          keyboardType: TextInputType.text,
-                          cursorColor: Colors.black87,
-                          validator: (value) {
-                            if (value == null) {
-                              return "Veuillez remplir ce champs";
-                            }
-                          },
-                          style: const TextStyle(color: TEXT_COLOR),
-                          decoration: InputDecoration(
-
-                              //labelText: "Matricule",
-                              prefixIcon: const Icon(Icons.abc_outlined),
-                              hintText: "Entrer votre matricule",
-                              labelStyle: const TextStyle(
-                                  color: TEXT_COLOR, fontSize: 20),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.blue.shade700, width: 0.5),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    color: Colors.blue, width: 2),
-                                borderRadius: BorderRadius.circular(10),
-                              )),
-                        ),
-                      ],
-                    )),
-                const SizedBox(
-                  height: 35,
-                ),
-              ],
-            ),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text("D'accord"),
               ),
             ],
-          );
+          ),
+          
+        ],
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      content: SizedBox(
+        //height: 200,
+        width: 400,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('Niveau'),
+                    Text(
+                      'M1-GL',
+                      style: styleElement,
+                    )
+                  ],
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('Code:'),
+                    Text(
+                      'inf4017',
+                      style: styleElement,
+                    )
+                  ],
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('Intitule:'),
+                    Text(
+                      'Algo et complexite',
+                      style: styleElement,
+                    )
+                  ],
+                ),
+              ),
+             
+              Divider(),
+            ],
+          ),
+        ),
+      ),
+    );
         });
   }
 
@@ -229,7 +175,14 @@ class _UeGestionState extends State<UeGestion> {
                               message:
                                   'Cliquer ici pour ajouter une UE',
                               child: InkWell(
-                                onTap: () async {},
+                                onTap: () async {
+                                  Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                              pageBuilder: (_, __, ___) =>
+                                  AddUe(),
+                            ));
+                                },
                                 child: Container(
                                   color: Colors.blue,
                                   height: 40,
@@ -330,7 +283,9 @@ class _UeGestionState extends State<UeGestion> {
                       children: [
                         Container(
                           child: InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              infoUe();
+                            },
                             child: const Icon(
                               Icons.remove_red_eye,
                               size: 18,
@@ -373,7 +328,9 @@ class _UeGestionState extends State<UeGestion> {
                       children: [
                         Container(
                           child: InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              infoUe();
+                            },
                             child: const Icon(
                               Icons.remove_red_eye,
                               size: 18,

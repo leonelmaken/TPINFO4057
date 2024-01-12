@@ -429,7 +429,7 @@ class _InscriptionState extends State<Inscription>
                                                       "Nombre de caracteres autorisés",
                                                   //labelText: "Matricule",
                                                   prefixIcon: const Icon(
-                                                      Icons.abc_outlined),
+                                                      Icons.assignment),
                                                   hintText:
                                                       "Entrer votre matricule",
                                                   labelStyle: const TextStyle(

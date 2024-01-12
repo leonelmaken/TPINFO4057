@@ -6,6 +6,7 @@ import 'package:unieduc/Utils/theme.dart';
 import 'package:unieduc/Widget/Loading.dart';
 import 'package:unieduc/Widget/ScrollableWidget.dart';
 
+import '../Model/User.dart';
 import '../Utils/Global.dart';
 import 'RecuperationPassword.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -26,151 +27,130 @@ class _TeacherGestionState extends State<TeacherGestion> {
 
   bool _obscuring = true;
   late String selectedNiveau;
+  var styleElement = TextStyle(
+    fontWeight: FontWeight.w600,
+  );
 
   final formkey = GlobalKey<FormState>();
 
-  addUe() {
+  List<User>TeacherList = <User>[];
+
+  getAllTeacher(){
+      Service.getAccount("Teacher").then((value) {
+          TeacherList=value;
+      });
+  }
+
+  infoTeacher() {
     showDialog(
         barrierDismissible: true,
         context: context,
         builder: (BuildContext) {
           return AlertDialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(5),
-            ),
-            title: Row(
-              children: [
-                const Icon(
-                  Icons.add,
-                  color: Colors.blue,
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              Container(
+                color: Colors.indigoAccent,
+                width: 5,
+                height: 20,
+              ),
+              const SizedBox(width: 10),
+              Text(
+                'Informations'.toUpperCase(),
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
                 ),
-                const SizedBox(
-                  width: 10,
-                ),
-                Text(
-                  "Formulaire d'ajout UE".toUpperCase(),
-                  style: const TextStyle(
-                      fontSize: 13, fontWeight: FontWeight.bold),
-                )
-              ],
-            ),
-            content: Column(
-              children: [
-                Row(children: const [
-                  SizedBox(width: 12),
-                  Text("code",
-                      style: TextStyle(
-                          color: TEXT_COLOR,
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold)),
-                ]),
-                const SizedBox(
-                  height: 10,
-                ),
-                Container(
-                    margin: const EdgeInsets.only(left: 10, right: 10),
-                    decoration: const BoxDecoration(border: Border()),
-                    child: Column(
-                      children: [
-                        TextFormField(
-                          controller: _matriculeController,
-                          maxLength: 10,
-                          keyboardType: TextInputType.text,
-                          cursorColor: Colors.black87,
-                          validator: (value) {
-                            if (value == null) {
-                              return "Veuillez remplir ce champs";
-                            }
-                          },
-                          style: const TextStyle(color: TEXT_COLOR),
-                          decoration: InputDecoration(
-
-                              //labelText: "Matricule",
-                              prefixIcon: const Icon(Icons.abc_outlined),
-                              hintText: "Entrer votre matricule",
-                              labelStyle: const TextStyle(
-                                  color: TEXT_COLOR, fontSize: 20),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.blue.shade700, width: 0.5),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    color: Colors.blue, width: 2),
-                                borderRadius: BorderRadius.circular(10),
-                              )),
-                        ),
-                      ],
-                    )),
-                const SizedBox(
-                  height: 35,
-                ),
-                Row(children: const [
-                  SizedBox(width: 12),
-                  Text("code",
-                      style: TextStyle(
-                          color: TEXT_COLOR,
-                          fontSize: 17,
-                          fontWeight: FontWeight.bold)),
-                ]),
-                const SizedBox(
-                  height: 10,
-                ),
-                Container(
-                    margin: const EdgeInsets.only(left: 10, right: 10),
-                    decoration: const BoxDecoration(border: Border()),
-                    child: Column(
-                      children: [
-                        TextFormField(
-                          controller: _matriculeController,
-                          maxLength: 10,
-                          keyboardType: TextInputType.text,
-                          cursorColor: Colors.black87,
-                          validator: (value) {
-                            if (value == null) {
-                              return "Veuillez remplir ce champs";
-                            }
-                          },
-                          style: const TextStyle(color: TEXT_COLOR),
-                          decoration: InputDecoration(
-
-                              //labelText: "Matricule",
-                              prefixIcon: const Icon(Icons.abc_outlined),
-                              hintText: "Entrer votre matricule",
-                              labelStyle: const TextStyle(
-                                  color: TEXT_COLOR, fontSize: 20),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Colors.blue.shade700, width: 0.5),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                    color: Colors.blue, width: 2),
-                                borderRadius: BorderRadius.circular(10),
-                              )),
-                        ),
-                      ],
-                    )),
-                const SizedBox(
-                  height: 35,
-                ),
-              ],
-            ),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text("D'accord"),
               ),
             ],
-          );
+          ),
+          
+        ],
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      content: SizedBox(
+        //height: 200,
+        width: 400,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('Matricule'),
+                    Text(
+                      '20T4458',
+                      style: styleElement,
+                    )
+                  ],
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('userName'),
+                    Text(
+                      'Paul Edouard',
+                      style: styleElement,
+                    )
+                  ],
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('adresse mail:'),
+                    Text(
+                      'edouard@gmail.com',
+                      style: styleElement,
+                    )
+                  ],
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('Numero de telephone:'),
+                    Text(
+                      '658741245',
+                      style: styleElement,
+                    )
+                  ],
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('Mot de passe:'),
+                    Text(
+                      '123456kl',
+                      style: styleElement,
+                    )
+                  ],
+                ),
+              ),
+             
+              Divider(),
+            ],
+          ),
+        ),
+      ),
+    );
         });
   }
 
@@ -226,10 +206,20 @@ class _TeacherGestionState extends State<TeacherGestion> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Tooltip(
-                              message:
-                                  'Cliquer ici pour ajouter un enseignant',
+                              message: 'Cliquer ici pour ajouter un enseignant',
                               child: InkWell(
-                                onTap: () async {},
+                                onTap: () async {
+                                  setState(() {
+                                    isVisibleCreateTeacherAccount = true;
+                                    isVisibleCreateStudentAccount = false;
+                                  });
+                                  Navigator.push(
+                                      context,
+                                      PageRouteBuilder(
+                                        pageBuilder: (_, __, ___) =>
+                                            CreateAccount(),
+                                      ));
+                                },
                                 child: Container(
                                   color: Colors.blue,
                                   height: 40,
@@ -273,8 +263,8 @@ class _TeacherGestionState extends State<TeacherGestion> {
           ),
           Row(
             children: [
-              Expanded(child:
-              DataTable(
+              Expanded(
+                  child: DataTable(
                 columns: const [
                   DataColumn2(
                     label: Text(
@@ -286,7 +276,6 @@ class _TeacherGestionState extends State<TeacherGestion> {
                     size: ColumnSize.S,
                   ),
                   DataColumn2(
-
                     label: Text(
                       'Nom & Prenom',
                       style: TextStyle(fontWeight: FontWeight.bold),
@@ -295,7 +284,6 @@ class _TeacherGestionState extends State<TeacherGestion> {
                     fixedWidth: 120,
                     size: ColumnSize.M,
                   ),
-                 
                   DataColumn2(
                     label: Text('Action',
                         style: TextStyle(fontWeight: FontWeight.bold)),
@@ -308,19 +296,22 @@ class _TeacherGestionState extends State<TeacherGestion> {
                     const DataCell(Text(
                       "20V4425",
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
+                      style:
+                          TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
                     )),
                     const DataCell(Text(
                       "Jean Mbarga",
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
+                      style:
+                          TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
                     )),
-                    
                     DataCell(Row(
                       children: [
                         Container(
                           child: InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              infoTeacher();
+                            },
                             child: const Icon(
                               Icons.remove_red_eye,
                               size: 18,
@@ -348,19 +339,22 @@ class _TeacherGestionState extends State<TeacherGestion> {
                     const DataCell(Text(
                       "20V4425",
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
+                      style:
+                          TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
                     )),
                     const DataCell(Text(
                       "Jean Mbarga",
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
+                      style:
+                          TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
                     )),
-                    
                     DataCell(Row(
                       children: [
                         Container(
                           child: InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              infoTeacher();
+                            },
                             child: const Icon(
                               Icons.remove_red_eye,
                               size: 18,

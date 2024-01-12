@@ -23,9 +23,11 @@ class _CreateAccountState extends State<CreateAccount> {
   TextEditingController _emailController = new TextEditingController();
   TextEditingController _phoneNumberController = new TextEditingController();
   TextEditingController _passwordController = new TextEditingController();
+  TextEditingController matriculeController = new TextEditingController();
   TextEditingController _confirmPasswordController =
       new TextEditingController();
   bool _obscuring = true;
+  final formkey = GlobalKey<FormState>();
 
   File? photoProfil = null;
 
@@ -65,6 +67,7 @@ class _CreateAccountState extends State<CreateAccount> {
         ),
         body: Center(
             child: Form(
+              key: formkey,
           child: ScrollableWidget(child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -249,7 +252,7 @@ class _CreateAccountState extends State<CreateAccount> {
                 height: 20,
               ),
               Visibility(
-                
+                visible: isVisibleCreateStudentAccount,
                 child: Container(
                 margin: const EdgeInsets.only(left: 15, right: 15),
                 child: TextFormField(
@@ -280,6 +283,32 @@ class _CreateAccountState extends State<CreateAccount> {
                           icon: Icon(Icons.remove_red_eye))),
                 ),
               ),),
+              Visibility(
+                visible: isVisibleCreateTeacherAccount,
+                child: Container(
+                margin: const EdgeInsets.only(left: 15, right: 15),
+                child: TextFormField(
+                  obscureText: _obscuring,
+                  keyboardType: TextInputType.visiblePassword,
+                  maxLength: 100,
+                  controller: _confirmPasswordController,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Veuillez remplir ce champs";
+                    }
+                  },
+                  style: TextStyle(color: Colors.black, letterSpacing: 1.2),
+                  decoration: const InputDecoration(
+                      counterText: "",
+                      prefixIcon: Icon(
+                        Icons.assignment,
+                        size: 25,
+                      ),
+                      hintText: "Entrer le matricule",
+                      hintStyle: TextStyle(letterSpacing: 1.2),
+                      ),
+                ),
+              ),),
               
               const SizedBox(height: 40),
               GestureDetector(
@@ -296,13 +325,16 @@ class _CreateAccountState extends State<CreateAccount> {
                   //Service.createAcount(photoProfil!);
 
                  // Service.addMessage();
+                 if(formkey.currentState!.validate()){
+                  print("Bien");
+                 }
                 
                 },
                 child: Container(
                   margin: EdgeInsets.only(left: 10, right: 10),
                   height: 55,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
                       color: Colors.blue),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -314,34 +346,15 @@ class _CreateAccountState extends State<CreateAccount> {
                 ),
               ),
 
-              // ElevatedButton(
-              //             style: ButtonStyle(
-              //                 shape: MaterialStatePropertyAll(
-              //                   RoundedRectangleBorder(
-              //                     borderRadius: BorderRadius.circular(25),
-              //                   ),
-              //                 ),
-              //                 backgroundColor:
-              //                     const MaterialStatePropertyAll(Colors.blue),
-              //                 fixedSize:
-              //                     const MaterialStatePropertyAll(Size(220, 55))),
-              //             onPressed: () {
-              //               // Navigator.push(
-              //               //     context,
-              //               //     PageRouteBuilder(
-              //               //       pageBuilder: (_, __, ___) =>
-              //               //           FicheInscription(),
-              //               //     ));
-              //             },
-              //             child: const Text('Creer un compte',
-              //                 style: TextStyle(color: Colors.white, fontSize: 20)),
-              //           ),
               const SizedBox(height: 20),
               const Divider(
                 indent: 18,
                 endIndent: 18,
               ),
               const SizedBox(height: 10),
+              Visibility(
+                visible: isVisibleCreateStudentAccount,
+                child: 
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -370,7 +383,8 @@ class _CreateAccountState extends State<CreateAccount> {
                             fontSize: 16),
                       )),
                 ],
-              )
+              ))
+              
             ],
           ),
         ))));

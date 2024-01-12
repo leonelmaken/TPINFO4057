@@ -10,6 +10,7 @@ import 'package:unieduc/Model/Message.dart';
 
 import 'Model/Etudiant.dart';
 import 'Model/Ue.dart';
+import 'Model/User.dart';
 import 'Utils/Global.dart';
 
 class Service {
@@ -25,7 +26,8 @@ class Service {
   static String getEtudiantUrl = '${root}/api/getEtudiant';
 
   static String saveMessageUrl = '${root}/api/messages/create';
-  static String getMessageUrl = '${root}/api/messages/msg/';
+  static String getMessageUrl = '${root}/api/messages/msg';
+  static String getUserUrl = '${root}/listTeacher';
 
   //Geestion student-------------------------------------------------
 
@@ -546,45 +548,37 @@ class Service {
     }
   }
 
-  // static Future<String> addNiveau()async{
-  //   try{
-  //     var map = Map<String, dynamic>();
-  //     map['idue'] = "8";
-  //     map['intitule']="L1";
+  static List<User> parseResponseUser(String responseBody) {
+    final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
+    return parsed.map<User>((json) => User.fromJson(json)).toList();
+  }
 
-  //     print("Le map--------:$map");
+  static Future<List<User>> getAccount(type) async {
+    try {
+      var map = Map<String, dynamic>();
+      getUserUrl = '${root}/listTeacher/${type.toString()}';
 
-  //      final response = await http.post(Uri.parse(saveNiveauUrl), body: map);
-  //     print('addEtudiant Response: ${response.statusCode}');
-  //     print('addEtudiant Body: ${response.body}');
+      print("L'url $getUserUrl");
 
-  //     if (200 == response.statusCode) {
-  //       return "success";
-  //     } else {
-  //       return "error";
-  //     }
-  //   } catch (e) {
-  //     print(e);
-  //     return "error";
-  //   }
-  // }
+      final response = await http.post(Uri.parse(getUserUrl), body: map);
+      print("statut:${response.statusCode}");
 
-  // static Future<String> getClient() async {
-  //   try {
-  //     var map = Map<String, dynamic>();
+      print("response:: ${response.body}");
+      if (response.statusCode == 200) {
+        print('object');
+        List<User> list = parseResponseUser(response.body);
+        return list;
+      } else {
+        return <User>[];
+      }
+    } catch (e) {
+      return <User>[]; // return an empty list on exception/error
+    }
+  }
 
-  //     final response = await http.post(Uri.parse(getClientUrl), body: map);
-  //     print("------------la reponse -------------------");
-  //     print("response:: ${response.body}");
-  //     if (response.statusCode == 200) {
-  //       return response.body;
-  //     } else {
-  //       return "error";
-  //     }
-  //   } catch (e) {
-  //     return "error";
-  //   }
-  // }
+
+
+
 
  
 
@@ -678,7 +672,7 @@ class Service {
   static Future<List<Message>> getMessage(idSender, idReceiver) async {
     try {
       var map = Map<String, dynamic>();
-      getMessageUrl = '${root}/api/$idSender/$idReceiver';
+      getMessageUrl = '${root}/api//messages/msg/$idSender/$idReceiver';
 
       print("L'url $getMessageUrl");
 
@@ -697,4 +691,6 @@ class Service {
       return <Message>[]; // return an empty list on exception/error
     }
   }
+
+  
 }

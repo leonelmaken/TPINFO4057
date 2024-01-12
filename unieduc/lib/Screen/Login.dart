@@ -184,7 +184,7 @@ class _LoginState extends State<Login> {
                          
                       },
                       child: Container(
-                        margin: EdgeInsets.only(left: 30, right: 30),
+                        margin: EdgeInsets.only(left: 10, right: 10),
                         height: 55,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.all(Radius.circular(20)),

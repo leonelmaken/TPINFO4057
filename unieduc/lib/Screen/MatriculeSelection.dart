@@ -163,8 +163,10 @@ class _MatriculeSelctionState extends State<MatriculeSelction> {
                               //Service.addUe();
 
                               if (formkey.currentState!.validate()) {
-                                // loading_popup(context);
-                                // await Future.delayed(Duration(seconds: 3));
+                               setState(() {
+                                    isVisibleCreateTeacherAccount = false;
+                                    isVisibleCreateStudentAccount = true;
+                                  });
                                 Navigator.push(
                                     context,
                                     PageRouteBuilder(
