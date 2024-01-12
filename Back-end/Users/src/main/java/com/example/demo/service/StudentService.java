@@ -44,7 +44,7 @@ public interface StudentService{
 	            String specialite,
 	            com.example.demo.models.Niveau niveau,
 	            //photo scannee à uploader
-	            MultipartFile dernierdiplom,
+	            String dernierdiplom,
 
 	            String anneeObtent, Double moyenne,
 	            String infojury,
