@@ -1,6 +1,6 @@
 import 'package:unieduc/Model/Ue.dart';
 
-class Niveau {
+class Annonce {
   int id;
   int like;
   int commentaire;
@@ -8,7 +8,7 @@ class Niveau {
   String contenenu;
   String image;
 
-  Niveau(
+  Annonce(
       {required this.id,
       required this.like,
       required this.commentaire,
@@ -16,9 +16,9 @@ class Niveau {
       required this.contenenu,
       required this.image});
 
-  factory Niveau.fromJson(Map<String, dynamic> json) {
-    return Niveau(
-      id: json != null ? json['idNiveau'] : null,
+  factory Annonce.fromJson(Map<String, dynamic> json) {
+    return Annonce(
+      id: json != null ? json['idAnnonce'] : null,
       like: json != null ? json['like'] : null,
       commentaire: json != null ? json['commentaire'] : null,
       title: json != null ? json['title'] : null,

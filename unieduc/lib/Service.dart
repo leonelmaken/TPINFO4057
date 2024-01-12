@@ -8,6 +8,7 @@ import 'package:http_parser/http_parser.dart';
 import 'package:path/path.dart';
 import 'package:unieduc/Model/Message.dart';
 
+import 'Model/Annonce.dart';
 import 'Model/Etudiant.dart';
 import 'Model/Ue.dart';
 import 'Model/User.dart';
@@ -28,6 +29,7 @@ class Service {
   static String saveMessageUrl = '${root}/api/messages/create';
   static String getMessageUrl = '${root}/api/messages/msg';
   static String getUserUrl = '${root}/listTeacher';
+  static String getAnnonceUrl = '${root}/annonces/read';
 
   //Geestion student-------------------------------------------------
 
@@ -322,6 +324,33 @@ class Service {
     }
   }
 
+  static List<Annonce> parseResponseAnnonce(String responseBody) {
+    final parsed = json.decode(responseBody).cast<Map<String, dynamic>>();
+    return parsed.map<Annonce>((json) => Annonce.fromJson(json)).toList();
+  }
+
+  static Future<List<Annonce>> getAnnonce() async {
+    try {
+      var map = Map<String, dynamic>();
+      
+      print("L'url $getAnnonceUrl");
+
+      final response = await http.post(Uri.parse(getAnnonceUrl), body: map);
+      print("statut:${response.statusCode}");
+
+      print("response:: ${response.body}");
+      if (response.statusCode == 200) {
+        print('object');
+        List<Annonce> list = parseResponseAnnonce(response.body);
+        return list;
+      } else {
+        return <Annonce>[];
+      }
+    } catch (e) {
+      return <Annonce>[]; // return an empty list on exception/error
+    }
+  }
+
   // static Future<String> incription(File photoUser, File releveBac,
   //     File releveProba, File acteNaiss, File recu, File phototCni) async {
   //   try {
@@ -421,29 +450,7 @@ class Service {
   //   }
   // }
 
-  static Future<String> addClient(String nom, String age) async {
-    try {
-      var map = Map<String, dynamic>();
-      map['idclient'] = "300";
-      map['nom'] = nom.toString();
-      map['age'] = age.toString();
 
-      print("Le map--------:$map");
-
-      final response = await http.post(Uri.parse(addClientUrl), body: map);
-      print('addEtudiant Response: ${response.statusCode}');
-      print('addEtudiant Body: ${response.body}');
-
-      if (200 == response.statusCode) {
-        return "success";
-      } else {
-        return "error";
-      }
-    } catch (e) {
-      print(e);
-      return "error";
-    }
-  }
 
   //Gestion des Ue
 
@@ -584,45 +591,7 @@ class Service {
 
   //Gestion des messages
 
-  static Future<String> addMessage2(File image) async {
-    try {
-      var map = Map<String, dynamic>();
-      var request = http.MultipartRequest(
-        'POST',
-        Uri.parse(createAccountUrl),
-      );
-
-      request.fields['content'] = "bonjour";
-      request.fields['time'] = "24/10/2023 11:14:13";
-      request.fields['isSender'] = "658547885";
-      request.fields['idReceiver'] = "20U2235";
-
-      var stream = http.ByteStream(image.openRead());
-      var length = await image.length();
-
-      var multipartPP = http.MultipartFile('photouser', stream, length,
-          filename: 'image.jpg', contentType: MediaType('image', 'jpeg'));
-
-      request.files.add(multipartPP);
-
-      print("Le map--------:$map");
-
-      var response = await request.send();
-      print('addUser Response: ${response.statusCode}');
-
-      if (200 == response.statusCode) {
-        print("c'est propre");
-        return "success";
-      } else {
-        print("Pas bon");
-        return "error";
-      }
-    } catch (e) {
-      print("Vraiment pas bon");
-      print(e);
-      return "error";
-    }
-  }
+  
 
   static Future<String> addMessage(content,date,senderId,senderName,receiverId,receiverName) async {
     try {
