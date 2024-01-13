@@ -29,6 +29,10 @@ class _ParametresState extends State<Parametres> {
 
   final formkey = GlobalKey<FormState>();
 
+  
+
+
+
   @override
   void initState() {
     super.initState();
@@ -42,14 +46,16 @@ class _ParametresState extends State<Parametres> {
     return Scaffold(
         backgroundColor: SECONDARY_COLOR,
         appBar: AppBar(
-          //title: Text("Personnaliser votre gestion",style: TextStyle(fontSize: 15),),
+          
           toolbarHeight: 40,
+          backgroundColor: Colors.blue,
+          title: Text("Gerer vos parametres",style: TextStyle(color: Colors.white,fontSize: 15),),
           leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
             },
             icon: const Icon(
-              Icons.arrow_back_ios,
+              Icons.arrow_back,
               size: 20,
               color: Colors.white,
             ),
@@ -73,6 +79,7 @@ class _ParametresState extends State<Parametres> {
               ),
             ),
             onTap: () {
+              indispo();
               // Navigator.push(
               //           context,
               //           PageRouteBuilder(
@@ -97,6 +104,7 @@ class _ParametresState extends State<Parametres> {
               ),
             ),
             onTap: () {
+              indispo();
               // Navigator.push(
               //           context,
               //           PageRouteBuilder(
@@ -121,6 +129,7 @@ class _ParametresState extends State<Parametres> {
               ),
             ),
             onTap: () {
+              indispo();
               // Navigator.push(
               //           context,
               //           PageRouteBuilder(
@@ -145,6 +154,7 @@ class _ParametresState extends State<Parametres> {
               ),
             ),
             onTap: () {
+                deleteAccount();
               //  Navigator.push(
               //           context,
               //           PageRouteBuilder(
@@ -153,5 +163,119 @@ class _ParametresState extends State<Parametres> {
             },
           ),
         ]))));
+  }
+
+  indispo() {
+    showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (BuildContext) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5),
+            ),
+            title: Row(
+              children: [
+                const Icon(
+                  Icons.help,
+                  color: Colors.orange,
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  "INFORMATION".toUpperCase(),
+                  style: const TextStyle(fontSize: 13),
+                )
+              ],
+            ),
+            content: const Text(
+              "Ce module n'est pas disponible pour le moment",
+            ),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text("D'accord"),
+              ),
+            ],
+          );
+        });
+  }
+
+ deleteAccount() {
+    return showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (BuildContext) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(0.0),
+            ),
+            title: Row(
+              children: [
+                const Icon(
+                  Icons.warning_amber_sharp,
+                  color: Colors.red,
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  "Attention Suppresssion".toUpperCase(),
+                  style: const TextStyle(fontSize: 13),
+                )
+              ],
+            ),
+            content: const Text(
+              'Voulez vous vraiment supprimer votre compte?',
+            ),
+            actions: <Widget>[
+              TextButton(
+                  onPressed: () async {
+                     _showSuccessSnackBarError("Vous ne pouvez pas supprimer votre compte pour le moment 😓");
+                      Navigator.pop(context);
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => const LoginPage(),
+                    //   ),
+                    // );
+                  },
+                  child: const Text('Oui')),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('Non'),
+              ),
+            ],
+          );
+        });
+  }
+
+   _showSuccessSnackBarError(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        width: 400,
+        elevation: 5,
+        behavior: SnackBarBehavior.floating,
+        // action: SnackBarAction(
+        //   label: 'Fermer',
+        //   onPressed: () {},
+        //   textColor: Colors.white,
+        // ),
+        dismissDirection: DismissDirection.down,
+        backgroundColor: Colors.red,
+        content: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+           Text(
+          message,
+          style:
+              const TextStyle(color: Colors.white, fontWeight: FontWeight.w500,fontSize: 12),
+        ),
+        ],)
+      ),
+    );
   }
 }

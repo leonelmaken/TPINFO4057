@@ -41,14 +41,18 @@ class _RecuperationPasswordState extends State<RecuperationPassword> {
         backgroundColor: SECONDARY_COLOR,
         appBar: AppBar(
           toolbarHeight: 40,
-          leading: IconButton(onPressed: () {
-            Navigator.pop(context);
-          },
-          
-          icon: const  Icon(Icons.arrow_back_ios,size: 20,color: Colors.white,),
-          
+          backgroundColor: Colors.blue,
+          title: Text("Recuperation mot de passe",style: TextStyle(color: Colors.white,fontSize: 15),),
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(
+              Icons.arrow_back,
+              size: 20,
+              color: Colors.white,
+            ),
           ),
-          
           elevation: 0.0,
         ),
         body: Container(
@@ -69,18 +73,18 @@ class _RecuperationPasswordState extends State<RecuperationPassword> {
                     "assets/images/logo1.png",
                     width: 300,
                   ),
-                  const SizedBox(
-                      height: 30,
-                    ),
-                    Center(
-                      child: const Text(
-                      " Recuperation de mot de passe",
-                      style: TextStyle(
-                          color: Colors.blue,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20),
-                    ),
-                    ),
+                  // const SizedBox(
+                  //     height: 30,
+                  //   ),
+                    // Center(
+                    //   child: const Text(
+                    //   " Recuperation de mot de passe",
+                    //   style: TextStyle(
+                    //       color: Colors.blue,
+                    //       fontWeight: FontWeight.bold,
+                    //       fontSize: 20),
+                    // ),
+                    // ),
 
                     
                     const SizedBox(

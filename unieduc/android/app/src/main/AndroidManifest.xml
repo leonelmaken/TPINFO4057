@@ -2,7 +2,7 @@
     package="com.example.unieduc">
    <application
         android:label="unieduc"
-        android:name="${applicationName}"
+        android:name="UY1App"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

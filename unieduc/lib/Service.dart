@@ -133,36 +133,36 @@ class Service {
           http.ByteStream(photoEtudiant.openRead()),
           await photoEtudiant.length(),
           filename: "photoUser.jpg",
-          contentType: MediaType('image', 'jpeg'));
+          contentType: MediaType('image', 'jpeg, jpg, png'));
 
       var relevebacs = http.MultipartFile(
           'relevebac',
           http.ByteStream(photoReleveBac.openRead()),
           await photoReleveBac.length(),
           filename: "releveBac.jpg",
-          contentType: MediaType('image', 'jpeg'));
+          contentType: MediaType('image', 'jpeg, jpg, png'));
       var releveprobas = http.MultipartFile(
           'releveproba',
           http.ByteStream(photoReleveProbatoire.openRead()),
           await photoReleveProbatoire.length(),
           filename: "releveProba.jpg",
-          contentType: MediaType('image', 'jpeg'));
+          contentType: MediaType('image', 'jpeg, jpg, png'));
       var actenaisss = http.MultipartFile(
           'actenaiss',
           http.ByteStream(photoActenaissance.openRead()),
           await photoActenaissance.length(),
           filename: "acteNaissance.jpg",
-          contentType: MediaType('image', 'jpeg'));
+          contentType: MediaType('image', 'jpeg, jpg, png'));
       var recus = http.MultipartFile(
           'recu',
           http.ByteStream(photoRecuPaiement.openRead()),
           await photoRecuPaiement.length(),
           filename: "recuPaiement.jpg",
-          contentType: MediaType('image', 'jpeg'));
+          contentType: MediaType('image', 'jpeg, jpg, png'));
 
       var photosCni = http.MultipartFile('photocni',
           http.ByteStream(photoCni.openRead()), await photoCni.length(),
-          filename: "photoCni.jpg", contentType: MediaType('image', 'jpeg'));
+          filename: "photoCni.jpg", contentType: MediaType('image', 'jpeg, jpg, png'));
 
       request.files.add(photoUsers);
       request.files.add(relevebacs);
@@ -216,20 +216,20 @@ class Service {
       var firsttranches = http.MultipartFile('firsttranche',
           http.ByteStream(firsttranche.openRead()), await firsttranche.length(),
           filename: "firsttranche.jpg",
-          contentType: MediaType('image', 'jpeg'));
+          contentType: MediaType('image', 'jpeg, jpg, png'));
 
       var secondtranches = http.MultipartFile(
           'secondtranche',
           http.ByteStream(secondtranche.openRead()),
           await secondtranche.length(),
           filename: "secondtranche.jpg",
-          contentType: MediaType('image', 'jpeg'));
+          contentType: MediaType('image', 'jpeg, jpg, png'));
       var totalitetranches = http.MultipartFile(
           'totalitetranche',
           http.ByteStream(totalitetranche.openRead()),
           await totalitetranche.length(),
           filename: "totalitetranche.jpg",
-          contentType: MediaType('image', 'jpeg'));
+          contentType: MediaType('image', 'jpeg, jpg, png'));
 
       request.files.add(firsttranches);
       request.files.add(secondtranches);
@@ -283,7 +283,7 @@ class Service {
 
   //gestion des annonces----------------------------------------------------------
 
-  static Future<String> addAnnonce(
+  static Future<String> addAnnonce(title,content,time,
     File image,
   ) async {
     try {
@@ -291,14 +291,14 @@ class Service {
 
       var request = http.MultipartRequest("POST", Uri.parse(addAnnonceUrl));
 
-      request.fields['title'] = "inscription Uy1";
+      request.fields['title'] = title.toString();
       request.fields['content'] =
-          "Il est possible de s'incrire avec 2000f au niveau de l'UY5";
-      request.fields['timeStamp'] = "20/10/2023 12:15:12";
+         content.toString();
+      request.fields['timeStamp'] = time.toString();
 
       var images = http.MultipartFile(
           'image', http.ByteStream(image.openRead()), await image.length(),
-          filename: "image.jpg", contentType: MediaType('image', 'jpeg'));
+          filename: "image.jpg", contentType: MediaType('image', 'jpeg, jpg, png'));
 
       request.files.add(images);
 
@@ -400,26 +400,26 @@ class Service {
 
   //     var photoUsers = http.MultipartFile('photouser',
   //         http.ByteStream(photoUser.openRead()), await photoUser.length(),
-  //         filename: "photoUser.jpg", contentType: MediaType('image', 'jpeg'));
+  //         filename: "photoUser.jpg", contentType: MediaType('image', 'jpeg, jpg, png'));
   //     print("L'image: ${basename(photoUser.path)}");
   //     var relevebacs = http.MultipartFile('relevebac',
   //         http.ByteStream(releveBac.openRead()), await releveBac.length(),
-  //         filename: "releveBac.jpg", contentType: MediaType('image', 'jpeg'));
+  //         filename: "releveBac.jpg", contentType: MediaType('image', 'jpeg, jpg, png'));
   //     var releveprobas = http.MultipartFile('releveproba',
   //         http.ByteStream(releveProba.openRead()), await releveProba.length(),
-  //         filename: "releveProba.jpg", contentType: MediaType('image', 'jpeg'));
+  //         filename: "releveProba.jpg", contentType: MediaType('image', 'jpeg, jpg, png'));
   //     var actenaisss = http.MultipartFile('actenaiss',
   //         http.ByteStream(acteNaiss.openRead()), await acteNaiss.length(),
   //         filename: "acteNaissance.jpg",
-  //         contentType: MediaType('image', 'jpeg'));
+  //         contentType: MediaType('image', 'jpeg, jpg, png'));
   //     var recus = http.MultipartFile(
   //         'recu', http.ByteStream(recu.openRead()), await recu.length(),
   //         filename: "recuPaiement.jpg",
-  //         contentType: MediaType('image', 'jpeg'));
+  //         contentType: MediaType('image', 'jpeg, jpg, png'));
 
   //     var photoCni = http.MultipartFile('photocni',
   //         http.ByteStream(recu.openRead()), await phototCni.length(),
-  //         filename: "photoCni.jpg", contentType: MediaType('image', 'jpeg'));
+  //         filename: "photoCni.jpg", contentType: MediaType('image', 'jpeg, jpg, png'));
 
   //     request.files.add(photoUsers);
   //     request.files.add(relevebacs);
@@ -532,7 +532,7 @@ class Service {
 
       var multipartPP = http.MultipartFile('photouser', stream, length,
           filename: 'photoProfile.jpg',
-          contentType: MediaType('image', 'jpeg'));
+          contentType: MediaType('image', 'jpeg, jpg, png'));
 
       request.files.add(multipartPP);
 

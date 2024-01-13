@@ -8,10 +8,12 @@ import 'package:unieduc/Screen/Login.dart';
 import 'package:unieduc/Screen/Messages.dart';
 import 'package:unieduc/Screen/Preinscription.dart';
 import 'package:unieduc/Screen/parametres.dart';
+import 'package:unieduc/Service.dart';
 import 'package:unieduc/Utils/Global.dart';
 import 'package:unieduc/Utils/theme.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../Model/Annonce.dart';
 import 'MatriculeSelection.dart';
 import 'personnalGestion.dart';
 
@@ -41,6 +43,14 @@ class _HomePageState extends State<HomePage> {
   final GlobalKey schoolKey = GlobalKey();
 
   final String salutation = DateTime.now().hour < 12 ? "Bonjour" : "Bonsoir";
+
+  List<Annonce> AnnocesList = <Annonce>[];
+  getAnnonce(){
+    Service.getAnnonce().then((value) {
+        AnnocesList = value;
+    });
+  }
+
 
   @override
   void initState() {

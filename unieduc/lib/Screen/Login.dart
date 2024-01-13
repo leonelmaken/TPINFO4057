@@ -46,7 +46,7 @@ class _LoginState extends State<Login> {
             Navigator.pop(context);
           },
           
-          icon: const  Icon(Icons.arrow_back_ios,size: 20,color: Colors.white,),
+          icon: const  Icon(Icons.arrow_back,size: 20,color: Colors.white,),
           
           ),
           
@@ -240,8 +240,8 @@ class _LoginState extends State<Login> {
                         ),
                         TextButton(
                             onPressed: () async{
-                              loading_popup(context);
-                        await Future.delayed(Duration(seconds: 1));
+                        //       loading_popup(context);
+                        // await Future.delayed(Duration(seconds: 1));
                               Navigator.push(
                             context,
                             PageRouteBuilder(

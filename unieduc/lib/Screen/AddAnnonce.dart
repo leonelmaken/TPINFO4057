@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:unieduc/Screen/CreateAccount.dart';
 import 'package:unieduc/Screen/HomePage.dart';
 import 'package:unieduc/Service.dart';
@@ -17,12 +20,25 @@ class AddAnnonce extends StatefulWidget {
 }
 
 class _AddAnnonceState extends State<AddAnnonce> {
-  TextEditingController _emailController = new TextEditingController();
+  TextEditingController titreController = new TextEditingController();
 
-  TextEditingController _passwordController = new TextEditingController();
+  TextEditingController contentController = new TextEditingController();
   bool _obscuring = true;
 
   final formkey = GlobalKey<FormState>();
+  bool visibleImage=false;
+
+  File? imageAPublier = null;
+
+  Future<File?> _getImageFromGallery() async {
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+
+    if (image == null) return null;
+
+    File imageFile = File(image.path);
+
+    return imageFile;
+  }
 
   @override
   void initState() {
@@ -38,12 +54,13 @@ class _AddAnnonceState extends State<AddAnnonce> {
         backgroundColor: SECONDARY_COLOR,
         appBar: AppBar(
           toolbarHeight: 40,
+          title: Text("Creer une annonce",style: TextStyle(color: Colors.white,fontSize: 15),),
           leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
             },
             icon: const Icon(
-              Icons.arrow_back_ios,
+              Icons.arrow_back,
               size: 20,
               color: Colors.white,
             ),
@@ -51,11 +68,12 @@ class _AddAnnonceState extends State<AddAnnonce> {
           elevation: 0.0,
         ),
         body: Container(
-          margin: EdgeInsets.only(top: 5),
-          child: Column(
+          margin: EdgeInsets.only(top: 20),
+          child:SingleChildScrollView(child: Column(
             children: [
               Row(
                 children: const [
+                   SizedBox(width: 10),
                   CircleAvatar(
                     minRadius: 15,
                     maxRadius: 15,
@@ -73,99 +91,152 @@ class _AddAnnonceState extends State<AddAnnonce> {
                   ),
                 ],
               ),
+
               const SizedBox(
-                height: 10,
+                height: 30,
               ),
-              // Row(
-              //   children: [
-              //     Form(
-              //         key: formkey,
-              //         child: Column(
-              //           mainAxisAlignment: MainAxisAlignment.start,
-              //           children: [
-              //             // Image.asset(
-              //             //   "assets/images/logo1.png",
-              //             //   width: 300,
-              //             // ),
-              //             // const SizedBox(
-              //             //   height: 30,
-              //             // ),
-              //             // const Text(
-              //             //   "Login",
-              //             //   style: TextStyle(
-              //             //       color: Colors.blue,
-              //             //       fontWeight: FontWeight.bold,
-              //             //       fontSize: 25),
-              //             // ),
-              //             const SizedBox(
-              //               height: 30,
-              //             ),
-              //             Container(
-              //               height: 200,
-              //               margin:
-              //                   const EdgeInsets.only(left: 15, right: 15),
-              //               child:Expanded(child: TextFormField(
-              //                 keyboardType: TextInputType.emailAddress,
-              //                 maxLength: 400,
-              //                 controller: _emailController,
-              //                 validator: (value) {
-              //                   if (value!.isEmpty) {
-              //                     return "Veuillez remplir ce champs";
-              //                   }
-              //                 },
-              //                 style: const TextStyle(
-              //                     color: Colors.black, letterSpacing: 1.2),
-              //                 decoration: const InputDecoration(
-              //                     counterText: "",
-              //                     prefixIcon: Icon(
-              //                       Icons.mail_outline_sharp,
-              //                       size: 25,
-              //                     ),
-              //                     hintText: "A quoi pensez vous?",
-              //                     hintStyle: TextStyle(letterSpacing: 1.2)),
-              //               ),
-              //             )),
-              //             const SizedBox(
-              //               height: 30,
-              //             ),
+              Container(
+                margin: EdgeInsets.only(left: 10,right: 10),
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 242, 240, 240),
+                   borderRadius:
+                          BorderRadius.all(Radius.circular(10)),
+                ),
+                child: TextFormField(
+                    keyboardType: TextInputType.emailAddress,
+                    maxLength: 400,
+                    controller: titreController,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Veuillez remplir ce champs";
+                      }
+                    },
+                    style: const TextStyle(
+                        color: Colors.black, letterSpacing: 1.2),
+                    decoration: const InputDecoration(
+                      border: InputBorder.none,
+                        counterText: "",
+                       
+                        hintText: "Titre",
+                        hintStyle: TextStyle(letterSpacing: 1.2)),
+                  ),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              Container(
+                height: 200,
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 242, 240, 240),
+                   borderRadius:
+                          BorderRadius.all(Radius.circular(10)),
+                ),
+                margin:
+                    const EdgeInsets.only(left: 10, right: 10),
+                child:TextFormField(
+                  keyboardType: TextInputType.multiline,
+                  maxLength: 400,
+                  maxLines: null,
+                  
+                  controller: contentController,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Veuillez remplir ce champs";
+                    }
+                  },
+                  style: const TextStyle(
+                      color: Colors.black, letterSpacing: 1.2),
+                  decoration: const InputDecoration(
+                    border: InputBorder.none,
+                      counterText: "",
+                     
+                      hintText: "A quoi pensez vous?",
+                      hintStyle: TextStyle(letterSpacing: 1.2)),
+                )),
+              const SizedBox(
+                height: 30,
+              ),
         
-              //             const SizedBox(height: 30),
+              const SizedBox(height: 10),
+
+              Visibility(
+                visible: visibleImage,
+                child: Container(
+                  width: 400,
+                            height: 200,
+                    decoration: BoxDecoration(
+                                //image: DecorationImage(image: ),
+                                image: imageAPublier != null
+                                    ? DecorationImage(
+                                        image: FileImage(imageAPublier!),
+                                        fit: BoxFit.cover,
+                                      )
+                                    : null,
+                               
+                                
+                               ),
+                )),
+                 const SizedBox(height: 20),
+
+              GestureDetector(
+                onTap: () async {
+                   imageAPublier = await _getImageFromGallery();
+                                    setState(() {});
+                  setState(() {
+                    visibleImage=true;
+                  });
+                },
+                child: Container(
+                  margin: const EdgeInsets.only(left: 10, right: 10),
+                  height: 55,
+                  decoration: const BoxDecoration(
+                    
+                      borderRadius:
+                          BorderRadius.all(Radius.circular(10)),
+                      color: Colors.orange),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                       Text(!visibleImage?
+                        "Ajouter une image":"Modifier l'image",
+                          style: TextStyle(
+                              color: Colors.white, fontSize: 20))
+                    ],
+                  ),
+                ),
+              ),
+               const SizedBox(height: 30),  
         
-              //             GestureDetector(
-              //               onTap: () async {
-              //                 //save();
-              //                 //Service.addUe();
+              GestureDetector(
+                onTap: () async {
+                  //save();
+                  //Service.addUe();
         
-              //                 // if (formkey.currentState!.validate()) {
-              //                 // loading_popup(context);
-              //                 // await Future.delayed(Duration(seconds: 3));
+                  // if (formkey.currentState!.validate()) {
+                  // loading_popup(context);
+                  // await Future.delayed(Duration(seconds: 3));
         
-              //                 // }
-              //               },
-              //               child: Container(
-              //                 margin: const EdgeInsets.only(left: 10, right: 10),
-              //                 height: 55,
-              //                 decoration: const BoxDecoration(
-              //                     borderRadius:
-              //                         BorderRadius.all(Radius.circular(20)),
-              //                     color: Colors.blue),
-              //                 child: Row(
-              //                   mainAxisAlignment: MainAxisAlignment.center,
-              //                   children: [
-              //                     const Text("Publier",
-              //                         style: TextStyle(
-              //                             color: Colors.white, fontSize: 20))
-              //                   ],
-              //                 ),
-              //               ),
-              //             ),
-                         
-              //           ],
-              //         )),
-              //   ],
-              // ),
+                  // }
+                },
+                child: Container(
+                  margin: const EdgeInsets.only(left: 10, right: 10),
+                  height: 55,
+                  decoration: const BoxDecoration(
+                      borderRadius:
+                          BorderRadius.all(Radius.circular(10)),
+                      color: Colors.blue),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text("Publier",
+                          style: TextStyle(
+                              color: Colors.white, fontSize: 20))
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
-        ));
+    )));
   }
 }

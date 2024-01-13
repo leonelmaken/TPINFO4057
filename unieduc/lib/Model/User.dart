@@ -8,8 +8,9 @@ class User {
   String email;
   String phoneNumber;
   String password;
+  String type;
   File photoProfil;
-  static late  User instance;
+  static   User? instance;
 
   User({
     required this.id,
@@ -18,11 +19,12 @@ class User {
     required this.phoneNumber,
     required this.password,
     required this.photoProfil,
+    required this.type
     
   });
 
  static User getInstance() {
-    return instance;
+    return instance!;
   } 
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -33,6 +35,7 @@ class User {
       phoneNumber: json != null ? json['phoneNumber'] : null,
       password: json != null ? json['password'] : null,
       photoProfil: json != null ? json['photoProfil'] : null,
+      type: json!=null? json['type'] : null
     );
   }
 

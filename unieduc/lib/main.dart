@@ -9,6 +9,8 @@ import 'package:unieduc/Screen/HomePage.dart';
 import 'package:unieduc/Screen/Welcome.dart';
 import 'package:unieduc/Utils/theme.dart';
 
+import 'Screen/LogoPage.dart';
+
 
 
 Future<void> main() async {
@@ -29,7 +31,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Landflight',
-      home:  HomePage(),
+      home:  LogoPage(),
      //home:  CreateAccount(),
       //darkTheme: darkTheme(),
       themeMode: ThemeMode.light,
