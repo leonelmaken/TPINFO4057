@@ -21,5 +21,5 @@ public interface StudentRepository extends JpaRepository<Student,Integer>{
     Optional<Student> findByNom(String name);
     @Modifying
     @Query("DELETE FROM Student s WHERE s.idUser = :userId")
-    void deleteStudentByUserId(@Param("userId") Long userId);
+    void deleteStudentByUserId(@Param("userId") int userId);
 }

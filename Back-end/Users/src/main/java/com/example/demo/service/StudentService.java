@@ -72,7 +72,7 @@ public interface StudentService{
 
     ResponseEntity<Object> findByNom(String nom);
 
-    ResponseEntity<Object> deleteStudent(Long studentId);
+    ResponseEntity<Object> deleteStudent(int studentId);
 
     MessageBean sendMessageToUser(MessageBean message);
     ResponseEntity<Object> getAllStudents();

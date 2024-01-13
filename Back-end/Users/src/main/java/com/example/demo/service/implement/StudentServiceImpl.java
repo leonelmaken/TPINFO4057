@@ -196,7 +196,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public ResponseEntity<Object> deleteStudent(Long studentId) {
+    public ResponseEntity<Object> deleteStudent(int studentId) {
         // Logique pour supprimer un étudiant avec studentService.deleteStudent
         // ...
         studentrepo.deleteStudentByUserId(studentId);
