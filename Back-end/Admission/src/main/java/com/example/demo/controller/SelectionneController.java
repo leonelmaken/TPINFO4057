@@ -17,6 +17,7 @@ public class SelectionneController {
 
     private final SelecionneService selecionneService;
     private final KafkaTemplate<String, Object> kafkaTemplate;
+    @Autowired
     private final MicroServiceUser microServiceUser;
 
     @Autowired
@@ -28,8 +29,8 @@ public class SelectionneController {
         this.microServiceUser = microServiceUser;
     }
 
-    @PostMapping("/select/{etudiantId}")
-    public StudentBean selectStudent(@PathVariable Long etudiantId, @RequestParam Long adminId) {
+    @PostMapping("/select/{etudiantId}/{adminId}")
+    public StudentBean selectStudent(@PathVariable ("etudiantId") Long etudiantId, @PathVariable ("adminId") Long adminId) {
         // Utilisez le service Feign pour obtenir les informations sur l'étudiant
         StudentBean studentBean = microServiceUser.getStudentInfoById(etudiantId);
 

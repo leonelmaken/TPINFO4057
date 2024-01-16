@@ -93,7 +93,7 @@ public class SelectionneServiceImpl implements SelecionneService {
     }
 
     // Méthode de génération du matricule mise à jour
-    private String generateMatricule(String nom, String prenom, Date dateNaiss) {
+    private String generateMatricule(String nom, String prenom, String dateNaiss) {
         // Utilisez la logique appropriée pour générer le matricule
         // Par exemple, concaténez les premières lettres du nom et du prénom avec la date de naissance
         // Assurez-vous de gérer les cas où le nom ou le prénom est vide

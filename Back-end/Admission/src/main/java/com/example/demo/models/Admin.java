@@ -3,6 +3,7 @@ package com.example.demo.models;
 import java.util.Date;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -52,20 +53,20 @@ public class Admin {
 
     @Column(name = "date_creation")
     private Date dateCreation;
-    
+
     @Column(name = "role")
     private Role role;
-    @OneToMany(mappedBy = "createdByAdmin")
+
+    @OneToMany(mappedBy = "idAdmin", cascade = CascadeType.ALL)
     private List<Teacher> createdTeachers;
+
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "admin")
     private List<Selectionne> selectionnes;
 
-	public Admin() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+    public Admin() {
+        super();
+    }
 
-	
 	
 	public Admin(String nom, String prenom, String email, String motDePasse, String photo, String telephone,
 			Statut statut, Date dateDerniereConnexion, Date dateCreation, Role role) {

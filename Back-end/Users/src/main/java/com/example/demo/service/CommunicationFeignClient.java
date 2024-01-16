@@ -17,4 +17,5 @@ public interface CommunicationFeignClient {
 
     @GetMapping("/api/messages/receiver/{receiverId}")
     List<MessageBean> getMessagesByReceiverId(@PathVariable Long receiverId);
+    
 }

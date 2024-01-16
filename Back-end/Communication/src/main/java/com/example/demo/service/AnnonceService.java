@@ -11,4 +11,6 @@ public interface AnnonceService {
 	Annonce createAnnonce(Annonce annonce, MultipartFile imageFile);
     List<Annonce> getAllAnnonces();
     Annonce getAnnonceById(Long id);
+    List<Annonce> getAnnoncesByTeacher(Long teacherId);
+	Annonce createAnnonceForTeacher(Long teacherId, Annonce annonce, MultipartFile imageFile);
 }

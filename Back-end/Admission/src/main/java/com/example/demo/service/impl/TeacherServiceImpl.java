@@ -1,6 +1,7 @@
 package com.example.demo.service.impl;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,57 +9,73 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.models.Admin;
+import com.example.demo.models.AnnonceBean;
 import com.example.demo.models.Teacher;
 import com.example.demo.models.TeacherEvent;
+import com.example.demo.models.TeacherNotFoundException;
 import com.example.demo.repository.AdminRepository;
 import com.example.demo.repository.TeacherRepository;
+import com.example.demo.service.MicroserviceCommunication;
 import com.example.demo.service.TeacherService;
 
+import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 
 @Service
 public class TeacherServiceImpl implements TeacherService {
 
-    private final TeacherRepository teacherRepository;
+	private final TeacherRepository teacherRepository;
     private final ApplicationEventPublisher eventPublisher;
     private final AdminRepository adminRepository;
- // Injectez la classe ici
+    private final MicroserviceCommunication microserviceCommunication;
 
     @Autowired
     public TeacherServiceImpl(TeacherRepository teacherRepository, ApplicationEventPublisher eventPublisher,
-                              AdminRepository adminRepository) {
+                              AdminRepository adminRepository, MicroserviceCommunication microserviceCommunication) {
         this.teacherRepository = teacherRepository;
         this.eventPublisher = eventPublisher;
         this.adminRepository = adminRepository;
+        this.microserviceCommunication = microserviceCommunication;
     }
 
-
-    @Transactional
     @Override
-    public ResponseEntity<String> createTeacher(Teacher teacher) {
-        try {
-        	 if (teacher.getCreatedByAdmin() != null) {
-                 // Vérifiez si l'ID de l'admin est présent
-                 if (teacher.getCreatedByAdmin().getAdminId() != null) {
-                     // Chargez l'administrateur depuis la base de données
-                     Optional<Admin> adminOptional = adminRepository.findById(teacher.getCreatedByAdmin().getAdminId());
+    public ResponseEntity<String> createTeacher(Long adminId,Teacher teacher) {
+    	try {
+            // Vérifier si l'e-mail de l'enseignant existe déjà
+            Optional<Teacher> existingTeacher = teacherRepository.findByEmail(teacher.getEmail());
 
-                     // Vérifiez si l'administrateur existe
-                     if (adminOptional.isPresent()) {
-                         // Affectez l'administrateur à l'enseignant
-                         teacher.setCreatedByAdmin(adminOptional.get());
-                     } else {
-                         return new ResponseEntity<>("L'administrateur avec l'ID spécifié n'existe pas.",
-                                 HttpStatus.BAD_REQUEST);
-                     }
-                 } else {
-                     // L'ID de l'administrateur est manquant
-                     return new ResponseEntity<>("ID de l'administrateur manquant.",
-                             HttpStatus.BAD_REQUEST);
-                 }
-             }
+            if (existingTeacher.isPresent()) {
+                return new ResponseEntity<>("L'adresse e-mail est déjà utilisée par un autre enseignant.", HttpStatus.BAD_REQUEST);
+            }
+    	        //fier si l'e-mail de l'enseignant existe déjà
+          
+
+            // Récupérer l'admin à partir de l'ID
+         // Récupérer l'admin à partir de l'ID
+            Optional<Admin> adminOptional = adminRepository.findById(adminId);
+
+            if (adminOptional.isEmpty()) {
+                return new ResponseEntity<>("L'administrateur avec l'ID spécifié n'existe pas.", HttpStatus.BAD_REQUEST);
+            }
+
+            Admin admin = adminOptional.get();
+
+            if (!adminRepository.existsById(adminId)) {
+                // Si non, sauvegarder l'admin pour le rattacher au contexte de persistance
+                admin = adminRepository.save(admin);
+            }
+            // Associer l'admin à l'enseignant
+            teacher.setIdAdmin(admin);
+
+            // Assurez-vous que l'admin est dans le contexte de persistance
+            
+            // Vérifier si le matricule est présent
+            if (teacher.getMatricule() == null || teacher.getMatricule().isEmpty()) {
+                return new ResponseEntity<>("Le matricule de l'enseignant est obligatoire.", HttpStatus.BAD_REQUEST);
+            }
             if (teacher.getName() == null)
                 return new ResponseEntity<>("Vous devez entrer Votre nom", HttpStatus.INTERNAL_SERVER_ERROR);
 
@@ -215,6 +232,27 @@ public class TeacherServiceImpl implements TeacherService {
         } catch (Exception e) {
             return new ResponseEntity<>("Une exception s'est produite lors de la recherche : " + e.getMessage(),
                     HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public AnnonceBean createAnnonceForTeacherWithFeign(Long teacherId, AnnonceBean annonce, MultipartFile imageFile) {
+        // Vérifier si l'ID du teacher existe dans la table Teacher
+        getTeacherById(teacherId);
+
+        // Appeler le microservice pour créer une annonce
+        return microserviceCommunication.createAnnonce(annonce, imageFile);
+    }
+
+    private Teacher getTeacherById1(Long teacherId) {
+        // Rechercher le teacher par ID dans la table Teacher
+        Optional<Teacher> teacherOptional = teacherRepository.findById(teacherId);
+
+        if (teacherOptional.isPresent()) {
+            // Si le teacher existe, retournez-le
+            return teacherOptional.get();
+        } else {
+            // Si le teacher n'existe pas, lancez une exception
+            throw new RuntimeException("Teacher with ID " + teacherId + " not found");
         }
     }
 

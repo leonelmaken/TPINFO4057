@@ -21,9 +21,10 @@ public class Teacher {
 	    @Column(name = "id_teacher")
 	    private Long idTeacher; 
 
+	   
 	   @ManyToOne(cascade = CascadeType.PERSIST)
 	   @JoinColumn(name = "admin_id")
-	   private Admin createdByAdmin;
+	   private Admin idAdmin;
 
 	    @Column(name = "name", nullable = false)
 	    private String name;
@@ -83,12 +84,12 @@ public class Teacher {
 	}
 	
 	
-	public Teacher(Admin createdByAdmin, String name, String surname, Date dateNaiss, String lieuNaiss,
+	public Teacher(Admin idAdmin, String name, String surname, Date dateNaiss, String lieuNaiss,
 			String numerocni, String photouser, String adresse, String sexe, String matricule, String email,
 			String password, String statusMarital, String langue, String statusprofess, Double numerotel,
 			String nationalite, String region, String departmt, Statut statut) {
 		super();
-		this.createdByAdmin = createdByAdmin;
+		this.idAdmin = idAdmin;
 		this.name = name;
 		this.surname = surname;
 		this.dateNaiss = dateNaiss;
@@ -110,12 +111,16 @@ public class Teacher {
 	}
 
 
-	public Admin getCreatedByAdmin() {
-		return createdByAdmin;
+	public Admin getIdAdmin() {
+		return idAdmin;
 	}
-	public void setCreatedByAdmin(Admin createdByAdmin) {
-		this.createdByAdmin = createdByAdmin;
+
+
+	public void setIdAdmin(Admin idAdmin) {
+		this.idAdmin = idAdmin;
 	}
+
+
 	public Long getIdTeacher() {
 		return idTeacher;
 	}
@@ -230,13 +235,16 @@ public class Teacher {
 	public void setStatut(Statut statut) {
 		this.statut = statut;
 	}
+
+
 	@Override
 	public String toString() {
-		return "Teacher [idTeacher=" + idTeacher + ", name=" + name + ", surname=" + surname + ", dateNaiss="
-				+ dateNaiss + ", lieuNaiss=" + lieuNaiss + ", numerocni=" + numerocni + ", photouser=" + photouser
-				+ ", adresse=" + adresse + ", sexe=" + sexe + ", matricule=" + matricule + ", email=" + email
-				+ ", password=" + password + ", statusMarital=" + statusMarital + ", langue=" + langue
-				+ ", numerotel=" + numerotel + ", nationalite=" + nationalite
-				+ ", region=" + region + ", departmt=" + departmt + ", statut=" + statut + "]";
+		return "Teacher [idTeacher=" + idTeacher + ", idAdmin=" + idAdmin + ", name=" + name + ", surname=" + surname
+				+ ", dateNaiss=" + dateNaiss + ", lieuNaiss=" + lieuNaiss + ", numerocni=" + numerocni + ", photouser="
+				+ photouser + ", adresse=" + adresse + ", sexe=" + sexe + ", matricule=" + matricule + ", email="
+				+ email + ", password=" + password + ", statusMarital=" + statusMarital + ", langue=" + langue
+				+ ", numerotel=" + numerotel + ", nationalite=" + nationalite + ", region=" + region + ", departmt="
+				+ departmt + ", statut=" + statut + "]";
 	}
+
 }

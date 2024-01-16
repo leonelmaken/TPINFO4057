@@ -12,4 +12,5 @@ public interface TeacherRepository extends JpaRepository<Teacher, Long> {
 	    Optional<Teacher> findByNameCaseSensitive(String name);
 	 @Query("SELECT t FROM Teacher t WHERE  t.matricule like %?1%")
 	    Optional<Teacher> findByNameCaseSensitivematriculeprof(String matricule);
+	 Optional<Teacher> findByEmail(String email);
 }

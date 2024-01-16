@@ -2,7 +2,9 @@ package com.example.demo.service.implement;
 
 
 import com.example.demo.models.Message;
+import com.example.demo.models.StudentBean;
 import com.example.demo.repository.MessageRepository;
+import com.example.demo.service.FeignInterface;
 import com.example.demo.service.MessageService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,5 +52,6 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public void deleteMessage(Long messageId) {
         messageRepository.deleteById(messageId);
-    }
+            }
+    
 }

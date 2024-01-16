@@ -1,42 +1,36 @@
 package com.example.demo.models;
 
+import java.time.LocalDateTime;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 
-import java.time.LocalDateTime;
+public class AnnonceBean {
 
-import org.springframework.web.multipart.MultipartFile;
-@Entity
-public class Annonce {
+	private Long id;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private Long IdTeacher;
     private String title;
     private String content;
     private LocalDateTime timestamp;
     private String imageFile;
+    private Long IdTeacher;
 
 
     // Constructeurs, getters et setters
 
-    public Annonce() {
+    public AnnonceBean() {
         // Constructeur par défaut
     }
 
     
-    public Annonce(Long idTeacher, String title, String content) {
+
+    public AnnonceBean(String title, String content, Long idTeacher) {
 		super();
-		IdTeacher = idTeacher;
 		this.title = title;
 		this.content = content;
+		IdTeacher = idTeacher;
 	}
+
 
 
 	// Getters et Setters
@@ -49,18 +43,7 @@ public class Annonce {
         this.id = id;
     }
 
-    
-    public Long getIdTeacher() {
-		return IdTeacher;
-	}
-
-
-	public void setIdTeacher(Long idTeacher) {
-		IdTeacher = idTeacher;
-	}
-
-
-	public String getTitle() {
+    public String getTitle() {
         return title;
     }
 
@@ -90,6 +73,18 @@ public class Annonce {
 		this.imageFile = fileName;
 	}
 
+	public Long getIdTeacher() {
+		return IdTeacher;
+	}
+
+
+
+	public void setIdTeacher(Long idTeacher) {
+		IdTeacher = idTeacher;
+	}
+
+
+
 	public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
@@ -100,10 +95,11 @@ public class Annonce {
     }
 
 
+
 	@Override
 	public String toString() {
-		return "Annonce [id=" + id + ", IdTeacher=" + IdTeacher + ", title=" + title + ", content=" + content
-				+ ", timestamp=" + timestamp + ", imageFile=" + imageFile + "]";
+		return "AnnonceBean [id=" + id + ", title=" + title + ", content=" + content + ", timestamp=" + timestamp
+				+ ", imageFile=" + imageFile + ", IdTeacher=" + IdTeacher + "]";
 	}
-    
+
 }

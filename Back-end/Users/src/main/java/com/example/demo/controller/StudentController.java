@@ -128,13 +128,7 @@ public class StudentController {
     }
     @GetMapping("/getStudentInfoById/{id}") // Mise à jour du chemin et de la variable de chemin
     public Student getStudentInfoById(@PathVariable("id") int id) {
-        try {
-            // Récupère l'étudiant par ID
             return studentService.getStudentById(id);
-        } catch (Exception e) {
-            // En cas d'erreur, vous pouvez gérer l'erreur ici, par exemple, en journalisant l'erreur.
-            return null; // ou jeter une exception
-        }
     }
     @PostMapping("/send-message")
     public MessageBean sendMessageToUser(@RequestBody MessageBean message) {

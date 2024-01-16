@@ -1,6 +1,8 @@
 package com.example.demo.controllers;
 
 import com.example.demo.models.Message;
+import com.example.demo.models.StudentBean;
+import com.example.demo.service.FeignInterface;
 import com.example.demo.service.MessageService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +23,16 @@ public class MessageController {
 
     @PostMapping(path = "/create")
     public Message sendMessage(@RequestBody Message message) {
+    	
+
         return messageService.saveMessage(message);
+        
     }
 
     @GetMapping("/sender/{senderId}")
     public List<Message> getMessagesBySenderId(@PathVariable Long senderId) {
+    	StudentBean studentBean = FeignInterface.getStudentInfoById(1);
+    	System.out.println(studentBean);
         return messageService.getMessagesBySenderId(senderId);
     }
 
