@@ -64,7 +64,7 @@ public class StudentController {
             @RequestParam String troisiemechoix,
             @RequestParam String specialite,
             @RequestParam String niveau,
-            @RequestPart(value = "dernierdiplom", required = false) MultipartFile dernierdiplom,
+            @RequestParam String dernierdiplom,
             @RequestParam String anneeObtent,
             @RequestParam Double moyenne,
             @RequestParam String infojury,
@@ -85,7 +85,7 @@ public class StudentController {
             @RequestParam boolean sport,
             @RequestParam boolean art) throws IOException {
 
-        if (!Arrays.stream(new MultipartFile[]{photouser, photocni, relevebac, releveproba, actenaiss, recu, dernierdiplom})
+        if (!Arrays.stream(new MultipartFile[]{photouser, photocni, relevebac, releveproba, actenaiss, recu})
                 .filter(Objects::nonNull)
                 .allMatch(file -> Arrays.asList("image/jpeg", "image/png", "image/jpg", "application/pdf").contains(file.getContentType()))) {
         return ResponseEntity.status(HttpStatus.UNSUPPORTED_MEDIA_TYPE).body("Seulement les images jpeg,png,jpg, ou les fichiers pdf sont acceptees");
@@ -98,7 +98,7 @@ public class StudentController {
 
         }
 
-        Niveau niveau1 = niveaurepo.findByNameIgnoreCase(niveau).orElseThrow(() -> new RuntimeException("type of this annonce is not found"));
+        Niveau niveau1 = niveaurepo.findByNameIgnoreCase(niveau).orElseThrow(() -> new RuntimeException("Niveau  is not found"));
 
         Student etudiant = studentService.preinscription(name, surname, dateNaiss, lieuNaiss, numerocni, photouser, adresse, sexe, email, statusMarital, langue, statusprofess, numerotel, nationalite, region, departmt, photocni, relevebac, releveproba, actenaiss, recu, premierchoix, deuxiemechoix, troisiemechoix, specialite, niveau1, dernierdiplom, anneeObtent, moyenne, infojury, matriculediplo, delivrepar, Datedeliv, nompere, professpere, nommere, professmere, nomurgent, numerourgent, villeurgent, nomtuteur, professtuteur, numerotransaction, codepreins, sport, art);
 

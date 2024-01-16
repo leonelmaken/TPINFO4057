@@ -14,7 +14,13 @@ public interface MessageService {
 
     List<Message> getMessagesByReceiverId(Long receiverId);
 
-    Message saveMessage(Message message);
+    Message saveMessage( Long senderId,
+                         Long receiverId,
+                         String content,
+                         String timestamp,
+                         String senderName,
+                         String receiverName
+    );
 
     void deleteMessage(Long messageId);
 }

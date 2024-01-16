@@ -60,7 +60,7 @@ public class StudentServiceImpl implements StudentService {
             String specialite,
             Niveau niveau,
             //photo scannee à uploader
-            MultipartFile dernierdiplom,
+            String dernierdiplom,
 
             String anneeObtent, Double moyenne,
             String infojury,
@@ -132,12 +132,6 @@ public class StudentServiceImpl implements StudentService {
         Files.write(path6, bytes6);
         System.out.println(route6);
 
-        final String folder7 = new ClassPathResource("static/dernierdiplom/").getFile().getAbsolutePath();
-        final String route7 = ServletUriComponentsBuilder.fromCurrentContextPath().path("/dernierdiplom/").path(dernierdiplom.getOriginalFilename()).toUriString();
-        byte[] bytes7 = dernierdiplom.getBytes();
-        Path path7 = Paths.get(folder7 + File.separator + dernierdiplom.getOriginalFilename());
-        Files.write(path7, bytes7);
-        System.out.println(route7);
 
         etudiant.setAdresse(adresse);
         etudiant.setEmail(email);
@@ -161,7 +155,7 @@ public class StudentServiceImpl implements StudentService {
         etudiant.setMoyenne(moyenne);
         etudiant.setSpecialite(specialite);
         etudiant.setNiveau(niveau);
-        etudiant.setDernierdiplom("/dernierdiplom/" + dernierdiplom.getOriginalFilename());
+        etudiant.setDernierdiplom(dernierdiplom);
         etudiant.setRelevebac("/relevebac/" + relevebac.getOriginalFilename());
         etudiant.setReleveproba("/relevaproba/" + releveproba.getOriginalFilename());
         etudiant.setRecu("/recu/" + recu.getOriginalFilename());
@@ -202,7 +196,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public ResponseEntity<Object> deleteStudent(Long studentId) {
+    public ResponseEntity<Object> deleteStudent(int studentId) {
         // Logique pour supprimer un étudiant avec studentService.deleteStudent
         // ...
         studentrepo.deleteStudentByUserId(studentId);

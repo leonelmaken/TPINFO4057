@@ -44,7 +44,7 @@ public interface StudentService{
 	            String specialite,
 	            com.example.demo.models.Niveau niveau,
 	            //photo scannee à uploader
-	            MultipartFile dernierdiplom,
+	            String dernierdiplom,
 
 	            String anneeObtent, Double moyenne,
 	            String infojury,
@@ -72,7 +72,7 @@ public interface StudentService{
 
     ResponseEntity<Object> findByNom(String nom);
 
-    ResponseEntity<Object> deleteStudent(Long studentId);
+    ResponseEntity<Object> deleteStudent(int studentId);
 
     MessageBean sendMessageToUser(MessageBean message);
     ResponseEntity<Object> getAllStudents();

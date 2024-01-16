@@ -3,7 +3,6 @@ package com.example.demo.service.implement;
 import com.example.demo.models.Annonce;
 import com.example.demo.repository.AnnonceRepository;
 import com.example.demo.service.AnnonceService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
@@ -75,28 +74,7 @@ public class AnnonceServiceImpl implements AnnonceService {
     }
 
     @Override
-    public Annonce createAnnonceForTeacher(Long teacherId, Annonce annonce, MultipartFile imageFile) {
-        // Ajoutez votre logique pour lier l'annonce à l'enseignant (utilisez teacherId)
-        annonce.setIdTeacher(teacherId);
-
-        if (imageFile != null && !imageFile.isEmpty() && isImageTypeValid(imageFile)) {
-            String fileName = "annonce_" + annonce.getId() + "_" + imageFile.getOriginalFilename();
-            saveImageToFileSystem(imageFile, fileName);
-            annonce.setImageFile(fileName);
-        }
-
-        return annonceRepository.save(annonce);
-    }
-
-    @Override
     public Annonce getAnnonceById(Long id) {
         return annonceRepository.findById(id).orElse(null);
     }
-
-	@Override
-	public List<Annonce> getAnnoncesByTeacher(Long teacherId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-   
 }

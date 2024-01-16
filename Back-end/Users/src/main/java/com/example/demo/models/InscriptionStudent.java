@@ -12,7 +12,7 @@ import jakarta.persistence.ManyToOne;
 public class InscriptionStudent {
 	@Id
 	private int idins;
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 
 	@ManyToOne
 	private Student student;
